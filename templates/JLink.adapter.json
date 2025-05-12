@@ -1,0 +1,196 @@
+{
+    "launch": {
+        "singlecore-launch": {
+            "name": "JLink (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMSIS Load",
+            "initCommands": [
+                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
+                "<% for (const file of files) { %>",
+                "symbol-file <%= file %>\n",
+                "<% } %>",
+                "monitor reset",
+                "tbreak main"
+            ],
+            "target": {
+                "server": "JLinkGDBServerCL",
+                "serverParameters": [
+                    "-device", "<%= device_name %>\n",
+                    "-endian", "little",
+                    "-if", "SWD",
+                    "-speed", "auto",
+                    "-noir",
+                    "-vd",
+                    "-nogui",
+                    "-localhostonly"
+                ],
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        },
+        "singlecore-attach": {
+            "name": "JLink (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
+                "<% for (let i = 0; i < files.length; i++) { %>",
+                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
+                "<% } %>"
+            ],
+            "target": {
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        },
+        "multicore-start-launch": {
+            "name": "<%= pname %> JLink (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMSIS Load",
+            "initCommands": [
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
+                "<% for (const file of files) { %>",
+                "symbol-file <%= file %>\n",
+                "<% } %>",
+                "monitor reset",
+                "tbreak main"
+            ],
+            "target": {
+                "server": "JLinkGDBServerCL",
+                "serverParameters": [
+                    "-device", "<%= device_name %>:<%= pname %>\n",
+                    "-endian", "little",
+                    "-if", "SWD",
+                    "-speed", "auto",
+                    "-noir",
+                    "-vd",
+                    "-nogui",
+                    "-localhostonly"
+                ],
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        },
+        "multicore-start-attach": {
+            "name": "<%= pname %> JLink (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
+                "<% for (let i = 0; i < files.length; i++) { %>",
+                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
+                "<% } %>"
+            ],
+            "target": {
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        },
+        "multicore-other": {
+            "name": "<%= pname %> JLink (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
+                "<% for (let i = 0; i < files.length; i++) { %>",
+                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
+                "<% } %>"
+            ],
+            "target": {
+                "server": "JLinkGDBServerCL",
+                "serverParameters": [
+                    "-device", "<%= device_name %>:<%= pname %>\n",
+                    "-endian", "little",
+                    "-if", "SWD",
+                    "-speed", "auto",
+                    "-noir",
+                    "-vd",
+                    "-nogui",
+                    "-localhostonly"
+                ],
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "CMSIS Erase",
+            "type": "shell",
+            "command": [
+                "echo Connect > .cmd.jlink &&",
+                "echo Erase >> .cmd.jlink &&",
+                "echo Exit >> .cmd.jlink &&",
+                "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Load",
+            "type": "shell",
+            "command": [
+                "echo Connect > .cmd.jlink &&",
+                "<% for (const image of image_files) { %>",
+                "echo LoadFile <%= image.file %> >> .cmd.jlink &&",
+                "<% } %>",
+                "echo Exit >> .cmd.jlink &&",
+                "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Run",
+            "type": "shell",
+            "command": "JLinkGDBServerCL",
+            "args": [
+                "-device", "<%= device_name %><%= start_pname ? `:${start_pname}` : '' %>\n",
+                "-endian", "little",
+                "-if", "SWD",
+                "-speed", "auto",
+                "-nohalt",
+                "-noir",
+                "-nogui",
+                "-localhostonly",
+                "-port", "<%= ports.get(start_pname) %>"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Load+Run",
+            "type": "shell",
+            "dependsOn": [
+                "CMSIS Load",
+                "CMSIS Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
+}
