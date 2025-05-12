@@ -26,7 +26,7 @@ debug-adapters:
       clock: 10000000
 
   - name: "JLink Server"
-    template: jlink.adapter.json              # template file
+    template: JLink.adapter.json              # template file
     gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
     defaults:                                 # default values to use when nowhere specified
       port: 3333                              # default value of first gdbserver port

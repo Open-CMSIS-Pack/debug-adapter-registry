@@ -1,0 +1,158 @@
+{
+    "launch": {
+        "singlecore-launch": {
+            "name": "CMSIS_DAP@pyOCD (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMSIS Load",
+            "initCommands": [
+                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
+                "<% for (const file of files) { %>",
+                "symbol-file <%= file %>\n",
+                "<% } %>",
+                "monitor reset halt",
+                "tbreak main"
+            ],
+            "target": {
+                "server": "pyocd",
+                "serverParameters": [
+                    "--probe", "cmsisdap:",
+                    "--persist"
+                ],
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
+        },
+        "singlecore-attach": {
+            "name": "CMSIS_DAP@pyOCD (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
+                "<% for (let i = 0; i < files.length; i++) { %>",
+                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
+                "<% } %>"
+            ],
+            "target": {
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        },
+        "multicore-start-launch": {
+            "name": "<%= pname %> CMSIS_DAP@pyOCD (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMSIS Load",
+            "initCommands": [
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
+                "<% for (const file of files) { %>",
+                "symbol-file <%= file %>\n",
+                "<% } %>",
+                "monitor reset halt",
+                "tbreak main"
+            ],
+            "target": {
+                "server": "pyocd",
+                "serverParameters": [
+                    "--probe", "cmsisdap:",
+                    "--persist"
+                ],
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
+        },
+        "multicore-start-attach": {
+            "name": "<%= pname %> CMSIS_DAP@pyOCD (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
+                "<% for (let i = 0; i < files.length; i++) { %>",
+                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
+                "<% } %>"
+            ],
+            "target": {
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        },
+        "multicore-other": {
+            "name": "<%= pname %> CMSIS_DAP@pyOCD (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "gdb": "arm-none-eabi-gdb",
+            "initCommands": [
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
+                "<% for (let i = 0; i < files.length; i++) { %>",
+                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
+                "<% } %>"
+            ],
+            "target": {
+                "port": "<%= ports.get(pname) %>"
+            },
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "CMSIS Erase",
+            "type": "shell",
+            "command": [
+                "pyocd erase --probe cmsisdap: --chip --cbuild-run ${command:cmsis-csolution.getCbuildRunFile}"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Load",
+            "type": "shell",
+            "command": [
+                "pyocd load --probe cmsisdap: --no-reset --cbuild-run ${command:cmsis-csolution.getCbuildRunFile}"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Run",
+            "type": "shell",
+            "command": [
+                "pyocd gdbserver --probe cmsisdap: --persist --reset-run --cbuild-run ${command:cmsis-csolution.getCbuildRunFile}"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Load+Run",
+            "type": "shell",
+            "dependsOn": [
+                "CMSIS Load",
+                "CMSIS Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
+}
