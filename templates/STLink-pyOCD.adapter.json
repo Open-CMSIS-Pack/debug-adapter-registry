@@ -16,6 +16,9 @@
                 "monitor reset halt",
                 "tbreak main"
             ],
+            "customResetCommands": [
+                "monitor reset halt"
+            ],
             "target": {
                 "server": "pyocd",
                 "serverParameters": [
@@ -43,6 +46,9 @@
                 "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
                 "<% } %>"
             ],
+            "customResetCommands": [
+                "monitor reset halt"
+            ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
             },
@@ -65,6 +71,9 @@
                 "<% } %>",
                 "monitor reset halt",
                 "tbreak main"
+            ],
+            "customResetCommands": [
+                "monitor reset halt"
             ],
             "target": {
                 "server": "pyocd",
@@ -92,6 +101,9 @@
                 "<% for (let i = 0; i < files.length; i++) { %>",
                 "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
                 "<% } %>"
+            ],
+            "customResetCommands": [
+                "monitor reset halt"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"

@@ -16,6 +16,9 @@
                 "monitor reset",
                 "tbreak main"
             ],
+            "customResetCommands": [
+                "monitor reset"
+            ],
             "target": {
                 "server": "JLinkGDBServerCL",
                 "serverParameters": [
@@ -47,6 +50,9 @@
                 "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
                 "<% } %>"
             ],
+            "customResetCommands": [
+                "monitor reset"
+            ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
             },
@@ -69,6 +75,9 @@
                 "<% } %>",
                 "monitor reset",
                 "tbreak main"
+            ],
+            "customResetCommands": [
+                "monitor reset"
             ],
             "target": {
                 "server": "JLinkGDBServerCL",
@@ -100,6 +109,9 @@
                 "<% for (let i = 0; i < files.length; i++) { %>",
                 "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
                 "<% } %>"
+            ],
+            "customResetCommands": [
+                "monitor reset"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
