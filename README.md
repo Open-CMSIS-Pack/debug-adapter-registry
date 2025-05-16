@@ -14,7 +14,7 @@ This repository contains the [debug adapter registry](https://open-cmsis-pack.gi
 The adapter registry is used by CMSIS-Toolbox starting version 2.9.0 to generate `<solution>+<target-type>.cbuild-run.yml` files for the active target-set selected by 
 
 ```
-cbuild setup <solution> --active <target-type>@<set>
+cbuild setup <solution> --active <target-type>[@<set>]
 ```
 
 Available target-sets are listed by running
