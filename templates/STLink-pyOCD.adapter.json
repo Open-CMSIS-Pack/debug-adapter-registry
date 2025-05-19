@@ -137,7 +137,7 @@
             "label": "CMSIS Erase",
             "type": "shell",
             "command": [
-                "pyocd erase --probe stlink: --chip --cbuild-run ${command:cmsis-csolution.getCbuildRunFile}"
+                "pyocd erase --probe stlink: --chip --cbuild-run \"${command:cmsis-csolution.getCbuildRunFile}\""
             ],
             "problemMatcher": []
         },
@@ -145,7 +145,7 @@
             "label": "CMSIS Load",
             "type": "shell",
             "command": [
-                "pyocd load --probe stlink: --cbuild-run ${command:cmsis-csolution.getCbuildRunFile}"
+                "pyocd load --probe stlink: --cbuild-run \"${command:cmsis-csolution.getCbuildRunFile}\""
             ],
             "problemMatcher": []
         },
@@ -153,7 +153,7 @@
             "label": "CMSIS Run",
             "type": "shell",
             "command": [
-                "pyocd gdbserver --probe stlink: --connect attach --persist --reset-run --cbuild-run ${command:cmsis-csolution.getCbuildRunFile}"
+                "pyocd gdbserver --probe stlink: --connect attach --persist --reset-run --cbuild-run \"${command:cmsis-csolution.getCbuildRunFile}\""
             ],
             "problemMatcher": []
         },
