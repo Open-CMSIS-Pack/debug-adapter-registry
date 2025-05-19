@@ -23,8 +23,7 @@
                 "server": "pyocd",
                 "serverParameters": [
                     "--probe", "stlink:",
-                    "--connect", "attach",
-                    "--persist"
+                    "--connect", "attach"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
