@@ -170,7 +170,7 @@
             "command": [
                 "echo Connect > .cmd.jlink &&",
                 "<% for (const image of image_files) { %>",
-                "echo LoadFile <%= image.file %> >> .cmd.jlink &&",
+                "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
                 "<% } %>",
                 "echo Exit >> .cmd.jlink &&",
                 "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
@@ -196,7 +196,6 @@
         },
         {
             "label": "CMSIS Load+Run",
-            "type": "shell",
             "dependsOn": [
                 "CMSIS Load",
                 "CMSIS Run"
