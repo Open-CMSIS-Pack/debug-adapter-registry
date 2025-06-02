@@ -73,3 +73,6 @@ debug-adapters:
 
   - name: "Keil uVision"
     template: uVision.adapter.json            # template file
+
+  - name: "Arm Debugger"
+    template: Arm-Debugger.adapter.json       # template file

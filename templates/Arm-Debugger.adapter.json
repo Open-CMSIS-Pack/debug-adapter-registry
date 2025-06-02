@@ -1,0 +1,38 @@
+{
+    "launch": {
+        "singlecore-launch": {
+            "name": "Arm Debugger (launch)",
+            "type": "arm-debugger",
+            "request": "launch",
+            "preLaunchTask": "CMSIS Load",
+            "serialNumber": "${command:device-manager.getSerialNumber}",
+            "programs": [
+                "<% symbol_files.map(s => `\\${workspaceFolder}/${s.file}`).forEach((file,index) => { %>",
+                "\"<%= file %>\"<%= index === symbol_files.length - 1 ? '' : '\\n' %>",
+                "<% }) %>"
+            ],
+            "cmsisPack": "${command:cmsis-csolution.getTargetPack}",
+            "deviceName": "<%= device_name %>",
+            "processorName": "<%= pname %>",
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "CMSIS Load",
+            "type": "arm-debugger.flash",
+            "serialNumber": "${command:device-manager.getSerialNumber}",
+            "programs": [
+                "<% image_files.map(s => `\\${workspaceFolder}/${s.file}`).forEach((file,index) => { %>",
+                "<%= file %><%= index === symbol_files.length - 1 ? '' : '\\n' %>",
+                "<% }) %>"
+            ],
+            "cmsisPack": "${command:cmsis-csolution.getTargetPack}",
+            "deviceName": "<%= device_name %>",
+            "processorName": "<%= start_pname %>",
+            "problemMatcher": []
+        }
+    ]
+}
