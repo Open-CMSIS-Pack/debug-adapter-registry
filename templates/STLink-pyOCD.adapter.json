@@ -137,6 +137,7 @@
             "label": "CMSIS Erase",
             "type": "shell",
             "command": "pyocd",
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "erase",
                 "--probe", "stlink:",
@@ -149,6 +150,7 @@
             "label": "CMSIS Load",
             "type": "shell",
             "command": "pyocd",
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "load",
                 "--probe", "stlink:",
@@ -160,6 +162,7 @@
             "label": "CMSIS Run",
             "type": "shell",
             "command": "pyocd",
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "gdbserver",
                 "--probe", "stlink:",
