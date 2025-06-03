@@ -162,6 +162,7 @@
                 "echo Exit >> .cmd.jlink &&",
                 "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "problemMatcher": []
         },
         {
@@ -175,12 +176,14 @@
                 "echo Exit >> .cmd.jlink &&",
                 "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "problemMatcher": []
         },
         {
             "label": "CMSIS Run",
             "type": "shell",
             "command": "JLinkGDBServerCL",
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "-device", "<%= device_name %><%= start_pname ? `:${start_pname}` : '' %>\n",
                 "-endian", "little",
