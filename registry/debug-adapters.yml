@@ -8,7 +8,8 @@ debug-adapters:
       protocol: swd
       clock: 10000000
 
-  - name: "ULINKplus"
+  - name: "ULINKplus@pyOCD"
+    alias-name: ["ULINKplus"]                 # alternative names that map to this debug adapter
     template: CMSIS-DAP-pyOCD.adapter.json    # template file (initally same as CMSIS-DAP@pyOCD)
     gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
     defaults:                                 # default values to use when nowhere specified
@@ -67,6 +68,14 @@ debug-adapters:
     defaults:                                 # default values to use when nowhere specified
       port: 3333                              # default value of first gdbserver port
       protocol: swd
+
+  - name: "CMSIS-DAP@Arm-Debugger"
+    alias-name: ["CMSIS-DAP@armdbg"]
+    template: CMSIS-DAP-Arm-Debugger.adapter.json
+
+  - name: "ST-Link@Arm-Debugger"
+    alias-name: ["ST-Link@armdbg"]
+    template: STLink-Arm-Debugger.adapter.json
 
   - name: "AVH-FVP"
     template: FVP.adapter.json                # template file
