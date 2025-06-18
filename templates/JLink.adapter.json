@@ -20,7 +20,7 @@
                 "monitor reset"
             ],
             "target": {
-                "server": "JLinkGDBServerCL",
+                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
@@ -80,7 +80,7 @@
                 "monitor reset"
             ],
             "target": {
-                "server": "JLinkGDBServerCL",
+                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>:<%= pname %>\n",
                     "-endian", "little",
@@ -134,7 +134,7 @@
                 "<% } %>"
             ],
             "target": {
-                "server": "JLinkGDBServerCL",
+                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>:<%= pname %>\n",
                     "-endian", "little",
@@ -160,7 +160,7 @@
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "problemMatcher": []
@@ -174,7 +174,7 @@
                 "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
                 "<% } %>",
                 "echo Exit >> .cmd.jlink &&",
-                "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "problemMatcher": []
@@ -182,7 +182,7 @@
         {
             "label": "CMSIS Run",
             "type": "shell",
-            "command": "JLinkGDBServerCL",
+            "command": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "-device", "<%= device_name %><%= start_pname ? `:${start_pname}` : '' %>\n",
