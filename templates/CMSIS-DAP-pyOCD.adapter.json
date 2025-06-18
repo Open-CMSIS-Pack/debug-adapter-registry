@@ -186,9 +186,7 @@
             "label": "CMSIS TargetInfo",
             "type": "shell",
             "command": "pyocd",
-            "options": {
-                "cwd": "${workspaceFolder}/"
-            },
+            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "list",
                 "--cbuild-run",
