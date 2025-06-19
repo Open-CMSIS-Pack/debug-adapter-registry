@@ -82,7 +82,7 @@
             "target": {
                 "server": "JLinkGDBServerCL",
                 "serverParameters": [
-                    "-device", "<%= device_name %>:<%= pname %>\n",
+                    "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
                     "-if", "SWD",
                     "-speed", "auto",
@@ -136,7 +136,7 @@
             "target": {
                 "server": "JLinkGDBServerCL",
                 "serverParameters": [
-                    "-device", "<%= device_name %>:<%= pname %>\n",
+                    "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
                     "-if", "SWD",
                     "-speed", "auto",
@@ -160,7 +160,7 @@
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+                "jlink -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "problemMatcher": []
@@ -174,7 +174,7 @@
                 "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
                 "<% } %>",
                 "echo Exit >> .cmd.jlink &&",
-                "jlink -device <%= device_name %><%= start_pname ? `:${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+                "jlink -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "problemMatcher": []
@@ -185,7 +185,7 @@
             "command": "JLinkGDBServerCL",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
-                "-device", "<%= device_name %><%= start_pname ? `:${start_pname}` : '' %>\n",
+                "-device", "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>\n",
                 "-endian", "little",
                 "-if", "SWD",
                 "-speed", "auto",
