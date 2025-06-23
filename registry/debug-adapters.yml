@@ -63,6 +63,7 @@ debug-adapters:
       clock: 10000000
 
   - name: "JLink Server"
+    alias-name: ["J-Link"]                    # alternative names that map to this debug adapter
     template: JLink.adapter.json              # template file
     gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
     defaults:                                 # default values to use when nowhere specified
