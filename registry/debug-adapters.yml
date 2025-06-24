@@ -89,6 +89,10 @@ debug-adapters:
 
   - name: "AVH-FVP"
     template: FVP.adapter.json                # template file
+    defaults:
+      model:
+      config: 
+      args: []
 
   - name: "Keil uVision"
     template: uVision.adapter.json            # template file
