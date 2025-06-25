@@ -29,7 +29,8 @@
                     "-noir",
                     "-vd",
                     "-nogui",
-                    "-localhostonly"
+                    "-localhostonly",
+                    "-port", "<%= ports.get(pname) %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -89,7 +90,8 @@
                     "-noir",
                     "-vd",
                     "-nogui",
-                    "-localhostonly"
+                    "-localhostonly",
+                    "-port", "<%= ports.get(pname) %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -143,7 +145,8 @@
                     "-noir",
                     "-vd",
                     "-nogui",
-                    "-localhostonly"
+                    "-localhostonly",
+                    "-port", "<%= ports.get(pname) %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },

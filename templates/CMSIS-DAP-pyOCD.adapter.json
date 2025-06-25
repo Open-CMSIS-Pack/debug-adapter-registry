@@ -22,8 +22,11 @@
             "target": {
                 "server": "pyocd",
                 "serverParameters": [
+                    "gdbserver",
+                    "--port", "<%= ports.get(pname) %>",
                     "--probe", "cmsisdap:",
-                    "--connect", "attach"
+                    "--connect", "attach",
+                    "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -77,9 +80,12 @@
             "target": {
                 "server": "pyocd",
                 "serverParameters": [
+                    "gdbserver",
+                    "--port", "<%= ports.get(pname) %>",
                     "--probe", "cmsisdap:",
                     "--connect", "attach",
-                    "--persist"
+                    "--persist",
+                    "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
