@@ -171,9 +171,10 @@
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "gdbserver",
-                "--probe", "cmsisdap:", 
-                "--connect", "attach", 
-                "--persist", 
+                "--port", "<%= ports.get(pname) %>",
+                "--probe", "cmsisdap:",
+                "--connect", "attach",
+                "--persist",
                 "--reset-run",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
             ],
@@ -195,8 +196,7 @@
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "args": [
                 "list",
-                "--cbuild-run",
-                "${command:cmsis-csolution.getCbuildRunFile}"
+                "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
             ],
             "problemMatcher": []
         }
