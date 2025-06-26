@@ -30,7 +30,7 @@
                     "-vd",
                     "-nogui",
                     "-localhostonly",
-                    "-port", "<%= ports.get(pname) %>"
+                    "-port", "<%= ports.get(pname) %>\n"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -91,7 +91,7 @@
                     "-vd",
                     "-nogui",
                     "-localhostonly",
-                    "-port", "<%= ports.get(pname) %>"
+                    "-port", "<%= ports.get(pname) %>\n"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -146,7 +146,7 @@
                     "-vd",
                     "-nogui",
                     "-localhostonly",
-                    "-port", "<%= ports.get(pname) %>"
+                    "-port", "<%= ports.get(pname) %>\n"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -196,7 +196,7 @@
                 "-noir",
                 "-nogui",
                 "-localhostonly",
-                "-port", "<%= ports.get(start_pname) %>"
+                "-port", "<%= ports.get(start_pname) %>\n"
             ],
             "problemMatcher": []
         },
