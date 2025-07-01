@@ -90,7 +90,7 @@ debug-adapters:
   - name: "AVH-FVP"
     template: FVP.adapter.json                # template file
     defaults:
-      model:
+      model: "set model executable as target-set.debugger.model in csolution.yml"
       config: 
       args: []
 
