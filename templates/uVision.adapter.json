@@ -1,0 +1,15 @@
+{
+    "tasks": [{
+        "label": "CMSIS Load+Run",
+        "type": "shell",
+        "command": "<%= uv4 %>",
+        "options": { "cwd": "${workspaceFolder}" },
+        "args": [
+            "<%= solution_path %>",
+            "<% for (const arg of args) { %>",
+            "<%= arg %>\n",
+            "<% } %>"
+        ],
+        "problemMatcher": []
+    }]
+}

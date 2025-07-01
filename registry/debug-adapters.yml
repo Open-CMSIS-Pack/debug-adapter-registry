@@ -96,3 +96,6 @@ debug-adapters:
 
   - name: "Keil uVision"
     template: uVision.adapter.json            # template file
+    defaults:
+      uv4: "set uVision executable as target-set.debugger.uv4 in csolution.yml"
+      args: []
