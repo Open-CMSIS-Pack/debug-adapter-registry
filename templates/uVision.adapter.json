@@ -3,7 +3,7 @@
         "label": "CMSIS Load+Run",
         "type": "shell",
         "command": "<%= uv4 %>",
-        "options": { "cwd": "${workspaceFolder}" },
+        "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
         "args": [
             "<%= solution_path %>",
             "<% for (const arg of args) { %>",
