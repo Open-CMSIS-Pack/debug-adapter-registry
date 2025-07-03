@@ -2,29 +2,14 @@
     "tasks": [{
         "label": "CMSIS Load+Run",
         "type": "shell",
-        "command": "<%= uv4 %>",
-        "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+        "command": "This is Windows only",
         "windows": {
-            "options": {
+            "command": "<%= uv4 %>",
+            "options": { 
+                "cwd": "${workspaceFolder}/<%= solution_folder %>",
                 "shell": {
                     "executable": "cmd.exe",
                     "args": [ "/d", "/c" ]
-                }
-            }
-        },
-        "linux": {
-            "options": {
-                "shell": {
-                    "executable": "/bin/bash",
-                    "args": [ "-c" ]
-                }
-            }
-        },
-        "osx": {
-            "options": {
-                "shell": {
-                    "executable": "/bin/bash",
-                    "args": [ "-c" ]
                 }
             }
         },
