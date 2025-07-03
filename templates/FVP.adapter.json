@@ -4,6 +4,30 @@
         "type": "shell",
         "command": "<%= model %>",
         "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+        "windows": {
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": [ "/d", "/c" ]
+                }
+            }
+        },
+        "linux": {
+            "options": {
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": [ "-c" ]
+                }
+            }
+        },
+        "osx": {
+            "options": {
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": [ "-c" ]
+                }
+            }
+        },
         "args": [
             "<% if (config) { %>",            
             "-f", "<%= config %>\n",

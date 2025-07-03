@@ -144,6 +144,30 @@
             "type": "shell",
             "command": "pyocd",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "args": [
                 "erase",
                 "--probe", "cmsisdap:",
@@ -157,6 +181,30 @@
             "type": "shell",
             "command": "pyocd",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "args": [
                 "load",
                 "--probe", "cmsisdap:",
@@ -169,6 +217,30 @@
             "type": "shell",
             "command": "pyocd",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "args": [
                 "gdbserver",
                 "--port", "<%= ports.get(start_pname) %>\n",
@@ -194,6 +266,30 @@
             "type": "shell",
             "command": "pyocd",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "args": [
                 "list",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"

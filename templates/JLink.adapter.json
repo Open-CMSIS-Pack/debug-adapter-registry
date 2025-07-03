@@ -166,6 +166,30 @@
                 "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "problemMatcher": []
         },
         {
@@ -180,6 +204,30 @@
                 "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "problemMatcher": []
         },
         {
@@ -187,6 +235,30 @@
             "type": "shell",
             "command": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
             "args": [
                 "-device", "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>\n",
                 "-endian", "little",
