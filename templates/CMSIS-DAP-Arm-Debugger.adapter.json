@@ -11,6 +11,18 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
+        },
+        "multicore-start-launch": {
+            "name": "<%= pname %> CMSIS-DAP@Arm-Debugger (launch)",
+            "type": "arm-debugger",
+            "request": "launch",
+            "serialNumber": "*",
+            "probe": "CMSIS-DAP",
+            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "cmsisPack": "${command:cmsis-csolution.getDfpName}",
+            "deviceName": "${command:cmsis-csolution.getDeviceName}",
+            "processorName": "${command:cmsis-csolution.getProcessorName}",
+            "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         }
     },
     "tasks": [
