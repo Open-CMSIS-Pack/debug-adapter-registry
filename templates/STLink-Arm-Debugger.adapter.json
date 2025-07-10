@@ -5,7 +5,7 @@
             "type": "arm-debugger",
             "request": "launch",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
-            "connectionType: "ST-Link",
+            "connectionType": "ST-Link",
             "programs": "${command:cmsis-csolution.getBinaryFiles}",
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
