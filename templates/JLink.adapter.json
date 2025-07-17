@@ -135,6 +135,9 @@
                 "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
                 "<% } %>"
             ],
+            "customResetCommands": [
+                "monitor reset"
+            ],
             "target": {
                 "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
                 "serverParameters": [
