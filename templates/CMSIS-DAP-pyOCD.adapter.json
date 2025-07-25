@@ -23,7 +23,6 @@
                 "server": "pyocd",
                 "serverParameters": [
                     "gdbserver",
-                    "--port", "<%= ports.get(pname) %>\n",
                     "--probe", "cmsisdap:",
                     "--connect", "attach",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
@@ -81,7 +80,6 @@
                 "server": "pyocd",
                 "serverParameters": [
                     "gdbserver",
-                    "--port", "<%= ports.get(pname) %>\n",
                     "--probe", "cmsisdap:",
                     "--connect", "attach",
                     "--persist",
@@ -246,7 +244,6 @@
             },
             "args": [
                 "gdbserver",
-                "--port", "<%= ports.get(start_pname) %>\n",
                 "--probe", "cmsisdap:",
                 "--connect", "attach",
                 "--persist",
