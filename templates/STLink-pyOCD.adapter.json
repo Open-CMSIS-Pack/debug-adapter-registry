@@ -17,7 +17,9 @@
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "server": "pyocd",
@@ -49,7 +51,9 @@
                 "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
@@ -75,7 +79,9 @@
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "server": "pyocd",
@@ -108,7 +114,9 @@
                 "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
@@ -131,7 +139,9 @@
                 "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset halt"
+                "monitor reset halt",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
