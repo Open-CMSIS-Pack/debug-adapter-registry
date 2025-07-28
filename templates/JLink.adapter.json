@@ -17,7 +17,9 @@
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset"
+                "monitor reset",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
@@ -52,7 +54,9 @@
                 "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset"
+                "monitor reset",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
@@ -78,7 +82,9 @@
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset"
+                "monitor reset",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
@@ -113,7 +119,9 @@
                 "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset"
+                "monitor reset",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "port": "<%= ports.get(pname) %>"
@@ -136,7 +144,9 @@
                 "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset"
+                "monitor reset",
+                "tbreak main",
+                "continue"
             ],
             "target": {
                 "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
