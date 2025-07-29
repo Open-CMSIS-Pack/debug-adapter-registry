@@ -27,7 +27,7 @@
                     "--probe", "cmsisdap:",
                     "--connect", "attach",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
-                    "-quiet",
+                    "--quiet",
                     "--log", "*.cbuild_run,*server=info"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -88,7 +88,7 @@
                     "--connect", "attach",
                     "--persist",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
-                    "-quiet",
+                    "--quiet",
                     "--log", "*.cbuild_run,*server=info"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -256,7 +256,7 @@
                 "--persist",
                 "--reset-run",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
-                "-quiet",
+                "--quiet",
                 "--log", "*.cbuild_run,*server=info"
             ],
             "problemMatcher": []
