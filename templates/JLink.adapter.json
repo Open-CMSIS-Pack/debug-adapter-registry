@@ -37,6 +37,7 @@
                 "port": "<%= ports.get(pname) %>"
             },
             "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
                 "updateConfiguration": "auto"
             }
         },
@@ -62,6 +63,7 @@
                 "port": "<%= ports.get(pname) %>"
             },
             "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
                 "updateConfiguration": "auto"
             }
         },
@@ -102,6 +104,7 @@
                 "port": "<%= ports.get(pname) %>"
             },
             "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
                 "updateConfiguration": "auto"
             }
         },
@@ -127,6 +130,7 @@
                 "port": "<%= ports.get(pname) %>"
             },
             "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
                 "updateConfiguration": "auto"
             }
         },
@@ -164,6 +168,7 @@
                 "port": "<%= ports.get(pname) %>"
             },
             "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
                 "updateConfiguration": "auto"
             }
         }
