@@ -1,0 +1,102 @@
+name: debug-adapter-registry
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ci.yml'
+      - 'registry/**'
+      - 'schemas/**'
+      - 'templates/**'
+  release:
+    types: [published]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    if: |
+      ${{ github.event_name == 'pull_request' || github.event_name == 'release' }}
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    name: 'Check schemas of registry and templates'
+
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Lint registry and templates
+        run: |
+          npm install --save-dev eslint eslint-plugin-jsonc eslint-plugin-yml eslint-formatter-compact
+          npx eslint --no-config-lookup --format compact --parser yaml-eslint-parser --plugin yml --ext .yml \
+            --rule 'yml/quotes: ["error", { prefer: "double" }]' \
+            --rule 'yml/indent: ["error", 2]' \
+            --rule 'no-trailing-spaces: "error"' \
+            registry
+          npx eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --plugin jsonc --ext .json \
+            --rule 'jsonc/quotes: ["error", "double"]' \
+            --rule 'jsonc/indent: ["error", 4]' \
+            --rule 'no-trailing-spaces: "error"' \
+            templates
+
+      - name: Check registry schema
+        uses: GrantBirki/json-yaml-validate@v3.3.2
+        with:
+          base_dir: registry
+          json_schema: schemas/debug-adapters.schema.json
+          yaml_as_json: true
+          ajv_strict_mode: false
+          use_gitignore: false
+
+      - name: Check templates schemas
+        uses: GrantBirki/json-yaml-validate@v3.3.2
+        with:
+          base_dir: templates
+          json_schema: schemas/templates.schema.json
+          ajv_strict_mode: false
+          use_gitignore: false
+
+  release:
+    if: ${{ github.event_name == 'release' }}
+    needs: [ tests ]
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: ZIP files
+        run: zip -r debug-adapter-registry.zip registry schemas templates
+
+      - name: TAR files
+        run: tar -czf debug-adapter-registry.tar.gz registry schemas templates
+
+      - name: Attach files to release assets
+        id: release_assets
+        uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: debug-adapter-registry.*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true

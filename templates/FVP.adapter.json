@@ -29,11 +29,11 @@
             }
         },
         "args": [
-            "<% if (config) { %>",            
+            "<% if (config) { %>",
             "-f", "<%= config %>\n",
             "<% } %>",
             "<% const files = symbol_files.map(s => s.file) %>",
-            "<% for (const file of files) { %>",            
+            "<% for (const file of files) { %>",
             "-a", "<%= file %>\n",
             "<% } %>",
             "<% for (const arg of args) { %>",
