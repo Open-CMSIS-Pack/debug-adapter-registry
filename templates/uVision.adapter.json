@@ -5,7 +5,7 @@
         "command": "This is Windows only",
         "windows": {
             "command": "<%= uv4 %>",
-            "options": { 
+            "options": {
                 "cwd": "${workspaceFolder}/<%= solution_folder %>",
                 "shell": {
                     "executable": "cmd.exe",

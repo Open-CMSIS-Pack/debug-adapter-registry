@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/debug-adapter-registry/v2.11.0/schemas/templates.schema.json",
+  "title": "CMSIS debug-adapters templates",
+  "description": "Contains the templates for the supported debug adapters",
+  "version": "2.11.0",
+  "type": "object",
+  "properties": {
+    "launch": { "$ref": "#/definitions/LaunchDescType" },
+    "tasks":  { "$ref": "#/definitions/TasksDescType"  }
+  },
+  "minProperties": 1,
+  "additionalProperties": false,
+  "definitions": {
+    "LaunchDescType": {
+      "title": "launch:\nDocumentation: https://mdk-packs.github.io/vscode-cmsis-solution-docs/configuration.html#template-files",
+      "type": "object",
+      "properties": {
+        "singlecore-launch":      { "$ref": "#/definitions/LaunchCommon" },
+        "singlecore-attach" :     { "$ref": "#/definitions/LaunchCommon" },
+        "multicore-start-launch": { "$ref": "#/definitions/LaunchCommon" },
+        "multicore-start-attach": { "$ref": "#/definitions/LaunchCommon" },
+        "multicore-other":        { "$ref": "#/definitions/LaunchCommon" }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "LaunchCommon": {
+      "type": "object",
+      "properties": {
+        "name":                { "type": "string" },
+        "type":                { "type": "string" },
+        "request":             { "type": "string" },
+        "cwd":                 { "type": "string" },
+        "program":             { "type": "string" },
+        "programs":            { "type": "string" },
+        "gdb":                 { "type": "string" },
+        "preLaunchTask":       { "type": "string" },
+        "connectionAddress":   { "type": "string" },
+        "connectionType":      { "type": "string" },
+        "cmsisPack":           { "type": "string" },
+        "deviceName":          { "type": "string" },
+        "processorName":       { "type": "string" },
+        "workspaceFolder":     { "type": "string" },
+        "initCommands":        { "type": "array", "items": { "type": "string" } },
+        "customResetCommands": { "type": "array", "items": { "type": "string" } },
+        "cmsis": {
+          "type": "object",
+          "properties": {
+            "cbuildRunFile":       { "type": "string" },
+            "updateConfiguration": { "type": "string" }
+          },
+          "required": [ "cbuildRunFile", "updateConfiguration" ]
+        },
+        "target": {
+          "type": "object",
+          "properties": {
+            "port":             { "type": "string" },
+            "server":           { "type": "string" },
+            "serverParameters": { "type": "array", "items": { "type": "string" } }
+          },
+          "required": [ "port" ]
+        }
+      },
+      "required": ["name", "type", "request"],
+      "additionalProperties": false
+    },
+    "TasksDescType": {
+      "title": "tasks:\nDocumentation: https://mdk-packs.github.io/vscode-cmsis-solution-docs/configuration.html#template-files",
+      "type": "array",
+      "items": { "$ref": "#/definitions/TaskCommon" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "TaskCommon": {
+      "type": "object",
+      "properties": {
+        "label":             { "type": "string" },
+        "type":              { "type": "string" },
+        "connectionAddress": { "type": "string" },
+        "connectionType":    { "type": "string" },
+        "dependsOrder":      { "type": "string" },
+        "programs":          { "type": "string" },
+        "cmsisPack":         { "type": "string" },
+        "deviceName":        { "type": "string" },
+        "processorName":     { "type": "string" },
+        "workspaceFolder":   { "type": "string" },
+        "problemMatcher":    { "type": "array"  },
+        "command":           { "type": [ "string", "array" ], "items": { "type": "string" } },
+        "args":              { "type": "array", "items": { "type": "string" } },
+        "dependsOn":         { "type": "array", "items": { "type": "string" } },
+        "options": {
+          "type": "object",
+          "properties": { "cwd": { "type": "string" } },
+          "required": [ "cwd" ],
+          "additionalProperties": false
+        },
+        "windows": { "$ref": "#/definitions/PlatformOptions" },
+        "linux":   { "$ref": "#/definitions/PlatformOptions" },
+        "osx":     { "$ref": "#/definitions/PlatformOptions" }
+      },
+      "required": [ "label" ],
+      "additionalProperties": false
+    },
+    "PlatformOptions": {
+      "type": "object",
+      "properties": {
+        "command": { "type": "string" },
+        "options": {
+          "type": "object",
+          "properties": {
+            "cwd": { "type": "string" },
+            "shell": { 
+              "type": "object",
+              "properties": {
+                "executable": { "type": "string" },
+                "args":       { "type": "array", "items": { "type": "string" } }
+              },
+              "required": [ "executable" ],
+              "additionalProperties": false
+            }
+          },
+          "required": [ "shell" ],
+          "additionalProperties": false
+        }
+      },
+      "required": [ "options" ],
+      "additionalProperties": false
+    }
+  }
+}
