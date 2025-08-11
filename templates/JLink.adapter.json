@@ -27,7 +27,7 @@
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
                     "-if", "SWD",
-                    "-speed", "auto",
+                    "-speed", "4000",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -94,7 +94,7 @@
                     "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
                     "-if", "SWD",
-                    "-speed", "auto",
+                    "-speed", "4000",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -158,7 +158,7 @@
                     "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
                     "-if", "SWD",
-                    "-speed", "auto",
+                    "-speed", "4000",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -181,7 +181,7 @@
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "windows": {
@@ -219,7 +219,7 @@
                 "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
                 "<% } %>",
                 "echo Exit >> .cmd.jlink &&",
-                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed auto -commandfile .cmd.jlink"
+                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "windows": {
@@ -281,7 +281,7 @@
                 "-device", "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>\n",
                 "-endian", "little",
                 "-if", "SWD",
-                "-speed", "auto",
+                "-speed", "4000",
                 "-nohalt",
                 "-noir",
                 "-nogui",
