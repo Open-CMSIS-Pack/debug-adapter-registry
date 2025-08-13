@@ -24,3 +24,53 @@ cbuild list target-sets <solution>
 ```
 
 The `<solution>+<target-type>.cbuild-run.yml` file is then processed by the CMSIS Solution extension to generate launch.json and task.json files from the debug adapter template files.
+
+---
+## Validation
+
+The [CI worklow](.github/workflows/ci.yml) validates the debugger adapter registry and templates by running linter and schema checker.
+Such validation steps can be reproduced in the local environment according to the following instructions.
+> Pre-requisite: it assumes [`npm`](https://nodejs.org/en/download) is installed in the system.
+
+### Linter
+
+Install [`eslint`](https://www.npmjs.com/package/eslint) and json/yaml plugins:
+
+```
+npm install --save-dev eslint eslint-plugin-jsonc eslint-plugin-yml eslint-formatter-compact
+```
+
+Lint debug adapters registry:
+```
+npx eslint --no-config-lookup --format compact --parser yaml-eslint-parser --plugin yml --ext .yml \
+  --rule 'yml/quotes: ["error", { prefer: "double" }]' \
+  --rule 'yml/indent: ["error", 2]' \
+  --rule 'no-trailing-spaces: "error"' \
+  registry
+```
+
+Lint templates:
+```
+npx eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --plugin jsonc --ext .json \
+  --rule 'jsonc/quotes: ["error", "double"]' \
+  --rule 'jsonc/indent: ["error", 4]' \
+  --rule 'no-trailing-spaces: "error"' \
+  templates
+```
+
+### Schema check
+
+Install [`ajv`](https://www.npmjs.com/package/ajv):
+```
+npm install --save-dev ajv
+```
+
+Check debug adapters registry schema:
+```
+npx ajv -s schemas/debug-adapters.schema.json -d registry/debug-adapters.yml --strict=false
+```
+
+Check templates schema:
+```
+npx ajv -s schemas/templates.schema.json -d "templates/*.json" --strict=false
+```
