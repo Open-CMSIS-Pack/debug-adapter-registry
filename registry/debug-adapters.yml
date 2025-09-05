@@ -21,23 +21,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -63,23 +68,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -105,23 +115,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -147,23 +162,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -189,23 +209,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -231,23 +256,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -273,23 +303,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -315,23 +350,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
@@ -356,23 +396,28 @@ debug-adapters:
         title: Trace
         type: group
         trace-port:
+          title: Trace Port
           type: enum
           values: [SWO-UART, SWO-Manchester, TP1, TP2, TP4] # today only SWO-UART is relevant
           description: trace port type
         trace-clock:
+          title: Trace Clock
           type: clock
           description: trace clock in Hz
       telnet: # has telnet server
         title: Telnet
         type: group
         max-cnt:
+          title: Max Count
           type: int
           description: maximum number of telnet clients
         mode:
+          title: Mode
           type: enum
           values: [UART, ITM, semihosting, EventRecorder, RTT]
           description: telnet connection mode
         pname:
+          title: Processor Name
           type: pname # type of string, one of the processor names
           description: one of the available processor names
 
