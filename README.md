@@ -62,7 +62,7 @@ npx eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --pl
 
 Install [`ajv`](https://www.npmjs.com/package/ajv):
 ```
-npm install --save-dev ajv
+npm install --save-dev ajv ajv-cli
 ```
 
 Check debug adapters registry schema:

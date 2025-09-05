@@ -27,7 +27,8 @@
         "alias-name": { "type": "array",  "items": { "type": "string"}, "description": "List of names (in input node or BSP) that map to this debug adapter." },
         "template":   { "type": "string", "description": "Used only by the VS Code CMSIS Solution extension for configuration." },
         "gdbserver":  { "type": "null", "description": "Add the gdbserver: node in the cbuild-run.yml file." },
-        "defaults":   { "$ref": "#/definitions/DebugAdaptersDefaultsType" }
+        "defaults":   { "$ref": "#/definitions/DebugAdaptersDefaultsType" },
+        "capabilities":   { "$ref": "#/definitions/DebugAdaptersCapabilitiesType" }
       },
       "additionalProperties": false,
       "required": ["name"]
@@ -41,6 +42,51 @@
         "clock":    { "type": "number", "description": "Selected debug clock speed (in Hz)." }
       },
       "additionalProperties": true
+    },
+    "DebugAdaptersCapabilitiesType": {
+      "capabilities": {
+        "clock": {
+          "title": { "type": "string", "description": "Clock" },
+          "type": { "enum": [ "clock" ] },
+          "description": { "type": "string", "description": "debug clock in Hz" }
+        },
+        "protocol": {
+          "title": { "type": "string", "description": "Protocol" },
+          "type": { "type": "string" },
+          "values": { "enum": [ "jtag", "swd" ] },
+          "description": { "type": "string", "description": "debug protocol" }
+        },
+        "trace": {
+          "title": { "type": "string", "description": "Trace" },
+          "type": { "type": "string" },
+          "trace-port": {
+            "type": { "type": "string" },
+            "values": { "enum": ["SWO-UART", "SWO-Manchester", "TP1", "TP2", "TP4"]},
+            "description": { "type": "string", "description": "trace port" }
+          },
+          "trace-clock": {
+            "type": { "type": "string" },
+            "description": { "type": "string", "description": "trace clock in Hz" }
+          }
+        },
+        "telnet": {
+          "title": { "type": "string", "description": "Telnet" },
+          "type": { "type": "string" },
+          "max-cnt": {
+            "type": { "type": "string" },
+            "description": { "type": "string", "description": "maximum number of telnet clients" }
+          },
+          "mode": {
+            "type": { "type": "string" },
+            "values": { "enum": ["UART", "ITM", "semihosting", "EventRecorder", "RTT"] },
+            "description": { "type": "string", "description": "telnet connection mode" }
+          },
+          "pname": {
+            "type": { "type": "string" },
+            "description": { "type": "string", "description": "one of the available processor names" }
+          }
+        }
+      }
     }
   }
 }
