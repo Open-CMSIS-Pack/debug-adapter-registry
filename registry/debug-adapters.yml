@@ -437,9 +437,11 @@ debug-adapters:
       args: []
     capabilities:
       config:
+        title: Configuration
         type: string
         description: config string (??? is this a file path - then a file-picker type would be needed - see uVision template ???)
       model:
+        title: Model (??? name or path ???)
         type: string
         description: model executable
 
@@ -450,5 +452,6 @@ debug-adapters:
       args: []
     capabilities:
       uv4:
+        title: uVision Path
         type: path
         description: path to UV4.exe
