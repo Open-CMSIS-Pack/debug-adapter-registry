@@ -1,101 +1,503 @@
 debug-adapters:
   - name: "CMSIS-DAP@pyOCD"
-    alias-name: ["CMSIS-DAP", "DAP-Link"]     # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["CMSIS-DAP", "DAP-Link"]       # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+      trace:
+        trace-port: SWO-UART
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "ULINKplus@pyOCD"
-    alias-name: ["ULINKplus"]                 # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["ULINKplus"]                   # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "MCU-Link@pyOCD"
-    alias-name: ["MCU-Link"]                  # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["MCU-Link"]                    # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            description: Trace mode configuration
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "Nu-Link@pyOCD"
-    alias-name: ["Nu-Link", "Nu-Link-Pro"]    # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["Nu-Link", "Nu-Link-Pro"]      # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            description: Trace mode configuration
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "PICkit@pyOCD"
-    alias-name: ["PICkit Basic"]              # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["PICkit Basic"]                # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace #not according to ChatGPT
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            description: Trace mode configuration
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART, Manchester, TP1, TP2, TP4]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "KitProg3@pyOCD"
-    alias-name: ["KitProg3"]                  # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["KitProg3"]                    # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "RPiDebugProbe@pyOCD"
-    alias-name: ["RaspberryPiDebugProbe"]     # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json    # template file
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["RaspberryPiDebugProbe"]       # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json      # template files
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [swd]
+            default: swd
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "ST-Link@pyOCD"
-    alias-name: ["ST-LINK"]                   # alternative names that map to this debug adapter
-    template: STLink-pyOCD.adapter.json       # template file
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["ST-LINK"]                     # alternative names that map to this debug adapter
+    template: STLink-pyOCD.adapter.json         # template files
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
       clock: 10000000
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            description: Trace mode configuration
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "JLink Server"
-    alias-name: ["J-Link"]                    # alternative names that map to this debug adapter
-    template: JLink.adapter.json              # template file
-    gdbserver:                                # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                 # default values to use when nowhere specified
-      port: 3333                              # default value of first gdbserver port
+    alias-name: ["J-Link"]                      # alternative names that map to this debug adapter
+    template: JLink.adapter.json                # template files
+    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults:                                   # default values to use when nowhere specified
+      port: 3333                                # default value of first gdbserver port
       protocol: swd
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock (kHz)
+            description: Clock configuration
+            yml-node: clock
+            type: string
+            range: [10, 5000]
+            unit: kHz
+            default: 1000kHz
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol
+            type: enum
+            values: [jtag, swd]
+            default: swd
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: off
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: string
+            range: [10, 200000]
+            default: 12000
+            unit: kHz
+          - name: Mode
+            description: Trace mode configuration
+            yml-node: trace-port
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+      - section: Telnet
+        description: Telnet server configuration
+        yml-node: telnet
+        select: off
+        options:
+          - name: Port
+            description: Telnet port configuration
+            yml-node: port
+            type: number
+            range: [1, 100000]
+            default: 4444
 
   - name: "CMSIS-DAP@Arm-Debugger"
     alias-name: ["CMSIS-DAP@armdbg"]
-    template: CMSIS-DAP-Arm-Debugger.adapter.json
+    template: CMSIS-DAP-Arm-Debugger.adapter.json       # template files
 
   - name: "ST-Link@Arm-Debugger"
     alias-name: ["ST-Link@armdbg"]
-    template: STLink-Arm-Debugger.adapter.json
+    template: STLink-Arm-Debugger.adapter.json          # template files
 
   - name: "AVH-FVP"
-    template: FVP.adapter.json                # template file
+    template: FVP.adapter.json                          # template files
     defaults:
       model: "set model executable as target-set.debugger.model in csolution.yml"
       config:
       args: []
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Configuration
+            description: Path to the configuration file
+            yml-node: config
+            type: string
+          - name: Model
+            yml-node: model
+            type: string
+            description: Path to the model executable
 
   - name: "Keil uVision"
-    template: uVision.adapter.json            # template file
+    template: uVision.adapter.json                      # template files
     defaults:
       uv4: "C:\\Keil_v5\\UV4\\UV4.exe"
-      args: []
+    ui:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: uVision
+            description: Path to the uVision executable
+            yml-node: config
+            type: string
+            default: "C:\\Keil_v5\\UV4\\UV4.exe"
+          - name: Arguments
+            description: Additional command line arguments
+            yml-node: args
+            type: string
+            default: ""
