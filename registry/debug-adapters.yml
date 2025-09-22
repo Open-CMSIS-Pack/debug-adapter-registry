@@ -14,13 +14,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -31,8 +32,9 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
@@ -47,6 +49,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -65,13 +68,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -82,8 +86,9 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
@@ -98,6 +103,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -116,9 +122,9 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
@@ -133,12 +139,14 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
+            description: Trace mode configuration
             yml-node: trace-port
             type: enum
             values: [SWO-UART]
@@ -149,6 +157,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -167,13 +176,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -184,12 +194,14 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
+            description: Trace mode configuration
             yml-node: trace-port
             type: enum
             values: [SWO-UART]
@@ -200,6 +212,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -218,13 +231,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -235,12 +249,14 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
+            description: Trace mode configuration
             yml-node: trace-port
             type: enum
             values: [SWO-UART, Manchester, TP1, TP2, TP4]
@@ -251,6 +267,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -269,13 +286,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -286,6 +304,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -304,13 +323,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [swd]
@@ -321,6 +341,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -339,13 +360,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -356,12 +378,14 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
+            description: Trace mode configuration
             yml-node: trace-port
             type: enum
             values: [SWO-UART]
@@ -372,6 +396,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
@@ -389,13 +414,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Trace configuration
+            description: Clock configuration
             yml-node: clock
-            type: number
+            type: string
             range: [10, 5000]
             unit: kHz
             default: 1000kHz
           - name: Protocol
+            description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
@@ -406,12 +432,14 @@ debug-adapters:
         select: off
         options:
           - name: Clock (kHz)
+            description: Trace clock configuration
             yml-node: trace-clock
-            type: number
+            type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
+            description: Trace mode configuration
             yml-node: trace-port
             type: enum
             values: [SWO-UART]
@@ -422,6 +450,7 @@ debug-adapters:
         select: off
         options:
           - name: Port
+            description: Telnet port configuration
             yml-node: port
             type: number
             range: [1, 100000]
