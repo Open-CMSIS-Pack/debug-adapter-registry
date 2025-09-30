@@ -6,10 +6,11 @@
             "request": "launch",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
             "connectionType": "CMSIS-DAP",
-            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "programs": ["${command:arm-debugger.getApplicationFiles}"],
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
+            "updateConfigurations": "auto",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         },
         "multicore-start-launch": {
@@ -18,10 +19,11 @@
             "request": "launch",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
             "connectionType": "CMSIS-DAP",
-            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "programs": ["${command:arm-debugger.getApplicationFiles}"],
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
+            "updateConfigurations": "auto",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         }
     },
@@ -31,10 +33,11 @@
             "type": "arm-debugger.flash",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
             "connectionType": "CMSIS-DAP",
-            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "programs": ["${command:arm-debugger.getApplicationFiles}"],
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
+            "updateConfigurations": "auto",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
             "problemMatcher": []
         }
