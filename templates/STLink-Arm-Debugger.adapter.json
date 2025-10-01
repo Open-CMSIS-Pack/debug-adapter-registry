@@ -12,7 +12,9 @@
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
-            "updateConfigurations": "auto",
+            "cmsis":{
+                "updateConfigurations": "auto"
+            },
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         },
         "multicore-start-launch": {
@@ -27,7 +29,9 @@
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
-            "updateConfigurations": "auto",
+            "cmsis":{
+                "updateConfigurations": "auto"
+            },
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         }
     },
@@ -43,7 +47,6 @@
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
-            "updateConfigurations": "auto",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
             "problemMatcher": []
         }
