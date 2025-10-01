@@ -13,7 +13,7 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "cmsis":{
-                "updateConfigurations": "auto"
+                "updateConfiguration": "auto"
             },
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         },
@@ -30,7 +30,7 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "cmsis":{
-                "updateConfigurations": "auto"
+                "updateConfiguration": "auto"
             },
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>"
         }
