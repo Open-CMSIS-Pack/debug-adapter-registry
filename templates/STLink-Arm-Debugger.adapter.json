@@ -6,7 +6,9 @@
             "request": "launch",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
             "connectionType": "ST-Link",
-            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "programs": [
+                "${command:arm-debugger.getApplicationFiles}"
+            ],
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
@@ -18,7 +20,9 @@
             "request": "launch",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
             "connectionType": "ST-Link",
-            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "programs": [
+                "${command:arm-debugger.getApplicationFiles}"
+            ],
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
@@ -31,7 +35,9 @@
             "type": "arm-debugger.flash",
             "connectionAddress": "${command:device-manager.getSerialNumber}",
             "connectionType": "ST-Link",
-            "programs": "${command:cmsis-csolution.getBinaryFiles}",
+            "programs": [
+                "${command:arm-debugger.getApplicationFiles}"
+            ],
             "cmsisPack": "${command:cmsis-csolution.getDfpName}",
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
