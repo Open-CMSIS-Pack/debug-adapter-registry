@@ -255,17 +255,19 @@ debug-adapters:
     defaults:                                              # default values to use when nowhere specified
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
+      clock: 4000000
+      reset: "Normal"
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Debug clock configuration
             yml-node: clock
             type: number
-            range: [10, 10000]
+            range: [1, 50000]
             scale: 1000
-            default: 10000
+            default: 4000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -278,6 +280,50 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
+          - name: Reset Type
+            description: Reset type configuration
+            yml-node: reset
+            type: enum
+            values: ["Normal", "Core", "Reset Pin"]
+            default: "Normal"
+      - section: Trace
+        description: Trace configuration
+        yml-node: trace
+        select: on
+        options:
+          - name: Clock (kHz)
+            description: Trace clock configuration
+            yml-node: trace-clock
+            type: number
+            range: [5, 200000]
+            default: 12000
+          - name: Mode
+            description: Trace mode configuration
+            yml-node: trace-mode
+            type: enum
+            values: [SWO-UART]
+            default: SWO-UART
+          - name: Port
+            description: Trace port configuration
+            yml-node: trace-port
+            type: number
+            default: 5555
+      - section: Terminal
+        description: Terminal server configuration
+        yml-node: terminal
+        select: on
+        options:
+          - name: Mode
+            description: Terminal mode configuration
+            yml-node: mode
+            type: enum
+            values: [Disabled, Semihosting, SWO, RTT ]
+            default: Disabled
+          - name: Port
+            description: Terminal port configuration
+            yml-node: port
+            type: number
+            default: 4444
 
   - name: "CMSIS-DAP@Arm-Debugger"
     alias-name: ["CMSIS-DAP@armdbg"]
