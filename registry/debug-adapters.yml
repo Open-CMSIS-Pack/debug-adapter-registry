@@ -1,15 +1,15 @@
 debug-adapters:
   - name: "CMSIS-DAP@pyOCD"
-    alias-name: ["CMSIS-DAP", "DAP-Link"]       # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["CMSIS-DAP", "DAP-Link"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
       trace:
         trace-port: SWO-UART
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -56,14 +56,14 @@ debug-adapters:
             default: 4444
 
   - name: "ULINKplus@pyOCD"
-    alias-name: ["ULINKplus"]                   # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["ULINKplus"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -110,14 +110,14 @@ debug-adapters:
             default: 4444
 
   - name: "MCU-Link@pyOCD"
-    alias-name: ["MCU-Link"]                    # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["MCU-Link"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -164,14 +164,14 @@ debug-adapters:
             default: 4444
 
   - name: "Nu-Link@pyOCD"
-    alias-name: ["Nu-Link", "Nu-Link-Pro"]      # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["Nu-Link", "Nu-Link-Pro"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -219,14 +219,14 @@ debug-adapters:
             default: 4444
 
   - name: "PICkit@pyOCD"
-    alias-name: ["PICkit Basic"]                # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["PICkit Basic"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -274,14 +274,14 @@ debug-adapters:
             default: 4444
 
   - name: "KitProg3@pyOCD"
-    alias-name: ["KitProg3"]                    # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files  (initally same as CMSIS-DAP@pyOCD)
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["KitProg3"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files  (initally same as CMSIS-DAP@pyOCD)
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -311,14 +311,14 @@ debug-adapters:
             default: 4444
 
   - name: "RPiDebugProbe@pyOCD"
-    alias-name: ["RaspberryPiDebugProbe"]       # alternative names that map to this debug adapter
-    template: CMSIS-DAP-pyOCD.adapter.json      # template files
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["RaspberryPiDebugProbe"] # alternative names that map to this debug adapter
+    template: CMSIS-DAP-pyOCD.adapter.json # template files
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -348,14 +348,14 @@ debug-adapters:
             default: 4444
 
   - name: "ST-Link@pyOCD"
-    alias-name: ["ST-LINK"]                     # alternative names that map to this debug adapter
-    template: STLink-pyOCD.adapter.json         # template files
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["ST-LINK"] # alternative names that map to this debug adapter
+    template: STLink-pyOCD.adapter.json # template files
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -403,13 +403,13 @@ debug-adapters:
             default: 4444
 
   - name: "JLink Server"
-    alias-name: ["J-Link"]                      # alternative names that map to this debug adapter
-    template: JLink.adapter.json                # template files
-    gdbserver:                                  # add gdbserver: node under debugger: in cbuild-run.yml
-    defaults:                                   # default values to use when nowhere specified
-      port: 3333                                # default value of first gdbserver port
+    alias-name: ["J-Link"] # alternative names that map to this debug adapter
+    template: JLink.adapter.json # template files
+    gdbserver: # add gdbserver: node under debugger: in cbuild-run.yml
+    defaults: # default values to use when nowhere specified
+      port: 3333 # default value of first gdbserver port
       protocol: swd
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -458,19 +458,19 @@ debug-adapters:
 
   - name: "CMSIS-DAP@Arm-Debugger"
     alias-name: ["CMSIS-DAP@armdbg"]
-    template: CMSIS-DAP-Arm-Debugger.adapter.json       # template files
+    template: CMSIS-DAP-Arm-Debugger.adapter.json # template files
 
   - name: "ST-Link@Arm-Debugger"
     alias-name: ["ST-Link@armdbg"]
-    template: STLink-Arm-Debugger.adapter.json          # template files
+    template: STLink-Arm-Debugger.adapter.json # template files
 
   - name: "AVH-FVP"
-    template: FVP.adapter.json                          # template files
+    template: FVP.adapter.json # template files
     defaults:
       model: "set model executable as target-set.debugger.model in csolution.yml"
       config:
       args: []
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
@@ -484,10 +484,10 @@ debug-adapters:
             description: Path to the model executable
 
   - name: "Keil uVision"
-    template: uVision.adapter.json                      # template files
+    template: uVision.adapter.json # template files
     defaults:
       uv4: "C:\\Keil_v5\\UV4\\UV4.exe"
-    ui:
+    user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
         options:
