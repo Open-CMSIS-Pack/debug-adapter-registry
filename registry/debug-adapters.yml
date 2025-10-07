@@ -19,7 +19,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -73,7 +73,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -127,7 +127,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             yml-node: protocol
             type: enum
@@ -181,7 +181,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -236,7 +236,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -291,7 +291,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -328,7 +328,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -365,7 +365,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -419,7 +419,7 @@ debug-adapters:
             type: string
             range: [10, 5000]
             unit: kHz
-            default: 1000kHz
+            default: 1000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
