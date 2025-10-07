@@ -49,7 +49,7 @@
         "defaults": {
           "$ref": "#/definitions/DebugAdaptersDefaultsType"
         },
-        "ui": {
+        "user-interface": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserInterfaceType"
