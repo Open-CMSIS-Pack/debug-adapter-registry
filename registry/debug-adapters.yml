@@ -409,6 +409,8 @@ debug-adapters:
     defaults:                                              # default values to use when nowhere specified
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
+      clock: 4000000
+      reset: "Normal"
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -416,16 +418,22 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: number
-            range: [10, 10000]
-            scale: 1000
-            default: 10000
+            type: string
+            range: [1, 50000000]
+            unit: kHz
+            default: 4000000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
             type: enum
             values: [jtag, swd]
             default: swd
+          - name: Reset Type
+            description: Reset type configuration
+            yml-node: reset
+            type: enum
+            values: ["Normal", "Core", "Reset Pin"]
+            default: "Normal"
       - section: Trace
         description: Trace configuration
         yml-node: trace
@@ -440,10 +448,16 @@ debug-adapters:
             scale: 1000
           - name: Mode
             description: Trace mode configuration
-            yml-node: trace-port
+            yml-node: trace-mode
             type: enum
             values: [SWO-UART]
             default: SWO-UART
+          - name: Port
+            description: Trace port configuration
+            yml-node: trace-port
+            type: number
+            range: [1, 100000]
+            default: 5555
       - section: Telnet
         description: Telnet server configuration
         yml-node: telnet
