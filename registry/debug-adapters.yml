@@ -8,7 +8,7 @@ debug-adapters:
       protocol: swd
       clock: 10000000
       trace:
-        trace-port: SWO-UART
+        port: SWO-UART
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -33,13 +33,13 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART]
             default: SWO-UART
@@ -87,13 +87,13 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART]
             default: SWO-UART
@@ -140,14 +140,14 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
             description: Trace mode configuration
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART]
             default: SWO-UART
@@ -195,14 +195,14 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
             description: Trace mode configuration
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART]
             default: SWO-UART
@@ -250,14 +250,14 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
             description: Trace mode configuration
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART, Manchester, TP1, TP2, TP4]
             default: SWO-UART
@@ -379,14 +379,14 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
             description: Trace mode configuration
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART]
             default: SWO-UART
@@ -433,14 +433,14 @@ debug-adapters:
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
-            yml-node: trace-clock
+            yml-node: clock
             type: string
             range: [10, 200000]
             default: 12000
             unit: kHz
           - name: Mode
             description: Trace mode configuration
-            yml-node: trace-port
+            yml-node: port
             type: enum
             values: [SWO-UART]
             default: SWO-UART
