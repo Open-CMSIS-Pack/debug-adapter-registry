@@ -463,6 +463,12 @@ debug-adapters:
         yml-node: telnet
         select: off
         options:
+          - name: Mode
+            description: Telnet mode configuration
+            yml-node: mode
+            type: enum
+            values: [Disabled, Semihosting, SWO, RTT ]
+            default: Disabled
           - name: Port
             description: Telnet port configuration
             yml-node: port
