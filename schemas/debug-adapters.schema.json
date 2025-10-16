@@ -163,7 +163,7 @@
             "items": {
               "type": "number"
             },
-            "description": "Range of valid values (for number type)."
+            "description": "Range of valid values in display scale (for number type)."
           },
           "default": {
             "type": [
@@ -171,11 +171,11 @@
               "number",
               "null"
             ],
-            "description": "Default value for the option."
+            "description": "Default value for the option (for number types in display scale)."
           },
-          "unit": {
-            "type": "string",
-            "description": "Unit of the option (for number type)."
+          "scale": {
+            "type": "number",
+            "description": "Display scaling of the option (for number type). E.g. 1000 to display a value stored in Hz as kHz."
           }
         }
       }
