@@ -16,10 +16,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -34,10 +34,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             yml-node: trace-port
             type: enum
@@ -70,10 +70,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -88,10 +88,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             yml-node: trace-port
             type: enum
@@ -124,10 +124,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             yml-node: protocol
             type: enum
@@ -141,10 +141,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             description: Trace mode configuration
             yml-node: trace-port
@@ -178,10 +178,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -196,10 +196,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             description: Trace mode configuration
             yml-node: trace-port
@@ -233,10 +233,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -251,10 +251,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             description: Trace mode configuration
             yml-node: trace-port
@@ -288,10 +288,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -325,10 +325,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -362,10 +362,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -380,10 +380,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             description: Trace mode configuration
             yml-node: trace-port
@@ -416,10 +416,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Clock configuration
             yml-node: clock
-            type: string
-            range: [10, 5000]
-            unit: kHz
-            default: 1000000
+            type: number
+            range: [10, 10000]
+            scale: 1000
+            default: 10000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -434,10 +434,10 @@ debug-adapters:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
-            type: string
+            type: number
             range: [10, 200000]
             default: 12000
-            unit: kHz
+            scale: 1000
           - name: Mode
             description: Trace mode configuration
             yml-node: trace-port
