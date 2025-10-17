@@ -147,7 +147,8 @@
             "enum": [
               "number",
               "enum",
-              "string"
+              "string",
+              "file"
             ],
             "description": "Type of the option."
           },
