@@ -6,7 +6,7 @@
         "windows": {
             "command": "<%= uv4 %>",
             "args": [
-                    "${command:cmsis-csolution.getSolutionFile}"
+                "${command:cmsis-csolution.getSolutionFile}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/<%= solution_folder %>",
