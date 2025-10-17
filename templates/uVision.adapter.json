@@ -5,7 +5,6 @@
         "command": "uVision runs on Windows only",
         "windows": {
             "command": "<%= uv4 %>",
-            "args": "${command:cmsis-csolution.getSolutionFile}",
             "options": {
                 "cwd": "${workspaceFolder}/<%= solution_folder %>",
                 "shell": {
@@ -14,6 +13,9 @@
                 }
             }
         },
+        "args": [
+            "args": "${command:cmsis-csolution.getSolutionFile}"           
+        ],
         "problemMatcher": []
     }]
 }
