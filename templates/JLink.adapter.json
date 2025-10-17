@@ -34,6 +34,7 @@
             "Core": 1,
             "Reset Pin": 2
         },
+        // TODO: null not working as assumed
         "defaultTerminalPortOption": null,
         "terminalPortOptions": {
             "Disabled": null,
@@ -41,7 +42,7 @@
             "SWO": "TelnetPort",
             "RTT": "RTTTelnetPort"
         },
-        "defaultTelnetPort": "4444",
+        "defaultTerminalPort": "4444",
         "defaultSWOPort": "5555",
         "defaultTraceClock": 12000
     },
@@ -85,9 +86,9 @@
                     "-SWOPort",
                     "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                     "<% } %>",
-                    "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
-                    "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
-                    "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
+                    "<% if (data.terminalPortOptions[config.terminal?.mode]) { %>",
+                    "-<%= data.terminalPortOptions[config.terminal?.mode] %>\n",
+                    "<%= config.terminal?.port ?? data.defaultTerminalPort %>\n",
                     "<% } %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -164,9 +165,9 @@
                     "-SWOPort",
                     "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                     "<% } %>",
-                    "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
-                    "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
-                    "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
+                    "<% if (data.terminalPortOptions[config.terminal?.mode]) { %>",
+                    "-<%= data.terminalPortOptions[config.terminal?.mode] %>\n",
+                    "<%= config.terminal?.port ?? data.defaultTerminalPort %>\n",
                     "<% } %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -240,9 +241,9 @@
                     "-SWOPort",
                     "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                     "<% } %>",
-                    "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
-                    "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
-                    "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
+                    "<% if (data.terminalPortOptions[config.terminal?.mode]) { %>",
+                    "-<%= data.terminalPortOptions[config.terminal?.mode] %>\n",
+                    "<%= config.terminal?.port ?? data.defaultTerminalPort %>\n",
                     "<% } %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -307,9 +308,9 @@
                 "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
                 "-SWOPort", "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                 "<% } %>",
-                "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
-                "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
-                "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
+                "<% if (data.terminalPortOptions[config.terminal?.mode]) { %>",
+                "-<%= data.terminalPortOptions[config.terminal?.mode] %>\n",
+                "<%= config.terminal?.port ?? data.defaultTerminalPort %>\n",
                 "<% } %>"
             ],
             "problemMatcher": []

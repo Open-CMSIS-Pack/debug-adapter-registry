@@ -456,19 +456,19 @@ debug-adapters:
             yml-node: trace-port
             type: number
             default: 5555
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
+      - section: Terminal
+        description: Terminal server configuration
+        yml-node: terminal
         select: on
         options:
           - name: Mode
-            description: Telnet mode configuration
+            description: Terminal mode configuration
             yml-node: mode
             type: enum
             values: [Disabled, Semihosting, SWO, RTT ]
             default: Disabled
           - name: Port
-            description: Telnet port configuration
+            description: Terminal port configuration
             yml-node: port
             type: number
             default: 4444
