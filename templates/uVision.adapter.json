@@ -14,7 +14,7 @@
             }
         },
         "args": [
-            "${command:cmsis-csolution.getSolutionFile}"           
+            "${command:cmsis-csolution.getSolutionFile}"
         ],
         "problemMatcher": []
     }]
