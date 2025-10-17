@@ -22,7 +22,7 @@
                 "continue"
             ],
             "target": {
-                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
+                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
@@ -89,7 +89,7 @@
                 "continue"
             ],
             "target": {
-                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
+                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
@@ -153,7 +153,7 @@
                 "continue"
             ],
             "target": {
-                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
+                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
@@ -251,7 +251,7 @@
         {
             "label": "CMSIS Run",
             "type": "shell",
-            "command": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : 'Exe' %>",
+            "command": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
             "windows": {
                 "options": {
