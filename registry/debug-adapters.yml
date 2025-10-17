@@ -416,12 +416,12 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Debug clock configuration
             yml-node: clock
-            type: string
-            range: [1, 50000000]
-            unit: kHz
-            default: 4000000
+            type: number
+            range: [1, 50000]
+            scale: 1000
+            default: 4000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -437,15 +437,14 @@ debug-adapters:
       - section: Trace
         description: Trace configuration
         yml-node: trace
-        select: off
+        select: on
         options:
           - name: Clock (kHz)
             description: Trace clock configuration
             yml-node: trace-clock
             type: number
-            range: [10, 200000]
+            range: [5, 200000]
             default: 12000
-            scale: 1000
           - name: Mode
             description: Trace mode configuration
             yml-node: trace-mode
@@ -456,12 +455,11 @@ debug-adapters:
             description: Trace port configuration
             yml-node: trace-port
             type: number
-            range: [1, 100000]
             default: 5555
       - section: Telnet
         description: Telnet server configuration
         yml-node: telnet
-        select: off
+        select: on
         options:
           - name: Mode
             description: Telnet mode configuration
@@ -473,7 +471,6 @@ debug-adapters:
             description: Telnet port configuration
             yml-node: port
             type: number
-            range: [1, 100000]
             default: 4444
 
   - name: "CMSIS-DAP@Arm-Debugger"

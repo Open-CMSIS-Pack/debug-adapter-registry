@@ -1,4 +1,50 @@
 {
+    "data": {
+        "osShellOptions": {
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [ "/d", "/c" ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [ "-c" ]
+                    }
+                }
+            }
+        },
+        "defaultDebugClock": 4000000,
+        "debugClockScaler": 1000,
+        "defaultResetType": 0,
+        "resetTypes": {
+            "Normal": 0,
+            "Core": 1,
+            "Reset Pin": 2
+        },
+        "defaultTerminalPortOption": null,
+        "terminalPortOptions": {
+            "Disabled": null,
+            "Semihosting": "TelnetPort",
+            "SWO": "TelnetPort",
+            "RTT": "RTTTelnetPort"
+        },
+        "defaultTelnetPort": "4444",
+        "defaultSWOPort": "5555",
+        "defaultTraceClock": 12000
+    },
     "launch": {
         "singlecore-launch": {
             "name": "JLink (launch)",
@@ -9,30 +55,17 @@
             "gdb": "arm-none-eabi-gdb",
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
-                "<% for (const file of files) { %>",
+                "<% symbol_files.slice(1).map(s => s.file).forEach(file => { %>",
                 "symbol-file <%= file %>\n",
-                "<% } %>",
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
-                "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
-                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? '12000' %> 1 0",
+                "<% }) %>",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
+                "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? data.defaultTraceClock %> 1 0",
                 "<% } %>",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
                 "tbreak main",
                 "continue"
             ],
@@ -42,27 +75,19 @@
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
-                    "-speed", "<%= config.clock ? parseInt(config.clock / 1000) : '4000' %>\n",
+                    "-speed", "<%= parseInt((config.clock ?? data.defaultDebugClock) / data.debugClockScaler) %>\n",
                     "-noir",
                     "-vd",
                     "-nogui",
                     "-localhostonly",
                     "-port", "<%= ports.get(pname) %>\n",
-                    "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                    "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
                     "-SWOPort",
-                    "<%= config.trace?.[\"trace-port\"] ?? '5555' %>\n",
+                    "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                     "<% } %>",
-                    "<% const telnetMode = config.telnet?.mode ?? 'Disabled' %>",
-                    "<% let addTelnetPort = false; %>",
-                    "<% if (telnetMode == 'Semihosting' || telnetMode == 'SWO') { %>",
-                    "-TelnetPort",
-                    "<% addTelnetPort = true; %>",
-                    "<% } else if (telnetMode == 'RTT') { %>",
-                    "-RTTTelnetPort",
-                    "<% addTelnetPort = true; %>",
-                    "<% } %>",
-                    "<% if (addTelnetPort) { %>",
-                    "<%= config.telnet?.port ?? '4444' %>\n",
+                    "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
+                    "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
+                    "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
                     "<% } %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -80,22 +105,15 @@
             "program": "<%= symbol_files[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
             "initCommands": [
-                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>",
-                "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
-                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? '12000' %> 1 0",
+                "<% symbol_files.slice(1).map(s => s.file).forEach(file => { %>",
+                "symbol-file <%= file %>\n",
+                "<% }) %>",
+                "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? data.defaultTraceClock %> 1 0",
                 "<% } %>"
             ],
             "customResetCommands": [
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
                 "tbreak main",
                 "continue"
             ],
@@ -116,30 +134,17 @@
             "gdb": "arm-none-eabi-gdb",
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (const file of files) { %>",
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file).forEach(file => { %>",
                 "symbol-file <%= file %>\n",
-                "<% } %>",
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
-                "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
-                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? '12000' %> 1 0",
+                "<% }) %>",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
+                "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? data.defaultTraceClock %> 1 0",
                 "<% } %>",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
                 "tbreak main",
                 "continue"
             ],
@@ -149,27 +154,19 @@
                     "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
-                    "-speed", "<%= config.clock ? parseInt(config.clock / 1000) : '4000' %>\n",
+                    "-speed", "<%= parseInt((config.clock ?? data.defaultDebugClock) / data.debugClockScaler) %>\n",
                     "-noir",
                     "-vd",
                     "-nogui",
                     "-localhostonly",
                     "-port", "<%= ports.get(pname) %>\n",
-                    "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                    "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
                     "-SWOPort",
-                    "<%= config.trace?.[\"trace-port\"] ?? '5555' %>\n",
+                    "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                     "<% } %>",
-                    "<% const telnetMode = config.telnet?.mode ?? 'Disabled' %>",
-                    "<% let addTelnetPort = false; %>",
-                    "<% if (telnetMode == 'Semihosting' || telnetMode == 'SWO') { %>",
-                    "-TelnetPort",
-                    "<% addTelnetPort = true; %>",
-                    "<% } else if (telnetMode == 'RTT') { %>",
-                    "-RTTTelnetPort",
-                    "<% addTelnetPort = true; %>",
-                    "<% } %>",
-                    "<% if (addTelnetPort) { %>",
-                    "<%= config.telnet?.port ?? '4444' %>\n",
+                    "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
+                    "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
+                    "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
                     "<% } %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -187,22 +184,15 @@
             "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>",
-                "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
-                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? '12000' %> 1 0",
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file).forEach(file => { %>",
+                "symbol-file <%= file %>\n",
+                "<% }) %>",
+                "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? data.defaultTraceClock %> 1 0",
                 "<% } %>"
             ],
             "customResetCommands": [
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
                 "tbreak main",
                 "continue"
             ],
@@ -222,22 +212,15 @@
             "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>",
-                "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
-                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? '12000' %> 1 0",
+                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file).forEach(file => { %>",
+                "symbol-file <%= file %>\n",
+                "<% }) %>",
+                "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                "monitor SWO EnableTarget 0 <%= config.trace?.[\"trace-clock\"] ?? data.defaultTraceClock %> 1 0",
                 "<% } %>"
             ],
             "customResetCommands": [
-                "<% const resetTypes = [ %>",
-                "<%   { name: 'Normal', argument: 0 }, %>",
-                "<%   { name: 'Core', argument: 1 }, %>",
-                "<%   { name: 'Reset Pin', argument: 2 }, %>",
-                "<% ] %>",
-				"<% const resetType = resetTypes.find(type => type.name === config.reset) %>",
-                "monitor reset <%= resetType?.argument ?? '' %>\n",
+                "monitor reset <%= data.resetTypes[config.reset] ?? data.defaultResetType %>\n",
                 "tbreak main",
                 "continue"
             ],
@@ -247,27 +230,19 @@
                     "-device", "<%= device_name %>_<%= pname %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
-                    "-speed", "<%= config.clock ? parseInt(config.clock / 1000) : '4000' %>\n",
+                    "-speed", "<%= parseInt((config.clock ?? data.defaultDebugClock) / data.debugClockScaler) %>\n",
                     "-noir",
                     "-vd",
                     "-nogui",
                     "-localhostonly",
                     "-port", "<%= ports.get(pname) %>\n",
-                    "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                    "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
                     "-SWOPort",
-                    "<%= config.trace?.[\"trace-port\"] ?? '5555' %>\n",
+                    "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                     "<% } %>",
-                    "<% const telnetMode = config.telnet?.mode ?? 'Disabled' %>",
-                    "<% let addTelnetPort = false; %>",
-                    "<% if (telnetMode == 'Semihosting' || telnetMode == 'SWO') { %>",
-                    "-TelnetPort",
-                    "<% addTelnetPort = true; %>",
-                    "<% } else if (telnetMode == 'RTT') { %>",
-                    "-RTTTelnetPort",
-                    "<% addTelnetPort = true; %>",
-                    "<% } %>",
-                    "<% if (addTelnetPort) { %>",
-                    "<%= config.telnet?.port ?? '4444' %>\n",
+                    "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
+                    "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
+                    "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
                     "<% } %>"
                 ],
                 "port": "<%= ports.get(pname) %>"
@@ -286,33 +261,12 @@
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if <%= config.protocol ?? 'swd' %> -speed <%= config.clock ? parseInt(config.clock / 1000) : '4000' %> -commandfile .cmd.jlink"
+                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultDebugClock) / data.debugClockScaler) %> -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
+            "windows": "<%= JSON.stringify(data.osShellOptions.windows) %>",
+            "linux": "<%= JSON.stringify(data.osShellOptions.linux) %>",
+            "osx": "<%= JSON.stringify(data.osShellOptions.osx) %>",
             "problemMatcher": []
         },
         {
@@ -324,33 +278,12 @@
                 "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
                 "<% } %>",
                 "echo Exit >> .cmd.jlink &&",
-                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if <%= config.protocol ?? 'swd' %> -speed <%= config.clock ? parseInt(config.clock / 1000) : '4000' %> -commandfile .cmd.jlink"
+                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultDebugClock) / data.debugClockScaler) %> -commandfile .cmd.jlink"
             ],
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
+            "windows": "<%= JSON.stringify(data.osShellOptions.windows) %>",
+            "linux": "<%= JSON.stringify(data.osShellOptions.linux) %>",
+            "osx": "<%= JSON.stringify(data.osShellOptions.osx) %>",
             "problemMatcher": []
         },
         {
@@ -358,54 +291,25 @@
             "type": "shell",
             "command": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
             "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
+            "windows": "<%= JSON.stringify(data.osShellOptions.windows) %>",
+            "linux": "<%= JSON.stringify(data.osShellOptions.linux) %>",
+            "osx": "<%= JSON.stringify(data.osShellOptions.osx) %>",
             "args": [
                 "-device", "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>\n",
                 "-endian", "little",
                 "-if", "<%= config.protocol ?? 'swd' %>\n",
-                "-speed", "<%= config.clock ? parseInt(config.clock / 1000) : '4000' %>\n",
+                "-speed", "<%= parseInt((config.clock ?? data.defaultDebugClock) / data.debugClockScaler) %>\n",
                 "-nohalt",
                 "-noir",
                 "-nogui",
                 "-localhostonly",
                 "-port", "<%= ports.get(start_pname) %>\n",
-                "<% if (config.trace && config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
-                "-SWOPort", "<%= config.trace?.[\"trace-port\"] ?? '5555' %>\n",
+                "<% if (config.trace?.[\"trace-mode\"] === 'SWO-UART') { %>",
+                "-SWOPort", "<%= config.trace?.[\"trace-port\"] ?? data.defaultSWOPort %>\n",
                 "<% } %>",
-                "<% const telnetMode = config.telnet?.mode ?? 'Disabled' %>",
-                "<% let addTelnetPort = false; %>",
-                "<% if (telnetMode == 'Semihosting' || telnetMode == 'SWO') { %>",
-                "-TelnetPort",
-                "<% addTelnetPort = true; %>",
-                "<% } else if (telnetMode == 'RTT') { %>",
-                "-RTTTelnetPort",
-                "<% addTelnetPort = true; %>",
-                "<% } %>",
-                "<% if (addTelnetPort) { %>",
-                "<%= config.telnet?.port ?? '4444' %>\n",
+                "<% if (data.terminalPortOptions[config.telnet?.mode]) { %>",
+                "-<%= data.terminalPortOptions[config.telnet?.mode] %>\n",
+                "<%= config.telnet?.port ?? data.defaultTelnetPort %>\n",
                 "<% } %>"
             ],
             "problemMatcher": []
