@@ -506,7 +506,6 @@ debug-adapters:
             yml-node: other_model
             type: file
             default:
-            select: on
           - name: Config File
             description: Path to the FVP configuration file
             yml-node: conf_file
@@ -516,7 +515,6 @@ debug-adapters:
             yml-node: simlimit
             type: number
             default: 600
-            select: on
           - name: Misc
             description: Miscellaneous command line arguments
             yml-node: args
