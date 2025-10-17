@@ -2,9 +2,12 @@
     "tasks": [{
         "label": "CMSIS Load+Run",
         "type": "shell",
-        "command": "This is Windows only",
+        "command": "uVision runs on Windows only",
         "windows": {
             "command": "<%= uv4 %>",
+            "args": [
+                    "${command:cmsis-csolution.getSolutionFile}"
+            ],
             "options": {
                 "cwd": "${workspaceFolder}/<%= solution_folder %>",
                 "shell": {
@@ -13,12 +16,6 @@
                 }
             }
         },
-        "args": [
-            "<%= solution_path %>",
-            "<% for (const arg of args) { %>",
-            "<%= arg %>\n",
-            "<% } %>"
-        ],
         "problemMatcher": []
     }]
 }
