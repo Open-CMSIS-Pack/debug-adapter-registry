@@ -35,7 +35,15 @@
             "<% if (simlimit) { %>",
             "--simlimit", "<%= simlimit %>\n",
             "<% } %>",
-            "<%= args %>",
+            "<% if (Array.isArray(args)) { %>",
+            "<% for (const arg of args) { %>",
+            "<%= arg %>",
+            "<% } %>,"
+            "<% } else if (typeof args === 'string' && args.trim().length > 0) { %>",
+            "<% for (const arg of args.trim().split(/\s+/)) { %>",
+            "<%= arg %>",
+            "<% } %>",
+            "<% } %>",
             "<% for (const image of symbol_files) { %>",
             "-a", "<%= image.file %>",
             "<% } %>"
