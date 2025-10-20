@@ -493,11 +493,6 @@ debug-adapters:
         options:
           - name: uVision
             description: Path to the uVision executable
-            yml-node: config
+            yml-node: uv4
             type: string
             default: "C:\\Keil_v5\\UV4\\UV4.exe"
-          - name: Arguments
-            description: Additional command line arguments
-            yml-node: args
-            type: string
-            default: ""
