@@ -29,12 +29,6 @@
             }
         },
         "args": [
-            "<% if (model === 'Other') { %>",
-            "<%= other_model %>\n",
-            "<% } %>",
-            "<% if (model !== 'Other') { %>",
-            "<%= model %>\n",
-            "<% } %>",
             "<% if (conf_file) { %>",
             "-f", "<%= conf_file %>\n",
             "<% } %>",
