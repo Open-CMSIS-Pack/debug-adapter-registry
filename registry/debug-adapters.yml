@@ -533,4 +533,3 @@ debug-adapters:
             yml-node: uv4
             type: file
             default: "C:\\Keil_v5\\UV4\\UV4.exe"
-            select: on
