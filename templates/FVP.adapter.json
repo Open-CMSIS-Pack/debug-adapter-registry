@@ -41,7 +41,7 @@
             "<% } %>",
             "<% } %>",
             "<% else if (typeof args === 'string' && args.trim().length > 0) { %>",
-            "<% for (const arg of args.trim().split(/\s+/)) { %>",
+            "<% for (const arg of args.trim().split(/\\s+/)) { %>",
             "<%= arg %>",
             "<% } %>",
             "<% } %>",
