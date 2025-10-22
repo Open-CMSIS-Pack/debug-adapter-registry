@@ -1,19 +1,35 @@
 {
+    "data": {
+        "cwd": "${workspaceFolder}/<%= solution_folder %>",
+        "shell": {
+            "win32": {
+                "executable": "cmd.exe",
+                "args": [ "/d", "/c" ]
+            },
+            "linux": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            },
+            "darwin": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            }
+        },
+        "program": "<%= symbol_files[0]?.file ?? '' %>",
+        "programs": "<%= Object.fromEntries(symbol_files.map(s => [s.pname ?? '', s.file ?? ''])) %>"
+    },
     "launch": {
         "singlecore-launch": {
             "name": "CMSIS_DAP@pyOCD (launch)",
             "type": "gdbtarget",
             "request": "launch",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
-                "<% for (const file of files) { %>",
-                "symbol-file <%= file %>\n",
-                "<% } %>",
+                "symbol-file <%= data.program %>\n",
                 "monitor reset halt",
                 "tbreak main"
             ],
@@ -43,15 +59,12 @@
             "name": "CMSIS_DAP@pyOCD (attach)",
             "type": "gdbtarget",
             "request": "attach",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>"
+                "symbol-file <%= data.program %>\n"
             ],
             "customResetCommands": [
                 "monitor reset halt",
@@ -70,16 +83,13 @@
             "name": "<%= pname %> CMSIS_DAP@pyOCD (launch)",
             "type": "gdbtarget",
             "request": "launch",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.programs[pname] %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (const file of files) { %>",
-                "symbol-file <%= file %>\n",
-                "<% } %>",
+                "symbol-file <%= data.programs[pname] %>\n",
                 "monitor reset halt",
                 "tbreak main"
             ],
@@ -110,15 +120,12 @@
             "name": "<%= pname %> CMSIS_DAP@pyOCD (attach)",
             "type": "gdbtarget",
             "request": "attach",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.programs[pname] %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>"
+                "symbol-file <%= data.programs[pname] %>\n"
             ],
             "customResetCommands": [
                 "monitor reset halt",
@@ -137,15 +144,12 @@
             "name": "<%= pname %> CMSIS_DAP@pyOCD (attach)",
             "type": "gdbtarget",
             "request": "attach",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.programs[pname] %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>"
+                "symbol-file <%= data.programs[pname] %>\n"
             ],
             "customResetCommands": [
                 "monitor reset halt",
@@ -166,30 +170,9 @@
             "label": "CMSIS Erase",
             "type": "shell",
             "command": "pyocd",
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "options": { 
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
                 "erase",
@@ -203,30 +186,9 @@
             "label": "CMSIS Load",
             "type": "shell",
             "command": "pyocd",
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "options": { 
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
                 "load",
@@ -239,30 +201,9 @@
             "label": "CMSIS Run",
             "type": "shell",
             "command": "pyocd",
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "options": { 
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
                 "gdbserver",
@@ -289,30 +230,9 @@
             "label": "CMSIS TargetInfo",
             "type": "shell",
             "command": "pyocd",
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "options": { 
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
                 "list",
