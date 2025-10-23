@@ -19,8 +19,10 @@
         "label": "CMSIS Load+Run",
         "type": "shell",
         "command": "<% if (model === 'Other') { %><%= other_model %><% } else { %><%= model %><% } %>",
-        "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-        "shell": "<%= data.shell[process.platform] %>",
+        "options": {
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "shell": "<%= data.shell[process.platform] %>",
+        },
         "args": [
             "<% if (conf_file) { %>",
             "-f", "<%= conf_file %>\n",
