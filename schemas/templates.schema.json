@@ -6,6 +6,7 @@
   "version": "2.11.0",
   "type": "object",
   "properties": {
+    "data": { "type": "object", "additionalProperties": true },
     "launch": { "$ref": "#/definitions/LaunchDescType" },
     "tasks":  { "$ref": "#/definitions/TasksDescType"  }
   },
@@ -91,9 +92,20 @@
         "dependsOn":         { "type": "array", "items": { "type": "string" } },
         "options": {
           "type": "object",
-          "properties": { "cwd": { "type": "string" } },
+          "properties": { 
+            "cwd": { "type": "string" },
+            "shell": { 
+              "type": [ "string", "object" ],
+              "properties": {
+                "executable": { "type": "string" },
+                "args":       { "type": [ "string", "array"], "items": { "type": "string" } }
+              },
+              "required": [ "executable" ],
+              "additionalProperties": false
+            }
+          },
           "required": [ "cwd" ],
-          "additionalProperties": false
+          "additionalProperties": true
         },
         "windows": { "$ref": "#/definitions/PlatformOptions" },
         "linux":   { "$ref": "#/definitions/PlatformOptions" },
