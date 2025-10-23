@@ -1,43 +1,40 @@
 {
+    "data": {
+        "shell": {
+            "win32": {
+                "executable": "cmd.exe",
+                "args": [ "/d", "/c" ]
+            },
+            "linux": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            },
+            "darwin": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            }
+        }
+    },
     "tasks": [{
         "label": "CMSIS Load+Run",
         "type": "shell",
-        "command": "<%= model %>",
-        "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-        "windows": {
-            "options": {
-                "shell": {
-                    "executable": "cmd.exe",
-                    "args": [ "/d", "/c" ]
-                }
-            }
-        },
-        "linux": {
-            "options": {
-                "shell": {
-                    "executable": "/bin/bash",
-                    "args": [ "-c" ]
-                }
-            }
-        },
-        "osx": {
-            "options": {
-                "shell": {
-                    "executable": "/bin/bash",
-                    "args": [ "-c" ]
-                }
-            }
+        "command": "<% if (model === 'Other') { %><%= other_model %><% } else { %><%= model %><% } %>",
+        "options": {
+            "cwd": "${workspaceFolder}/<%= solution_folder %>",
+            "shell": "<%= data.shell[process.platform] %>"
         },
         "args": [
-            "<% if (config) { %>",
-            "-f", "<%= config %>\n",
+            "<% if (conf_file) { %>",
+            "-f", "<%= conf_file %>\n",
             "<% } %>",
-            "<% const files = symbol_files.map(s => s.file) %>",
-            "<% for (const file of files) { %>",
-            "-a", "<%= file %>\n",
+            "<% if (simlimit) { %>",
+            "--simlimit", "<%= simlimit %>\n",
             "<% } %>",
-            "<% for (const arg of args) { %>",
-            "<%= arg %>\n",
+            "<% if (Array.isArray(args) && args.length > 0) { %>",
+            "<%= args.join('\\n') %>\n",
+            "<% } %>",
+            "<% else if (typeof args === 'string' && args.trim().length > 0) { %>",
+            "<%= args.trim().split(/\\s+/).join('\\n') %>\n",
             "<% } %>"
         ],
         "problemMatcher": []

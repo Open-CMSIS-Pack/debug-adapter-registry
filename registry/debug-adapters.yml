@@ -464,24 +464,61 @@ debug-adapters:
     alias-name: ["ST-Link@armdbg"]
     template: STLink-Arm-Debugger.adapter.json             # template files
 
-  - name: "AVH-FVP"
+  - name: "Arm-FVP"
     template: FVP.adapter.json                             # template files
     defaults:
-      model: "set model executable as target-set.debugger.model in csolution.yml"
-      config:
-      args: []
+      model: "FVP_MPS2_Cortex-M3"
+      other_model:
+      conf_file:
+      simlimit: 600
+      args:
     user-interface:
-      - section: Debug Interface
-        description: Interface configuration for the debug port
+      - section: Model
+        description: Arm FVP model setup
         options:
-          - name: Configuration
-            description: Path to the configuration file
-            yml-node: config
-            type: string
           - name: Model
+            description: Model name
             yml-node: model
+            type: enum
+            values:
+              - FVP_Corstone_SSE-300
+              - FVP_Corstone_SSE-300_Ethos-U55
+              - FVP_Corstone_SSE-300_Ethos-U65
+              - FVP_Corstone_SSE-310
+              - FVP_Corstone_SSE-310_Ethos-U65
+              - FVP_Corstone_SSE-315
+              - FVP_Corstone_SSE-320
+              - FVP_MPS2_Cortex-M0
+              - FVP_MPS2_Cortex-M0plus
+              - FVP_MPS2_Cortex-M3
+              - FVP_MPS2_Cortex-M4
+              - FVP_MPS2_Cortex-M7
+              - FVP_MPS2_Cortex-M23
+              - FVP_MPS2_Cortex-M33
+              - FVP_MPS2_Cortex-M35P
+              - FVP_MPS2_Cortex-M52
+              - FVP_MPS2_Cortex-M55
+              - FVP_MPS2_Cortex-M58
+              - Other
+            default: FVP_MPS2_Cortex-M3
+          - name: Other Model
+            description: Specify location of another model
+            yml-node: other_model
+            type: file
+            default:
+          - name: Config File
+            description: Path to the FVP configuration file
+            yml-node: conf_file
+            type: file
+          - name: Time limit
+            description: Simulation time limit in seconds
+            yml-node: simlimit
+            type: number
+            default: 600
+          - name: Misc
+            description: Miscellaneous command line arguments
+            yml-node: args
             type: string
-            description: Path to the model executable
 
   - name: "Keil uVision"
     template: uVision.adapter.json                         # template files
@@ -494,5 +531,5 @@ debug-adapters:
           - name: uVision
             description: Path to the uVision executable
             yml-node: uv4
-            type: string
+            type: file
             default: "C:\\Keil_v5\\UV4\\UV4.exe"
