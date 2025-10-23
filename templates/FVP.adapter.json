@@ -20,30 +20,7 @@
         "type": "shell",
         "command": "<% if (model === 'Other') { %><%= other_model %><% } else { %><%= model %><% } %>",
         "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-        "windows": {
-            "options": {
-                "shell": {
-                    "executable": "cmd.exe",
-                    "args": [ "/d", "/c" ]
-                }
-            }
-        },
-        "linux": {
-            "options": {
-                "shell": {
-                    "executable": "/bin/bash",
-                    "args": [ "-c" ]
-                }
-            }
-        },
-        "osx": {
-            "options": {
-                "shell": {
-                    "executable": "/bin/bash",
-                    "args": [ "-c" ]
-                }
-            }
-        },
+        "shell": "<%= data.shell[process.platform] %>",
         "args": [
             "<% if (conf_file) { %>",
             "-f", "<%= conf_file %>\n",
