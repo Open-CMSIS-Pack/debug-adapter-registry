@@ -1,4 +1,20 @@
 {
+    "data": {
+        "shell": {
+            "win32": {
+                "executable": "cmd.exe",
+                "args": [ "/d", "/c" ]
+            },
+            "linux": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            },
+            "darwin": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            }
+        }
+    },
     "tasks": [{
         "label": "CMSIS Load+Run",
         "type": "shell",
