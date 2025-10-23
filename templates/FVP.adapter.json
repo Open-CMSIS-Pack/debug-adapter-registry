@@ -21,7 +21,7 @@
         "command": "<% if (model === 'Other') { %><%= other_model %><% } else { %><%= model %><% } %>",
         "options": {
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "shell": "<%= data.shell[process.platform] %>",
+            "shell": "<%= data.shell[process.platform] %>"
         },
         "args": [
             "<% if (conf_file) { %>",
