@@ -7,6 +7,7 @@
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
             "program": "<%= symbol_files[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<% const files = symbol_files.slice(1).map(s => s.file) %>",
@@ -48,6 +49,7 @@
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
             "program": "<%= symbol_files[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
             "initCommands": [
                 "<% const files = symbol_files.slice(1).map(s => s.file) %>",
                 "<% for (let i = 0; i < files.length; i++) { %>",
@@ -74,6 +76,7 @@
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
             "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
@@ -115,6 +118,7 @@
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
             "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
             "initCommands": [
                 "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
                 "<% for (let i = 0; i < files.length; i++) { %>",
@@ -141,6 +145,7 @@
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
             "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
             "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
             "initCommands": [
                 "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
                 "<% for (let i = 0; i < files.length; i++) { %>",

@@ -36,6 +36,7 @@
         "program":             { "type": "string" },
         "programs":            { "type": "array", "items": { "type": "string" } },
         "gdb":                 { "type": "string" },
+        "auxiliaryGdb":        { "type": "boolean"},
         "preLaunchTask":       { "type": "string" },
         "connectionAddress":   { "type": "string" },
         "connectionType":      { "type": "string" },
