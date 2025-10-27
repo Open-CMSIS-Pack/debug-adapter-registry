@@ -24,7 +24,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -78,7 +84,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -131,7 +143,13 @@ debug-adapters:
           - name: Protocol
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -186,7 +204,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -241,7 +265,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace #not according to ChatGPT
         description: Trace configuration
@@ -296,7 +326,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Telnet
         description: Telnet server configuration
@@ -370,7 +406,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -424,7 +466,13 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: [jtag, swd]
+            values:
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -481,25 +529,63 @@ debug-adapters:
             yml-node: model
             type: enum
             values:
-              - FVP_Corstone_SSE-300
-              - FVP_Corstone_SSE-300_Ethos-U55
-              - FVP_Corstone_SSE-300_Ethos-U65
-              - FVP_Corstone_SSE-310
-              - FVP_Corstone_SSE-310_Ethos-U65
-              - FVP_Corstone_SSE-315
-              - FVP_Corstone_SSE-320
-              - FVP_MPS2_Cortex-M0
-              - FVP_MPS2_Cortex-M0plus
-              - FVP_MPS2_Cortex-M3
-              - FVP_MPS2_Cortex-M4
-              - FVP_MPS2_Cortex-M7
-              - FVP_MPS2_Cortex-M23
-              - FVP_MPS2_Cortex-M33
-              - FVP_MPS2_Cortex-M35P
-              - FVP_MPS2_Cortex-M52
-              - FVP_MPS2_Cortex-M55
-              - FVP_MPS2_Cortex-M58
-              - Other
+              - name: Corstone 300
+                value: FVP_Corstone_SSE-300
+                description: Arm Corstone 300 Reference Platform
+              - name: Corstone 300 with Ethos-U55
+                value: FVP_Corstone_SSE-300_Ethos-U55
+                description: Arm Corstone 300 Ethos-U55 Reference Platform
+              - name: FVP_Corstone_SSE-300_Ethos-U65
+                value: Corstone 300 with Ethos-U65
+                description: Arm Corstone 300 Ethos-U55 Reference Platform
+              - name: Corstone 310
+                value: FVP_Corstone_SSE-310
+                description: Arm Corstone 310 Reference Platform
+              - name: Corstone 310 with Ethos-U65
+                value: FVP_Corstone_SSE-310_Ethos-U65
+                description: Arm Corstone 310 Ethos-U55 Reference Platform
+              - name: Corstone 315
+                value: FVP_Corstone_SSE-315
+                description: Arm Corstone 315 Reference Platform
+              - name: Corstone 320
+                value: FVP_Corstone_SSE-320
+                description: Arm Corstone 315 Reference Platform
+              - name: MPS2 Cortex-M0
+                value: FVP_MPS2_Cortex-M0
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M0
+              - name: MPS2 Cortex-M0plus
+                value: FVP_MPS2_Cortex-M0plus
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M0plus
+              - name: MPS2 Cortex-M3
+                value: FVP_MPS2_Cortex-M3
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M3
+              - name: MPS2 Cortex-M4
+                value: FVP_MPS2_Cortex-M4
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M4
+              - name: MPS2 Cortex-M7
+                value: FVP_MPS2_Cortex-M7
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M7
+              - name: MPS2 Cortex-M23
+                value: FVP_MPS2_Cortex-M23
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M23
+              - name: MSP2 Cortex-M33
+                value: FVP_MPS2_Cortex-M33
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M33
+              - name: MPS2 Cortex-M35P
+                value: FVP_MPS2_Cortex-M35P
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M35P
+              - name: MPS2 Cortex-M52
+                value: FVP_MPS2_Cortex-M52
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M52
+              - name: MPS2 Cortex-M55
+                value: FVP_MPS2_Cortex-M55
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M55
+              - name: MPS2 Cortex-M58
+                value: FVP_MPS2_Cortex-M58
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M58
+              - name: Select Other ...
+                value: Other
+                description: Configure path to another Arm FastModel
             default: FVP_MPS2_Cortex-M3
           - name: Other Model
             description: Specify location of another model
@@ -523,7 +609,7 @@ debug-adapters:
   - name: "Keil uVision"
     template: uVision.adapter.json                         # template files
     defaults:
-      uv4: "C:\\Keil_v5\\UV4\\UV4.exe"
+      uv4: "C:/Keil_v5/UV4/UV4.exe"
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -532,4 +618,4 @@ debug-adapters:
             description: Path to the uVision executable
             yml-node: uv4
             type: file
-            default: "C:\\Keil_v5\\UV4\\UV4.exe"
+            default: "C:/Keil_v5/UV4/UV4.exe"
