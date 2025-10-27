@@ -518,7 +518,7 @@ debug-adapters:
       model: "FVP_MPS2_Cortex-M3"
       other_model:
       conf_file:
-      simlimit: 600
+      simlimit:
       args:
     user-interface:
       - section: Model
@@ -591,7 +591,6 @@ debug-adapters:
             description: Specify location of another model
             yml-node: other_model
             type: file
-            default:
           - name: Config File
             description: Path to the FVP configuration file
             yml-node: conf_file
@@ -600,7 +599,6 @@ debug-adapters:
             description: Simulation time limit in seconds
             yml-node: simlimit
             type: number
-            default: 600
           - name: Misc
             description: Miscellaneous command line arguments
             yml-node: args
@@ -609,7 +607,7 @@ debug-adapters:
   - name: "Keil uVision"
     template: uVision.adapter.json                         # template files
     defaults:
-      uv4: "C:/Keil_v5/UV4/UV4.exe"
+      uv4: "${env:LOCALAPPDATA}/Keil_v5/UV4/UV4.exe"
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -618,4 +616,4 @@ debug-adapters:
             description: Path to the uVision executable
             yml-node: uv4
             type: file
-            default: "C:/Keil_v5/UV4/UV4.exe"
+            default: "${env:LOCALAPPDATA}/Keil_v5/UV4/UV4.exe"
