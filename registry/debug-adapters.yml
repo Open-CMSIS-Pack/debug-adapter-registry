@@ -24,7 +24,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -84,7 +84,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -143,7 +143,7 @@ debug-adapters:
           - name: Protocol
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -204,7 +204,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -265,7 +265,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -326,7 +326,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -406,7 +406,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -466,7 +466,7 @@ debug-adapters:
             description: Protocol configuration
             yml-node: protocol
             type: enum
-            values: 
+            values:
               - name: JTAG
                 value: jtag
                 description: Use JTAG protocol for debugging
@@ -542,7 +542,7 @@ debug-adapters:
                 value: FVP_Corstone_SSE-310
                 description: Arm Corstone 310 Reference Platform
               - name: Corstone 310 with Ethos-U65
-                value: FVP_Corstone_SSE-310_Ethos-U65             
+                value: FVP_Corstone_SSE-310_Ethos-U65
                 description: Arm Corstone 310 Ethos-U55 Reference Platform
               - name: Corstone 315
                 value: FVP_Corstone_SSE-315
