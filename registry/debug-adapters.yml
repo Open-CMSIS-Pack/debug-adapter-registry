@@ -25,12 +25,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -85,12 +85,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -144,12 +144,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -205,12 +205,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -266,12 +266,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace #not according to ChatGPT
         description: Trace configuration
@@ -327,12 +327,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Telnet
         description: Telnet server configuration
@@ -407,12 +407,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -467,12 +467,12 @@ debug-adapters:
             yml-node: protocol
             type: enum
             values: 
-            - name: JTAG
-              value: jtag
-              description: Use JTAG protocol for debugging
-            - name: SWD
-              value: swd
-              description: Use SWD protocol for debugging
+              - name: JTAG
+                value: jtag
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
       - section: Trace
         description: Trace configuration
@@ -609,7 +609,7 @@ debug-adapters:
   - name: "Keil uVision"
     template: uVision.adapter.json                         # template files
     defaults:
-      uv4: "C:\\Keil_v5\\UV4\\UV4.exe"
+      uv4: "C:/Keil_v5/UV4/UV4.exe"
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -618,4 +618,4 @@ debug-adapters:
             description: Path to the uVision executable
             yml-node: uv4
             type: file
-            default: "C:\\Keil_v5\\UV4\\UV4.exe"
+            default: "C:/Keil_v5/UV4/UV4.exe"
