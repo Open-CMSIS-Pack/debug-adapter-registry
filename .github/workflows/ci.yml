@@ -41,7 +41,7 @@ jobs:
           npm run lint
 
       - name: Check registry schema
-        uses: GrantBirki/json-yaml-validate@v3.3.2
+        uses: GrantBirki/json-yaml-validate@v4.0.0
         with:
           base_dir: registry
           json_schema: schemas/debug-adapters.schema.json
@@ -50,7 +50,7 @@ jobs:
           use_gitignore: false
 
       - name: Check templates schemas
-        uses: GrantBirki/json-yaml-validate@v3.3.2
+        uses: GrantBirki/json-yaml-validate@v4.0.0
         with:
           base_dir: templates
           json_schema: schemas/templates.schema.json
