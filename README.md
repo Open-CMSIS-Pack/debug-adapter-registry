@@ -11,7 +11,7 @@ This repository contains the [debug adapter registry](https://open-cmsis-pack.gi
     ┗ 📄 ...
 ```
 
-The adapter registry is used by CMSIS-Toolbox starting version 2.9.0 to generate `<solution>+<target-type>.cbuild-run.yml` files for the active target-set selected by 
+The adapter registry is used by CMSIS-Toolbox starting version 2.9.0 to generate `<solution>+<target-type>.cbuild-run.yml` files for the active target-set selected by
 
 ```
 cbuild setup <solution> --active <target-type>[@<set>]
@@ -26,6 +26,7 @@ cbuild list target-sets <solution>
 The `<solution>+<target-type>.cbuild-run.yml` file is then processed by the CMSIS Solution extension to generate launch.json and task.json files from the debug adapter template files.
 
 ---
+
 ## Validation
 
 The [CI worklow](.github/workflows/ci.yml) validates the debugger adapter registry and templates by running linter and schema checker.
@@ -34,14 +35,22 @@ Such validation steps can be reproduced in the local environment according to th
 
 ### Linter
 
+tl:dr
+
+```sh
+npm install
+npm run lint
+```
+
 Install [`eslint`](https://www.npmjs.com/package/eslint) and json/yaml plugins:
 
-```
+```sh
 npm install --save-dev eslint eslint-plugin-jsonc eslint-plugin-yml eslint-formatter-compact
 ```
 
 Lint debug adapters registry:
-```
+
+```sh
 npx eslint --no-config-lookup --format compact --parser yaml-eslint-parser --plugin yml --ext .yml \
   --rule 'yml/quotes: ["error", { prefer: "double" }]' \
   --rule 'yml/indent: ["error", 2]' \
@@ -50,7 +59,8 @@ npx eslint --no-config-lookup --format compact --parser yaml-eslint-parser --plu
 ```
 
 Lint templates:
-```
+
+```sh
 npx eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --plugin jsonc --ext .json \
   --rule 'jsonc/quotes: ["error", "double"]' \
   --rule 'jsonc/indent: ["error", 4]' \
@@ -60,17 +70,27 @@ npx eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --pl
 
 ### Schema check
 
-Install [`ajv`](https://www.npmjs.com/package/ajv):
+tl:dr
+
+```sh
+npm install
+npm run schema
 ```
+
+Install [`ajv`](https://www.npmjs.com/package/ajv):
+
+```sh
 npm install --save-dev ajv ajv-cli
 ```
 
 Check debug adapters registry schema:
-```
+
+```sh
 npx ajv -s schemas/debug-adapters.schema.json -d registry/debug-adapters.yml --strict=false
 ```
 
 Check templates schema:
-```
+
+```sh
 npx ajv -s schemas/templates.schema.json -d "templates/*.json" --strict=false
 ```

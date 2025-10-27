@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-cli": "^5.0.0",
+    "eslint": "^9.38.0",
+    "eslint-formatter-compact": "^9.0.1",
+    "eslint-plugin-jsonc": "^2.21.0",
+    "eslint-plugin-yml": "^1.19.0"
+  },
+  "scripts": {
+    "lint": "npm run lint:registry && npm run lint:templates",
+    "lint:fix": "npm run lint:registry:fix && npm run lint:templates:fix",
+    "lint:registry": "eslint --no-config-lookup --format compact --parser yaml-eslint-parser --plugin yml --ext .yml --rule 'yml/quotes: [\"error\", { prefer: \"double\" }]' --rule 'yml/indent: [\"error\", 2]' --rule 'no-trailing-spaces: \"error\"' registry",
+    "lint:registry:fix": "eslint --fix --no-config-lookup --format compact --parser yaml-eslint-parser --plugin yml --ext .yml --rule 'yml/quotes: [\"error\", { prefer: \"double\" }]' --rule 'yml/indent: [\"error\", 2]' --rule 'no-trailing-spaces: \"error\"' registry",
+    "lint:templates": "eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --plugin jsonc --ext .json --rule 'jsonc/quotes: [\"error\", \"double\"]' --rule 'jsonc/indent: [\"error\", 4]' --rule 'no-trailing-spaces: \"error\"' templates",
+    "lint:templates:fix": "eslint --fix --no-config-lookup --format compact --parser jsonc-eslint-parser --plugin jsonc --ext .json --rule 'jsonc/quotes: [\"error\", \"double\"]' --rule 'jsonc/indent: [\"error\", 4]' --rule 'no-trailing-spaces: \"error\"' templates",
+    "schema": "npm run schema:registry && npm run schema:templates",
+    "schema:registry": "ajv -s schemas/debug-adapters.schema.json -d registry/debug-adapters.yml --strict=false",
+    "schema:templates": "ajv -s schemas/templates.schema.json -d \"templates/*.json\" --strict=false"
+  }
+}
