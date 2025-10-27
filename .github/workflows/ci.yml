@@ -37,17 +37,8 @@ jobs:
 
       - name: Lint registry and templates
         run: |
-          npm install --save-dev eslint eslint-plugin-jsonc eslint-plugin-yml eslint-formatter-compact
-          npx eslint --no-config-lookup --format compact --parser yaml-eslint-parser --plugin yml --ext .yml \
-            --rule 'yml/quotes: ["error", { prefer: "double" }]' \
-            --rule 'yml/indent: ["error", 2]' \
-            --rule 'no-trailing-spaces: "error"' \
-            registry
-          npx eslint --no-config-lookup --format compact --parser jsonc-eslint-parser --plugin jsonc --ext .json \
-            --rule 'jsonc/quotes: ["error", "double"]' \
-            --rule 'jsonc/indent: ["error", 4]' \
-            --rule 'no-trailing-spaces: "error"' \
-            templates
+          npm ci
+          npm run lint
 
       - name: Check registry schema
         uses: GrantBirki/json-yaml-validate@v3.3.2
