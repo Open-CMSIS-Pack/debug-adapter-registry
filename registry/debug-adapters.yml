@@ -7,8 +7,6 @@ debug-adapters:
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-      trace:
-        trace-port: SWO-UART
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -32,34 +30,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "ULINKplus@pyOCD"
     alias-name: ["ULINKplus"]                              # alternative names that map to this debug adapter
@@ -92,34 +62,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "MCU-Link@pyOCD"
     alias-name: ["MCU-Link"]                               # alternative names that map to this debug adapter
@@ -151,35 +93,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            description: Trace mode configuration
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "Nu-Link@pyOCD"
     alias-name: ["Nu-Link", "Nu-Link-Pro"]                 # alternative names that map to this debug adapter
@@ -212,35 +125,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            description: Trace mode configuration
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "PICkit@pyOCD"
     alias-name: ["PICkit Basic"]                           # alternative names that map to this debug adapter
@@ -273,35 +157,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace #not according to ChatGPT
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            description: Trace mode configuration
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART, Manchester, TP1, TP2, TP4]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "KitProg3@pyOCD"
     alias-name: ["KitProg3"]                               # alternative names that map to this debug adapter
@@ -334,17 +189,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "RPiDebugProbe@pyOCD"
     alias-name: ["RaspberryPiDebugProbe"]                  # alternative names that map to this debug adapter
@@ -371,17 +215,6 @@ debug-adapters:
             type: enum
             values: [swd]
             default: swd
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "ST-Link@pyOCD"
     alias-name: ["ST-LINK"]                                # alternative names that map to this debug adapter
@@ -414,35 +247,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            description: Trace mode configuration
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "JLink Server"
     alias-name: ["J-Link"]                                 # alternative names that map to this debug adapter
@@ -474,35 +278,6 @@ debug-adapters:
                 value: swd
                 description: Use SWD protocol for debugging
             default: swd
-      - section: Trace
-        description: Trace configuration
-        yml-node: trace
-        select: off
-        options:
-          - name: Clock (kHz)
-            description: Trace clock configuration
-            yml-node: trace-clock
-            type: number
-            range: [10, 200000]
-            default: 12000
-            scale: 1000
-          - name: Mode
-            description: Trace mode configuration
-            yml-node: trace-port
-            type: enum
-            values: [SWO-UART]
-            default: SWO-UART
-      - section: Telnet
-        description: Telnet server configuration
-        yml-node: telnet
-        select: off
-        options:
-          - name: Port
-            description: Telnet port configuration
-            yml-node: port
-            type: number
-            range: [1, 100000]
-            default: 4444
 
   - name: "CMSIS-DAP@Arm-Debugger"
     alias-name: ["CMSIS-DAP@armdbg"]
