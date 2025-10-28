@@ -7,8 +7,6 @@ debug-adapters:
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
       clock: 10000000
-      trace:
-        trace-port: SWO-UART
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
