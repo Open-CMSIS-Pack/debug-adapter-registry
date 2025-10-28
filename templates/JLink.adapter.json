@@ -70,7 +70,9 @@
             "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
+            "initCommands": [
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>"
+            ],
             "customResetCommands": [
                 "monitor reset",
                 "tbreak main",
@@ -131,7 +133,9 @@
             "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
+            "initCommands": [
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>"
+            ],
             "customResetCommands": [
                 "monitor reset",
                 "tbreak main",
@@ -153,7 +157,9 @@
             "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
+            "initCommands": [
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>"
+            ],
             "customResetCommands": [
                 "monitor reset",
                 "tbreak main",
@@ -201,7 +207,7 @@
             "type": "shell",
             "command": [
                 "echo Connect > .cmd.jlink &&",
-                "<% image_files.map(image => `echo LoadFile \"${image.file}\" >> .cmd.jlink &&\\n`).join('') %>",
+                "<%= image_files.map(image => `echo LoadFile \"${image.file}\" >> .cmd.jlink &&\\n`).join('') %>",
                 "echo Exit >> .cmd.jlink &&",
                 "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
