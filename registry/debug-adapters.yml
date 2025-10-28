@@ -518,7 +518,6 @@ debug-adapters:
       model: "FVP_MPS2_Cortex-M3"
       other_model:
       conf_file:
-      simlimit:
       args:
     user-interface:
       - section: Model
@@ -595,10 +594,6 @@ debug-adapters:
             description: Path to the FVP configuration file
             yml-node: conf_file
             type: file
-          - name: Time limit
-            description: Simulation time limit in seconds
-            yml-node: simlimit
-            type: number
           - name: Misc
             description: Miscellaneous command line arguments
             yml-node: args
