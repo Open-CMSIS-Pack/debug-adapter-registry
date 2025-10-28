@@ -18,7 +18,7 @@
     "tasks": [{
         "label": "CMSIS Load+Run",
         "type": "shell",
-        "command": "<% if (model === 'Other') { %><%= other_model %><% } else { %><%= model %><% } %>",
+        "command": "<%= model %>",
         "options": {
             "cwd": "${workspaceFolder}/<%= solution_folder %>",
             "shell": "<%= data.shell[process.platform] %>"
