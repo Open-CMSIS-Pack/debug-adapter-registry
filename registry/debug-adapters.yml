@@ -354,9 +354,9 @@ debug-adapters:
               - name: MPS2 Cortex-M55
                 value: FVP_MPS2_Cortex-M55
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M55
-              - name: MPS2 Cortex-M58
-                value: FVP_MPS2_Cortex-M58
-                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M58
+              - name: MPS2 Cortex-M85
+                value: FVP_MPS2_Cortex-M85
+                description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M85
               - name: Select Other ...
                 value: Other
                 description: Configure path to another Arm FastModel
