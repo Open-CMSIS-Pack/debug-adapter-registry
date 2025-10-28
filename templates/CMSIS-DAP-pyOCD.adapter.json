@@ -16,7 +16,7 @@
             }
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
-        "programs": "<%= Object.fromEntries(symbol_files.map(s => [s.pname ?? '', s.file ?? ''])) %>"
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>"
     },
     "launch": {
         "singlecore-launch": {
@@ -29,7 +29,7 @@
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "symbol-file <%= data.program %>\n",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>",
                 "monitor reset halt",
                 "tbreak main"
             ],
@@ -63,9 +63,7 @@
             "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": [
-                "symbol-file <%= data.program %>\n"
-            ],
+            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
             "customResetCommands": [
                 "monitor reset halt",
                 "tbreak main",
@@ -84,12 +82,12 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "<%= data.cwd %>",
-            "program": "<%= data.programs[pname] %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "symbol-file <%= data.programs[pname] %>\n",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>",
                 "monitor reset halt",
                 "tbreak main"
             ],
@@ -121,12 +119,10 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "<%= data.cwd %>",
-            "program": "<%= data.programs[pname] %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": [
-                "symbol-file <%= data.programs[pname] %>\n"
-            ],
+            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
             "customResetCommands": [
                 "monitor reset halt",
                 "tbreak main",
@@ -145,12 +141,10 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "<%= data.cwd %>",
-            "program": "<%= data.programs[pname] %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": [
-                "symbol-file <%= data.programs[pname] %>\n"
-            ],
+            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
             "customResetCommands": [
                 "monitor reset halt",
                 "tbreak main",
@@ -170,7 +164,7 @@
             "label": "CMSIS Erase",
             "type": "shell",
             "command": "pyocd",
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },
@@ -186,7 +180,7 @@
             "label": "CMSIS Load",
             "type": "shell",
             "command": "pyocd",
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },
@@ -201,7 +195,7 @@
             "label": "CMSIS Run",
             "type": "shell",
             "command": "pyocd",
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },
@@ -230,7 +224,7 @@
             "label": "CMSIS TargetInfo",
             "type": "shell",
             "command": "pyocd",
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },

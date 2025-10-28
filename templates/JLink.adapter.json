@@ -16,11 +16,11 @@
             }
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
-        "programs": "<%= Object.fromEntries(symbol_files.map(s => [s.pname ?? '', s.file ?? ''])) %>",
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
         "JLinkGDBServerCL": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
         "JLink": "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %>",
         "jlinkDevice": "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>",
-        "jlinkDevices": "<%= Object.fromEntries(symbol_files.map(s => [s.pname ?? '', `${device_name}_${s.pname ?? start_pname}`])) %>"
+        "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>"
     },
     "launch": {
         "singlecore-launch": {
@@ -33,7 +33,7 @@
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "symbol-file <%= data.program %>\n",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>",
                 "monitor reset",
                 "tbreak main"
             ],
@@ -70,9 +70,7 @@
             "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": [
-                "symbol-file <%= data.program %>\n"
-            ],
+            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
             "customResetCommands": [
                 "monitor reset",
                 "tbreak main",
@@ -91,12 +89,12 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "<%= data.cwd %>",
-            "program": "<%= data.programs[pname] %>",
+            "program": "<%= data.programs[pname]?.[0].file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "symbol-file <%= data.programs[pname] %>\n",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>",
                 "monitor reset",
                 "tbreak main"
             ],
@@ -130,12 +128,10 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "<%= data.cwd %>",
-            "program": "<%= data.programs[pname] %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": [
-                "symbol-file <%= data.programs[pname] %>\n"
-            ],
+            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
             "customResetCommands": [
                 "monitor reset",
                 "tbreak main",
@@ -154,12 +150,10 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "<%= data.cwd %>",
-            "program": "<%= data.programs[pname] %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
-            "initCommands": [
-                "symbol-file <%= data.programs[pname] %>\n"
-            ],
+            "initCommands": "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}` : '') ?? [] %>",
             "customResetCommands": [
                 "monitor reset",
                 "tbreak main",
@@ -196,7 +190,7 @@
                 "echo Exit >> .cmd.jlink &&",
                 "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },
@@ -207,13 +201,11 @@
             "type": "shell",
             "command": [
                 "echo Connect > .cmd.jlink &&",
-                "<% for (const image of image_files) { %>",
-                "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
-                "<% } %>",
+                "<% image_files.map(image => `echo LoadFile \"${image.file}\" >> .cmd.jlink &&\\n`).join('') %>",
                 "echo Exit >> .cmd.jlink &&",
                 "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },
@@ -223,7 +215,7 @@
             "label": "CMSIS Run",
             "type": "shell",
             "command": "<%= data.JLinkGDBServerCL %>",
-            "options": { 
+            "options": {
                 "cwd": "<%= data.cwd %>",
                 "shell": "<%= data.shell[process.platform] %>"
             },
