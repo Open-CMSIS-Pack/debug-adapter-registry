@@ -29,7 +29,7 @@
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor reset halt",
                 "tbreak main"
             ],
@@ -64,7 +64,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
                 "monitor reset halt",
@@ -89,7 +89,7 @@
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor reset halt",
                 "tbreak main"
             ],
@@ -125,7 +125,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
                 "monitor reset halt",
@@ -149,7 +149,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file ${p.file}\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
                 "monitor reset halt",
