@@ -291,8 +291,6 @@ debug-adapters:
     template: FVP.adapter.json                             # template files
     defaults:
       model: "FVP_MPS2_Cortex-M3"
-      conf_file:
-      args:
     user-interface:
       - section: Model
         description: Arm FVP model setup
@@ -322,7 +320,7 @@ debug-adapters:
                 description: Arm Corstone 315 Reference Platform
               - name: Corstone 320
                 value: FVP_Corstone_SSE-320
-                description: Arm Corstone 315 Reference Platform
+                description: Arm Corstone 320 Reference Platform
               - name: MPS2 Cortex-M0
                 value: FVP_MPS2_Cortex-M0
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M0
@@ -359,7 +357,7 @@ debug-adapters:
             default: FVP_MPS2_Cortex-M3
           - name: Config File
             description: Path to the FVP configuration file
-            yml-node: conf_file
+            yml-node: config-file
             type: file
           - name: Misc
             description: Miscellaneous command line arguments
