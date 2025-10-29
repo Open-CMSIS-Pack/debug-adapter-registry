@@ -298,35 +298,20 @@ debug-adapters:
                 value: auto
                 description: Auto-detection of optimal debug clock
               - name: 50MHz
-                value: 50MHz
               - name: 33MHz
-                value: 33MHz
               - name: 25MHz
-                value: 25MHz
               - name: 20MHz
-                value: 20MHz
               - name: 10MHz
-                value: 10MHz
               - name: 5MHz
-                value: 10MHz
               - name: 2MHz
-                value: 2MHz
               - name: 1MHz
-                value: 1MHz
               - name: 500kHz
-                value: 500kHz
               - name: 200kHz
-                value: 200kHz
               - name: 100kHz
-                value: 100kHz
               - name: 40kHz
-                value: 40kHz
               - name: 20kHz
-                value: 20kHz
               - name: 10kHz
-                value: 10kHz
               - name: 5kHz
-                value: 5kHz
             default: auto
           - name: Protocol
             description: Debug protocol
