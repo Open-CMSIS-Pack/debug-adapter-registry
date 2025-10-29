@@ -12,14 +12,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 30000]
             scale: 1000
             default: 10000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -44,14 +44,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 10000]
             scale: 1000
             default: 10000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -76,13 +76,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 10000]
             scale: 1000
             default: 10000
           - name: Protocol
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -107,14 +108,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 10000]
             scale: 1000
             default: 10000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -139,14 +140,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 10000]
             scale: 1000
             default: 10000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -171,14 +172,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 10000]
             scale: 1000
             default: 10000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -203,17 +204,20 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 10000]
             scale: 1000
             default: 1000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
-            values: [swd]
+            values:
+              - name: SWD
+                value: swd
+                description: Use SWD protocol for debugging
             default: swd
 
   - name: "ST-Link@pyOCD"
@@ -229,14 +233,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 24000]
             scale: 1000
             default: 4000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
@@ -261,14 +265,14 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock
             type: number
             range: [10, 50000]
             scale: 1000
             default: 4000
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol
             type: enum
             values:
