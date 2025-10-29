@@ -300,7 +300,7 @@ debug-adapters:
               - name: 50MHz
                 value: 50MHz
               - name: 33MHz
-                value: 33MHz       
+                value: 33MHz
               - name: 25MHz
                 value: 25MHz
               - name: 20MHz
@@ -365,7 +365,7 @@ debug-adapters:
               - name: 50MHz
                 value: 50MHz
               - name: 33MHz
-                value: 33MHz       
+                value: 33MHz
               - name: 25MHz
                 value: 25MHz
               - name: 20MHz
