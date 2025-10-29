@@ -13,8 +13,8 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
-            "debugClockSpeed": "<%= clock_armdbg %>",
-            "debugPortMode": "<%= protocol_armdbg %>"
+            "debugClockSpeed": "<%= config['clock-armdbg'] %>",
+            "debugPortMode": "<%= config['protocol-armdbg'] %>"
         },
         "multicore-start-launch": {
             "name": "<%= pname %> CMSIS-DAP@Arm-Debugger (launch)",
@@ -29,8 +29,8 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
-            "debugClockSpeed": "<%= clock_armdbg %>",
-            "debugPortMode": "<%= protocol_armdbg %>"
+            "debugClockSpeed": "<%= config['clock-armdbg'] %>",
+            "debugPortMode": "<%= config['protocol-armdbg'] %>"
         }
     },
     "tasks": [
@@ -46,8 +46,8 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
-            "debugClockSpeed": "<%= clock_armdbg %>",
-            "debugPortMode": "<%= protocol_armdbg %>",
+            "debugClockSpeed": "<%= config['clock-armdbg'] %>",
+            "debugPortMode": "<%= config['protocol-armdbg'] %>",
             "problemMatcher": []
         }
     ]
