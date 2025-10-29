@@ -296,7 +296,7 @@ debug-adapters:
             values:
               - name: auto
                 value: auto
-                description: auto detection of optimal debug clock
+                description: Auto-detection of optimal debug clock
               - name: 50MHz
                 value: 50MHz
               - name: 33MHz
