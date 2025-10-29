@@ -16,7 +16,7 @@
             }
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
-        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>"
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>"
     },
     "launch": {
         "singlecore-launch": {
