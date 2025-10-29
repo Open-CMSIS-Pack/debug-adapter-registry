@@ -47,7 +47,7 @@
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
             "debugClockSpeed": "<%= clock_armdbg %>",
-            "debugPortMode": "<%= protocol_armdbg %>"
+            "debugPortMode": "<%= protocol_armdbg %>",
             "problemMatcher": []
         }
     ]
