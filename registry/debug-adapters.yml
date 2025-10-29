@@ -290,7 +290,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock
-            description: Clock configuration
+            description: Maximum debug clock
             yml-node: clock_armdbg
             type: enum
             values:
