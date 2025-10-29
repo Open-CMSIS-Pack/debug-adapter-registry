@@ -20,7 +20,9 @@
         "JLinkGDBServerCL": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
         "JLink": "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %>",
         "jlinkDevice": "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>",
-        "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>"
+        "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>",
+        "defaultClock": 4000,
+        "scaleClock": 1000
     },
     "launch": {
         "singlecore-launch": {
@@ -47,8 +49,8 @@
                 "serverParameters": [
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
-                    "-if", "SWD",
-                    "-speed", "4000",
+                    "-if", "<%= config.protocol ?? 'swd' %>\n",
+                    "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -110,8 +112,8 @@
                 "serverParameters": [
                     "-device", "<%= data.jlinkDevices[pname] %>\n",
                     "-endian", "little",
-                    "-if", "SWD",
-                    "-speed", "4000",
+                    "-if", "<%= config.protocol ?? 'swd' %>\n",
+                    "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -170,8 +172,8 @@
                 "serverParameters": [
                     "-device", "<%= data.jlinkDevices[pname] %>\n",
                     "-endian", "little",
-                    "-if", "SWD",
-                    "-speed", "4000",
+                    "-if", "<%= config.protocol ?? 'swd' %>\n",
+                    "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -194,7 +196,7 @@
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
+                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %> -commandfile .cmd.jlink"
             ],
             "options": {
                 "cwd": "<%= data.cwd %>",
@@ -209,7 +211,7 @@
                 "echo Connect > .cmd.jlink &&",
                 "<%= image_files.map(image => `echo LoadFile \"${image.file}\" >> .cmd.jlink &&\\n`).join('') %>",
                 "echo Exit >> .cmd.jlink &&",
-                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
+                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %> -commandfile .cmd.jlink"
             ],
             "options": {
                 "cwd": "<%= data.cwd %>",
@@ -228,8 +230,8 @@
             "args": [
                 "-device", "<%= data.jlinkDevice %>\n",
                 "-endian", "little",
-                "-if", "SWD",
-                "-speed", "4000",
+                "-if", "<%= config.protocol ?? 'swd' %>",
+                "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
                 "-nohalt",
                 "-noir",
                 "-nogui",
