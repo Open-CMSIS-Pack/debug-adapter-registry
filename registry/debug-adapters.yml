@@ -329,7 +329,7 @@ debug-adapters:
                 value: 5kHz
             default: auto
           - name: Protocol
-            description: Protocol configuration
+            description: Debug protocol
             yml-node: protocol_armdbg
             type: enum
             values:
