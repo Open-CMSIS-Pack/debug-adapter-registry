@@ -15,7 +15,7 @@ debug-adapters:
             description: Clock configuration
             yml-node: clock
             type: number
-            range: [10, 10000]
+            range: [10, 30000]
             scale: 1000
             default: 10000
           - name: Protocol
@@ -197,7 +197,7 @@ debug-adapters:
     defaults:                                              # default values to use when nowhere specified
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
-      clock: 10000000
+      clock: 1000000
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -208,7 +208,7 @@ debug-adapters:
             type: number
             range: [10, 10000]
             scale: 1000
-            default: 10000
+            default: 1000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -223,7 +223,7 @@ debug-adapters:
     defaults:                                              # default values to use when nowhere specified
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
-      clock: 10000000
+      clock: 4000000
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -232,9 +232,9 @@ debug-adapters:
             description: Clock configuration
             yml-node: clock
             type: number
-            range: [10, 10000]
+            range: [10, 24000]
             scale: 1000
-            default: 10000
+            default: 4000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
@@ -255,6 +255,7 @@ debug-adapters:
     defaults:                                              # default values to use when nowhere specified
       port: 3333                                           # default value of first gdbserver port
       protocol: swd
+      clock: 4000000
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -263,9 +264,9 @@ debug-adapters:
             description: Clock configuration
             yml-node: clock
             type: number
-            range: [10, 10000]
+            range: [10, 50000]
             scale: 1000
-            default: 10000
+            default: 4000
           - name: Protocol
             description: Protocol configuration
             yml-node: protocol
