@@ -282,10 +282,102 @@ debug-adapters:
   - name: "CMSIS-DAP@Arm-Debugger"
     alias-name: ["CMSIS-DAP@armdbg"]
     template: CMSIS-DAP-Arm-Debugger.adapter.json          # template files
+    defaults:                                              # default values to use when nowhere specified
+      protocol-armdbg: auto
+      clock-armdbg: auto
+    user-interface:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock
+            description: Maximum debug clock
+            yml-node: clock-armdbg
+            type: enum
+            values:
+              - name: auto
+                value: auto
+                description: Auto-detection of optimal debug clock
+              - name: 50MHz
+              - name: 33MHz
+              - name: 25MHz
+              - name: 20MHz
+              - name: 10MHz
+              - name: 5MHz
+              - name: 2MHz
+              - name: 1MHz
+              - name: 500kHz
+              - name: 200kHz
+              - name: 100kHz
+              - name: 40kHz
+              - name: 20kHz
+              - name: 10kHz
+              - name: 5kHz
+            default: auto
+          - name: Protocol
+            description: Debug protocol
+            yml-node: protocol-armdbg
+            type: enum
+            values:
+              - name: auto
+                value: auto
+                description: Use target specific default protocol for debugging
+              - name: JTAG
+                value: JTAG
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: SWD
+                description: Use SWD protocol for debugging
+            default: auto
 
   - name: "ST-Link@Arm-Debugger"
     alias-name: ["ST-Link@armdbg"]
     template: STLink-Arm-Debugger.adapter.json             # template files
+    defaults:                                              # default values to use when nowhere specified
+      protocol-armdbg: auto
+      clock-armdbg: auto
+    user-interface:
+      - section: Debug Interface
+        description: Interface configuration for the debug port
+        options:
+          - name: Clock
+            description: Clock configuration
+            yml-node: clock-armdbg
+            type: enum
+            values:
+              - name: auto
+                value: auto
+                description: auto detection of optimal debug clock
+              - name: 50MHz
+              - name: 33MHz
+              - name: 25MHz
+              - name: 20MHz
+              - name: 10MHz
+              - name: 5MHz
+              - name: 2MHz
+              - name: 1MHz
+              - name: 500kHz
+              - name: 200kHz
+              - name: 100kHz
+              - name: 40kHz
+              - name: 20kHz
+              - name: 10kHz
+              - name: 5kHz
+            default: auto
+          - name: Protocol
+            description: Protocol configuration
+            yml-node: protocol-armdbg
+            type: enum
+            values:
+              - name: auto
+                value: auto
+                description: Use target specific default protocol for debugging
+              - name: JTAG
+                value: JTAG
+                description: Use JTAG protocol for debugging
+              - name: SWD
+                value: SWD
+                description: Use SWD protocol for debugging
+            default: auto
 
   - name: "Arm-FVP"
     template: FVP.adapter.json                             # template files

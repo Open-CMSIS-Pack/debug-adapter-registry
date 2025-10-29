@@ -44,6 +44,8 @@
         "deviceName":          { "type": "string" },
         "processorName":       { "type": "string" },
         "workspaceFolder":     { "type": "string" },
+        "debugClockSpeed":     { "type": "string" },
+        "debugPortMode":       { "type": "string" },
         "initCommands":        { "type": "array", "items": { "type": "string" } },
         "customResetCommands": { "type": "array", "items": { "type": "string" } },
         "cmsis": {
@@ -87,6 +89,8 @@
         "deviceName":        { "type": "string" },
         "processorName":     { "type": "string" },
         "workspaceFolder":   { "type": "string" },
+        "debugClockSpeed":     { "type": "string" },
+        "debugPortMode":       { "type": "string" },
         "problemMatcher":    { "type": "array"  },
         "command":           { "type": [ "string", "array" ], "items": { "type": "string" } },
         "args":              { "type": "array", "items": { "type": "string" } },
