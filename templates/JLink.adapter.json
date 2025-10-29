@@ -1,19 +1,39 @@
 {
+    "data": {
+        "cwd": "${workspaceFolder}/<%= solution_folder %>",
+        "shell": {
+            "win32": {
+                "executable": "cmd.exe",
+                "args": [ "/d", "/c" ]
+            },
+            "linux": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            },
+            "darwin": {
+                "executable": "/bin/bash",
+                "args": [ "-c" ]
+            }
+        },
+        "program": "<%= symbol_files[0]?.file ?? '' %>",
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
+        "JLinkGDBServerCL": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
+        "JLink": "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %>",
+        "jlinkDevice": "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>",
+        "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>"
+    },
     "launch": {
         "singlecore-launch": {
             "name": "JLink (launch)",
             "type": "gdbtarget",
             "request": "launch",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
-                "<% for (const file of files) { %>",
-                "symbol-file <%= file %>\n",
-                "<% } %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor reset",
                 "tbreak main"
             ],
@@ -23,7 +43,7 @@
                 "continue"
             ],
             "target": {
-                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
+                "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
@@ -46,15 +66,12 @@
             "name": "JLink (attach)",
             "type": "gdbtarget",
             "request": "attach",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<% const files = symbol_files.slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
                 "monitor reset",
@@ -73,16 +90,13 @@
             "name": "<%= pname %> JLink (launch)",
             "type": "gdbtarget",
             "request": "launch",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.programs[pname]?.[0].file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (const file of files) { %>",
-                "symbol-file <%= file %>\n",
-                "<% } %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor reset",
                 "tbreak main"
             ],
@@ -92,9 +106,9 @@
                 "continue"
             ],
             "target": {
-                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
+                "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
-                    "-device", "<%= device_name %>_<%= pname %>\n",
+                    "-device", "<%= data.jlinkDevices[pname] %>\n",
                     "-endian", "little",
                     "-if", "SWD",
                     "-speed", "4000",
@@ -115,15 +129,12 @@
             "name": "<%= pname %> JLink (attach)",
             "type": "gdbtarget",
             "request": "attach",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
                 "monitor reset",
@@ -142,15 +153,12 @@
             "name": "<%= pname %> JLink (launch)",
             "type": "gdbtarget",
             "request": "launch",
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "program": "<%= symbol_files.filter(s => s.pname === pname)[0]?.file || '' %>",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.programs[pname]?.[0]?.file ?? '' %>",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<% const files = symbol_files.filter(s => s.pname === pname).slice(1).map(s => s.file) %>",
-                "<% for (let i = 0; i < files.length; i++) { %>",
-                "symbol-file <%= files[i] %><%= i < files.length - 1 ? \"\\n\" : '' %>",
-                "<% } %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
                 "monitor reset",
@@ -158,9 +166,9 @@
                 "continue"
             ],
             "target": {
-                "server": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
+                "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
-                    "-device", "<%= device_name %>_<%= pname %>\n",
+                    "-device", "<%= data.jlinkDevices[pname] %>\n",
                     "-endian", "little",
                     "-if", "SWD",
                     "-speed", "4000",
@@ -186,32 +194,11 @@
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed 4000 -commandfile .cmd.jlink"
+                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "problemMatcher": []
         },
@@ -220,70 +207,26 @@
             "type": "shell",
             "command": [
                 "echo Connect > .cmd.jlink &&",
-                "<% for (const image of image_files) { %>",
-                "echo LoadFile \"<%= image.file %>\" >> .cmd.jlink &&",
-                "<% } %>",
+                "<%= image_files.map(image => `echo LoadFile \"${image.file}\" >> .cmd.jlink &&\\n`).join('') %>",
                 "echo Exit >> .cmd.jlink &&",
-                "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %> -device <%= device_name %><%= start_pname ? `_${start_pname}` : '' %> -if SWD -speed 4000 -commandfile .cmd.jlink"
+                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if SWD -speed 4000 -commandfile .cmd.jlink"
             ],
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "problemMatcher": []
         },
         {
             "label": "CMSIS Run",
             "type": "shell",
-            "command": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : '' %>",
-            "options": { "cwd": "${workspaceFolder}/<%= solution_folder %>" },
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [ "/d", "/c" ]
-                    }
-                }
-            },
-            "linux": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
-            },
-            "osx": {
-                "options": {
-                    "shell": {
-                        "executable": "/bin/bash",
-                        "args": [ "-c" ]
-                    }
-                }
+            "command": "<%= data.JLinkGDBServerCL %>",
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
-                "-device", "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>\n",
+                "-device", "<%= data.jlinkDevice %>\n",
                 "-endian", "little",
                 "-if", "SWD",
                 "-speed", "4000",
