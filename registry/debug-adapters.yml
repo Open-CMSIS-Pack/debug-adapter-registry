@@ -12,7 +12,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 30000]
@@ -25,10 +25,10 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "ULINKplus@pyOCD"
@@ -44,7 +44,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 10000]
@@ -57,10 +57,10 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "MCU-Link@pyOCD"
@@ -76,7 +76,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 10000]
@@ -89,10 +89,10 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "Nu-Link@pyOCD"
@@ -108,7 +108,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 10000]
@@ -121,10 +121,10 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "PICkit@pyOCD"
@@ -140,7 +140,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 10000]
@@ -153,10 +153,10 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "KitProg3@pyOCD"
@@ -172,7 +172,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 10000]
@@ -185,14 +185,14 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "RPiDebugProbe@pyOCD"
-    alias-name: ["RaspberryPiDebugProbe"]                  # alternative names that map to this debug adapter
+    alias-name: ["RaspberryPiDebugProbe", "RPiDebugProbe"] # alternative names that map to this debug adapter
     template: CMSIS-DAP-pyOCD.adapter.json                 # template files
     gdbserver:                                             # add gdbserver: node under debugger: in cbuild-run.yml
     defaults:                                              # default values to use when nowhere specified
@@ -204,7 +204,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 10000]
@@ -217,7 +217,7 @@ debug-adapters:
             values:
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "ST-Link@pyOCD"
@@ -233,7 +233,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 24000]
@@ -246,14 +246,14 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
-  - name: "JLink Server"
-    alias-name: ["J-Link"]                                 # alternative names that map to this debug adapter
+  - name: "J-Link Server"
+    alias-name: ["J-Link", "JLink Server"]                 # alternative names that map to this debug adapter
     template: JLink.adapter.json                           # template files
     gdbserver:                                             # add gdbserver: node under debugger: in cbuild-run.yml
     defaults:                                              # default values to use when nowhere specified
@@ -265,7 +265,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock (kHz)
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock
             type: number
             range: [10, 50000]
@@ -278,10 +278,10 @@ debug-adapters:
             values:
               - name: JTAG
                 value: jtag
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: swd
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
 
   - name: "CMSIS-DAP@Arm-Debugger"
@@ -295,7 +295,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: Clock
-            description: Maximum debug clock
+            description: Debug clock speed
             yml-node: clock-armdbg
             type: enum
             values:
@@ -328,10 +328,10 @@ debug-adapters:
                 description: Use target specific default protocol for debugging
               - name: JTAG
                 value: JTAG
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: SWD
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: auto
 
   - name: "ST-Link@Arm-Debugger"
@@ -378,10 +378,10 @@ debug-adapters:
                 description: Use target specific default protocol for debugging
               - name: JTAG
                 value: JTAG
-                description: Use JTAG protocol for debugging
+                description: Use JTAG interface (4 pins)
               - name: SWD
                 value: SWD
-                description: Use SWD protocol for debugging
+                description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: auto
 
   - name: "Arm-FVP"
@@ -390,34 +390,34 @@ debug-adapters:
       model: "FVP_MPS2_Cortex-M3"
     user-interface:
       - section: Model
-        description: Arm FVP model setup
+        description: Arm FVP simulation model setup
         options:
           - name: Model
-            description: Model name
+            description: Filename (optionally with path) of the FVP executable
             yml-node: model
             type: enum
             values:
-              - name: Corstone 300
+              - name: Corstone-300
                 value: FVP_Corstone_SSE-300
-                description: Arm Corstone 300 Reference Platform
-              - name: Corstone 300 with Ethos-U55
+                description: Arm Corstone-300 Reference Platform with Cortex-M55
+              - name: Corstone-300 with Ethos-U55
                 value: FVP_Corstone_SSE-300_Ethos-U55
-                description: Arm Corstone 300 Ethos-U55 Reference Platform
+                description: Arm Corstone-300 Reference Platform with Cortex-M55 and Ethos-U55
               - name: FVP_Corstone_SSE-300_Ethos-U65
-                value: Corstone 300 with Ethos-U65
-                description: Arm Corstone 300 Ethos-U55 Reference Platform
-              - name: Corstone 310
+                value: Corstone-300 with Ethos-U65
+                description: Arm Corstone-300 Reference Platform with Cortex-M55 and Ethos-U65
+              - name: Corstone-310
                 value: FVP_Corstone_SSE-310
-                description: Arm Corstone 310 Reference Platform
-              - name: Corstone 310 with Ethos-U65
+                description: Arm Corstone 310 Reference Platform with Cortex-M85 and Ethos-U55
+              - name: Corstone-310 with Ethos-U65
                 value: FVP_Corstone_SSE-310_Ethos-U65
-                description: Arm Corstone 310 Ethos-U55 Reference Platform
-              - name: Corstone 315
+                description: Arm Corstone-310  Reference Platform with Cortex-M85 and Ethos-U65
+              - name: Corstone-315
                 value: FVP_Corstone_SSE-315
-                description: Arm Corstone 315 Reference Platform
-              - name: Corstone 320
+                description: Arm Corstone-315 Reference Platform with Cortex-M85, Ethos-U65, and Mali-C55
+              - name: Corstone-320
                 value: FVP_Corstone_SSE-320
-                description: Arm Corstone 320 Reference Platform
+                description: Arm Corstone-320 Reference Platform with Cortex-M85, Ethos-U85, and Mali-C55
               - name: MPS2 Cortex-M0
                 value: FVP_MPS2_Cortex-M0
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M0
@@ -453,7 +453,7 @@ debug-adapters:
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M85
             default: FVP_MPS2_Cortex-M3
           - name: Config File
-            description: Path to the FVP configuration file
+            description: Path and filename of the FVP configuration file
             yml-node: config-file
             type: file
           - name: Misc
@@ -470,7 +470,7 @@ debug-adapters:
         description: Interface configuration for the debug port
         options:
           - name: uVision
-            description: Path to the uVision executable
+            description: Path and filename of uVision executable
             yml-node: uv4
             type: file
             default: "${env:LOCALAPPDATA}/Keil_v5/UV4/UV4.exe"
