@@ -54,7 +54,7 @@
             "cbuildRunFile":       { "type": "string" },
             "updateConfiguration": { "type": "string" }
           },
-          "required": [ "cbuildRunFile", "updateConfiguration" ]
+          "required": [ "updateConfiguration" ]
         },
         "target": {
           "type": "object",

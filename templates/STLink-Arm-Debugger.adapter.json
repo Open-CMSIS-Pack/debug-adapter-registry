@@ -14,7 +14,10 @@
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
             "debugClockSpeed": "<%= config['clock-armdbg'] %>",
-            "debugPortMode": "<%= config['protocol-armdbg'] %>"
+            "debugPortMode": "<%= config['protocol-armdbg'] %>",
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
         },
         "multicore-start-launch": {
             "name": "<%= pname %> STLink@Arm-Debugger (launch)",
@@ -30,7 +33,10 @@
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "workspaceFolder": "${workspaceFolder}/<%= solution_folder %>",
             "debugClockSpeed": "<%= config['clock-armdbg'] %>",
-            "debugPortMode": "<%= config['protocol-armdbg'] %>"
+            "debugPortMode": "<%= config['protocol-armdbg'] %>",
+            "cmsis": {
+                "updateConfiguration": "auto"
+            }
         }
     },
     "tasks": [
