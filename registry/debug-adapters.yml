@@ -430,7 +430,6 @@ debug-adapters:
               - name: FVP_MPS2_Cortex-M52
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M52
               - name: FVP_MPS2_Cortex-M55
-                value: FVP_MPS2_Cortex-M55
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M55
               - name: FVP_MPS2_Cortex-M85
                 description: Arm Microcontroller Prototyping System (MPS2) with Cortex-M85
