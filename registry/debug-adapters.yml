@@ -313,7 +313,7 @@ debug-adapters:
               - name: 500kHz
               - name: 200kHz
               - name: 100kHz
-              - name: 40kHz
+              - name: 50kHz
               - name: 20kHz
               - name: 10kHz
               - name: 5kHz
@@ -363,7 +363,7 @@ debug-adapters:
               - name: 500kHz
               - name: 200kHz
               - name: 100kHz
-              - name: 40kHz
+              - name: 50kHz
               - name: 20kHz
               - name: 10kHz
               - name: 5kHz
