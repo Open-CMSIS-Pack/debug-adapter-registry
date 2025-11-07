@@ -41,6 +41,8 @@
             ],
             "customResetCommands": [
                 "monitor reset",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
                 "tbreak main",
                 "continue"
             ],
@@ -77,6 +79,8 @@
             ],
             "customResetCommands": [
                 "monitor reset",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
                 "tbreak main",
                 "continue"
             ],
@@ -104,6 +108,8 @@
             ],
             "customResetCommands": [
                 "monitor reset",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
                 "tbreak main",
                 "continue"
             ],
@@ -140,6 +146,8 @@
             ],
             "customResetCommands": [
                 "monitor reset",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
                 "tbreak main",
                 "continue"
             ],
@@ -164,6 +172,8 @@
             ],
             "customResetCommands": [
                 "monitor reset",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
                 "tbreak main",
                 "continue"
             ],
