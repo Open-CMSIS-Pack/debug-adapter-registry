@@ -1,6 +1,6 @@
 # debug-adapter-registry
 
-[![License](https://img.shields.io/github/license/Open-CMSIS-Pack/debug-adapter-registry?label)](https://github.com/Open-CMSIS-Pack/debug-adapter-registry/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/Open-CMSIS-Pack/debug-adapter-registry?label=License)](https://github.com/Open-CMSIS-Pack/debug-adapter-registry/blob/main/LICENSE)
 [![Test and release ](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/debug-adapter-registry/ci.yml?logo=arm&logoColor=0091bd&label=Test%20and%20release)](https://github.com/Open-CMSIS-Pack/debug-adapter-registry/tree/main/.github/workflows/ci.yml)
 
 This repository contains the [debug adapter registry](https://open-cmsis-pack.github.io/cmsis-toolbox/build-operation/#debug-adapter-integration) and the CMSIS Solution extension specific adapter template files.
