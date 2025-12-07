@@ -33,7 +33,7 @@ debug-adapters:
       - section: Telnet
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: telnet
-        select:
+        select: on
         pname-options:
         options:
           - name: Telnet Mode
@@ -313,7 +313,7 @@ debug-adapters:
       - section: Telnet
         description: Serial input/output via semihosting
         yml-node: telnet
-        select:
+        select: on
         options:
           - name: Telnet Mode
             description: Configure Serial I/O redirect
