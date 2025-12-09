@@ -45,6 +45,9 @@
                 "serverParameters": [
                     "gdbserver",
                     "--probe", "cmsisdap:",
+                    "<% if (config['probe-id']) { %>",
+                    "--uid", "<%= config['probe-id'] %>\n",
+                    "<% } %>",
                     "--connect", "attach",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
                     "--quiet",
@@ -109,6 +112,9 @@
                 "serverParameters": [
                     "gdbserver",
                     "--probe", "cmsisdap:",
+                    "<% if (config['probe-id']) { %>",
+                    "--uid", "<%= config['probe-id'] %>\n",
+                    "<% } %>",
                     "--connect", "attach",
                     "--persist",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
@@ -187,6 +193,9 @@
             "args": [
                 "erase",
                 "--probe", "cmsisdap:",
+                "<% if (config['probe-id']) { %>",
+                "--uid", "<%= config['probe-id'] %>\n",
+                "<% } %>",
                 "--chip",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
             ],
@@ -203,6 +212,9 @@
             "args": [
                 "load",
                 "--probe", "cmsisdap:",
+                "<% if (config['probe-id']) { %>",
+                "--uid", "<%= config['probe-id'] %>\n",
+                "<% } %>",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
             ],
             "problemMatcher": []
@@ -218,6 +230,9 @@
             "args": [
                 "gdbserver",
                 "--probe", "cmsisdap:",
+                "<% if (config['probe-id']) { %>",
+                "--uid", "<%= config['probe-id'] %>\n",
+                "<% } %>",
                 "--connect", "attach",
                 "--persist",
                 "--reset-run",
