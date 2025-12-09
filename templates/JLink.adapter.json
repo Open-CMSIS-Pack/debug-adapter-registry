@@ -49,7 +49,9 @@
             "target": {
                 "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
+                    "<% if (config['probe-id']) { %>",
                     "-USB", "<%= config['probe-id'] %>\n",
+                    "<% } %>",
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
