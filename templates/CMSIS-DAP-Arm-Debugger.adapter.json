@@ -4,7 +4,7 @@
             "name": "CMSIS-DAP@Arm-Debugger (launch)",
             "type": "arm-debugger",
             "request": "launch",
-            "connectionAddress": "*",
+            "connectionAddress": "<%= config['probe-id'] || '*' %>",
             "connectionType": "CMSIS-DAP",
             "programs": [
                 "${command:arm-debugger.getApplicationFiles}"
@@ -23,7 +23,7 @@
             "name": "<%= pname %> CMSIS-DAP@Arm-Debugger (launch)",
             "type": "arm-debugger",
             "request": "launch",
-            "connectionAddress": "*",
+            "connectionAddress": "<%= config['probe-id'] || '*' %>",
             "connectionType": "CMSIS-DAP",
             "programs": [
                 "${command:arm-debugger.getApplicationFiles}"
@@ -43,7 +43,7 @@
         {
             "label": "CMSIS Load+Run",
             "type": "arm-debugger.flash",
-            "connectionAddress": "*",
+            "connectionAddress": "<%= config['probe-id'] || '*' %>",
             "connectionType": "CMSIS-DAP",
             "programs": [
                 "${command:arm-debugger.getApplicationFiles}"

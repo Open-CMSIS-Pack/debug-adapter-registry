@@ -49,6 +49,9 @@
             "target": {
                 "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
+                    "<% if (config['probe-id']) { %>",
+                    "-USB", "<%= config['probe-id'] %>\n",
+                    "<% } %>",
                     "-device", "<%= device_name %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
@@ -117,6 +120,9 @@
             "target": {
                 "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
+                    "<% if (config['probe-id']) { %>",
+                    "-USB", "<%= config['probe-id'] %>\n",
+                    "<% } %>",
                     "-device", "<%= data.jlinkDevices[pname] %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
@@ -182,6 +188,9 @@
             "target": {
                 "server": "<%= data.JLinkGDBServerCL %>",
                 "serverParameters": [
+                    "<% if (config['probe-id']) { %>",
+                    "-USB", "<%= config['probe-id'] %>\n",
+                    "<% } %>",
                     "-device", "<%= data.jlinkDevices[pname] %>\n",
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
@@ -206,10 +215,11 @@
             "label": "CMSIS Erase",
             "type": "shell",
             "command": [
+                "<% const usbArg = config['probe-id'] ? ` -USB ${config['probe-id']}` : '' %>",
                 "echo Connect > .cmd.jlink &&",
                 "echo Erase >> .cmd.jlink &&",
                 "echo Exit >> .cmd.jlink &&",
-                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %> -commandfile .cmd.jlink"
+                "<%= data.JLink %><%= usbArg %> -device <%= data.jlinkDevice %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %> -commandfile .cmd.jlink"
             ],
             "options": {
                 "cwd": "<%= data.cwd %>",
@@ -221,10 +231,11 @@
             "label": "CMSIS Load",
             "type": "shell",
             "command": [
+                "<% const usbArg = config['probe-id'] ? ` -USB ${config['probe-id']}` : '' %>",
                 "echo Connect > .cmd.jlink &&",
                 "<%= image_files.map(image => `echo LoadFile \"${image.file}\" >> .cmd.jlink &&\\n`).join('') %>",
                 "echo Exit >> .cmd.jlink &&",
-                "<%= data.JLink %> -device <%= data.jlinkDevice %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %> -commandfile .cmd.jlink"
+                "<%= data.JLink %><%= usbArg %> -device <%= data.jlinkDevice %> -if <%= config.protocol ?? 'swd' %> -speed <%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %> -commandfile .cmd.jlink"
             ],
             "options": {
                 "cwd": "<%= data.cwd %>",
@@ -241,6 +252,9 @@
                 "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
+                "<% if (config['probe-id']) { %>",
+                "-USB", "<%= config['probe-id'] %>\n",
+                "<% } %>",
                 "-device", "<%= data.jlinkDevice %>\n",
                 "-endian", "little",
                 "-if", "<%= config.protocol ?? 'swd' %>",
