@@ -4,7 +4,7 @@
             "name": "STLink@Arm-Debugger (launch)",
             "type": "arm-debugger",
             "request": "launch",
-            "connectionAddress": "*",
+            "connectionAddress": "<%= config['probe-id'] || '*' %>",
             "connectionType": "ST-Link",
             "programs": [
                 "${command:arm-debugger.getApplicationFiles}"
@@ -23,7 +23,7 @@
             "name": "<%= pname %> STLink@Arm-Debugger (launch)",
             "type": "arm-debugger",
             "request": "launch",
-            "connectionAddress": "*",
+            "connectionAddress": "<%= config['probe-id'] || '*' %>",
             "connectionType": "ST-Link",
             "programs": [
                 "${command:arm-debugger.getApplicationFiles}"
@@ -43,7 +43,7 @@
         {
             "label": "CMSIS Load+Run",
             "type": "arm-debugger.flash",
-            "connectionAddress": "*",
+            "connectionAddress": "<%= config['probe-id'] || '*' %>",
             "connectionType": "ST-Link",
             "programs": [
                 "${command:arm-debugger.getApplicationFiles}"
