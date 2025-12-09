@@ -89,6 +89,34 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
+
 
   - name: "MCU-Link@pyOCD"
     alias-name: ["MCU-Link"]                               # alternative names that map to this debug adapter
@@ -121,6 +149,34 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
+
 
   - name: "Nu-Link@pyOCD"
     alias-name: ["Nu-Link", "Nu-Link-Pro"]                 # alternative names that map to this debug adapter
@@ -153,6 +209,33 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
 
   - name: "PICkit@pyOCD"
     alias-name: ["PICkit Basic"]                           # alternative names that map to this debug adapter
@@ -185,6 +268,33 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
 
   - name: "KitProg3@pyOCD"
     alias-name: ["KitProg3"]                               # alternative names that map to this debug adapter
@@ -217,6 +327,33 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
 
   - name: "RPiDebugProbe@pyOCD"
     alias-name: ["RaspberryPiDebugProbe", "RPiDebugProbe"] # alternative names that map to this debug adapter
@@ -246,6 +383,33 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
 
   - name: "ST-Link@pyOCD"
     alias-name: ["ST-LINK"]                                # alternative names that map to this debug adapter
@@ -278,6 +442,33 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
+      - section: Telnet
+        description: Serial input/output via semihosting or RTT channel 0
+        yml-node: telnet
+        select: on
+        pname-options:
+        options:
+          - name: Telnet Mode
+            description: Configure Serial I/O redirect
+            yml-node: mode
+            type: enum
+            default: monitor
+            values:
+              - name: Telnet Server
+                value: server
+                description:  Serial I/O to Telnet server port
+              - name: Debug Console
+                value: console
+                description:  Serial output to console (Debug console in VS Code)
+              - name: Serial Monitor
+                value: monitor
+                description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Text File
+                value: file
+                description:  Serial output to file (default ./out/<solution-name>+<target-type>.<pname>.out)
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
 
   - name: "J-Link Server"
     alias-name: ["J-Link", "JLink Server"]                 # alternative names that map to this debug adapter
