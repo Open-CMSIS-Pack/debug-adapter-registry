@@ -165,7 +165,7 @@
               ],
               "properties": {
                 "name": { "type": "string", "description": "Display name of the value." },
-                "value": { "type": [ "string", "number" ], "description": "Actual value to use in the YAML file." },
+                "value": { "type": [ "string", "number", "boolean" ], "description": "Actual value to use in the YAML file." },
                 "description": { "type": "string", "description": "Description of the value." }
               },
               "required": [ "name" ]
