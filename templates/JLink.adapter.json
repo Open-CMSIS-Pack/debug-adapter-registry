@@ -21,6 +21,15 @@
         "JLink": "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %>",
         "jlinkDevice": "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>",
         "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>",
+        "resetOption": {
+            "system": "0",
+            "core": "1",
+            "hardware": "2"
+        },
+        "connectOptions": {
+            "attach": [ "-nohalt", "-noreset" ],
+            "halt": [ "-halt" ]
+        },
         "defaultClock": 4000,
         "scaleClock": 1000
     },
@@ -36,11 +45,11 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -56,6 +65,10 @@
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
                     "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
+                    "<% const connectOptions = data.connectOptions[config.connect?.mode ?? 'halt'] ?? data.connectOptions.halt %>",
+                    "<% connectOptions.forEach(connectOption => { %>",
+                    "<%= connectOption %>\n",
+                    "<% }) %>",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -82,7 +95,7 @@
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -107,11 +120,11 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -127,6 +140,10 @@
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
                     "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
+                    "<% const connectOptions = data.connectOptions[config.connect?.mode ?? 'halt'] ?? data.connectOptions.halt %>",
+                    "<% connectOptions.forEach(connectOption => { %>",
+                    "<%= connectOption %>\n",
+                    "<% }) %>",
                     "-noir",
                     "-vd",
                     "-nogui",
@@ -153,7 +170,7 @@
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -179,7 +196,7 @@
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -195,6 +212,10 @@
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
                     "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
+                    "<% const connectOptions = data.connectOptions[config.connect?.mode ?? 'halt'] ?? data.connectOptions.halt %>",
+                    "<% connectOptions.forEach(connectOption => { %>",
+                    "<%= connectOption %>\n",
+                    "<% }) %>",
                     "-noir",
                     "-vd",
                     "-nogui",
