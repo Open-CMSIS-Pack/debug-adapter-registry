@@ -57,8 +57,8 @@
                 "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
                 "<% if (config.connect?.mode !== 'attach') { %>",
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
-                "<% } %>",
-                "tbreak main"
+                "tbreak main",
+                "<% } %>"
             ],
             "customResetCommands": [
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
@@ -137,8 +137,8 @@
                 "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
                 "<% if (config.connect?.mode !== 'attach') { %>",
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
-                "<% } %>",
-                "tbreak main"
+                "tbreak main",
+                "<% } %>"
             ],
             "customResetCommands": [
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
