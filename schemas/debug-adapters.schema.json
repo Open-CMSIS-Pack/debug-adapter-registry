@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/Open-CMSIS-Pack/debug-adapter-registry/v2.11.0/schemas/debug-adapters.schema.json",
+  "$id": "https://raw.githubusercontent.com/Open-CMSIS-Pack/debug-adapter-registry/v2.12.1/schemas/debug-adapters.schema.json",
   "title": "CMSIS debug-adapters registry",
   "description": "Contains the list of supported debug adapters",
-  "version": "2.11.0",
+  "version": "2.12.1",
   "type": "object",
   "properties": {
     "debug-adapters": {
@@ -42,10 +42,6 @@
           "type": "string",
           "description": "Used only by the VS Code CMSIS Solution extension for configuration."
         },
-        "gdbserver": {
-          "type": "null",
-          "description": "Add the gdbserver: node in the cbuild-run.yml file."
-        },
         "defaults": {
           "$ref": "#/definitions/DebugAdaptersDefaultsType"
         },
@@ -79,6 +75,36 @@
         "clock": {
           "type": "number",
           "description": "Selected debug clock speed (in Hz)."
+        },
+        "gdbserver": {
+          "type": "object",
+          "properties": {
+            "active": {
+              "type": "null",
+              "description": "Add the gdbserver: node in the cbuild-run.yml file."
+            },
+            "port": {
+              "type": "number",
+              "description": "Port number."
+            }
+          }
+        },
+        "telnet": {
+          "type": "object",
+          "properties": {
+            "active": {
+              "type": "null",
+              "description": "Add the telnet: node in the cbuild-run.yml file."
+            },
+            "port": {
+              "type": "number",
+              "description": "Port number."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Redirect output mode."
+            }
+          }
         }
       },
       "additionalProperties": true
