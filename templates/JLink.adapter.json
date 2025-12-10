@@ -26,12 +26,14 @@
             "core": "1",
             "hardware": "2"
         },
+        "resetTypes": "<%= Object.fromEntries(config.reset ? (Array.isArray(config.reset) ? config.reset.map(r => ( [ r.pname ?? '', r.type ?? 'system' ])) : [[ config.reset.pname ?? '', config.reset.type ?? 'system' ]] ) : [[ '', 'system' ]]) %>",
         "connectOptions": {
             "attach": [ "-nohalt", "-noreset" ],
             "halt": [ "-halt" ]
         },
         "defaultClock": 4000,
-        "scaleClock": 1000
+        "scaleClock": 1000,
+        "defaultResetType": "system"
     },
     "launch": {
         "singlecore-launch": {
@@ -45,11 +47,11 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -95,7 +97,7 @@
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -120,11 +122,11 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -170,7 +172,7 @@
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -196,7 +198,7 @@
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "customResetCommands": [
-                "monitor reset <%= data.resetOption[config.reset?.type] ?? data.resetOption.system %>\n",
+                "monitor reset <%= data.resetOption[data.resetTypes[pname ?? ''] ?? data.defaultResetType] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
