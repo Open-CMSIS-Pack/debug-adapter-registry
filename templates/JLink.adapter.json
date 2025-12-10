@@ -55,9 +55,9 @@
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
-                "<% if (config.connect?.mode !== 'attach') { >\n",
+                "<% if (config.connect?.mode !== 'attach') { %>",
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
-                "<% } >\n",
+                "<% } %>",
                 "tbreak main"
             ],
             "customResetCommands": [
@@ -135,9 +135,9 @@
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
-                "<% if (config.connect?.mode !== 'attach') { >\n",
+                "<% if (config.connect?.mode !== 'attach') { %>",
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
-                "<% } >\n",
+                "<% } %>",
                 "tbreak main"
             ],
             "customResetCommands": [
