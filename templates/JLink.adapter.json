@@ -30,6 +30,11 @@
         "resetTypeDefault": "<%= config.reset?.type ?? 'system' %>",
         "telnetOptionsInput": "<%= config.telnet && Array.isArray(config.telnet) ? Object.fromEntries(config.telnet.map(t => ( [ t.pname ?? '', { mode: t.mode, port: t.port }]))) : undefined %>",
         "telnetOptionsDefault": "<%= { mode: config.telnet?.mode ?? 'server', port: config.telnet?.port ?? '4444' } %>",
+        "telnetMode": {
+            "server": "1",
+            "monitor": "1",
+            "console": "2"
+        },
         "connectOptions": {
             "attach": [ "-nohalt", "-noreset" ],
             "halt": [ "-halt" ]
@@ -49,6 +54,7 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "tbreak main"
             ],
@@ -97,7 +103,8 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
             ],
             "customResetCommands": [
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
@@ -125,6 +132,7 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n",
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "tbreak main"
             ],
@@ -173,7 +181,8 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n"
             ],
             "customResetCommands": [
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
@@ -199,7 +208,8 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "monitor semihosting ioclient <%= data.telnetMode[data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode] %>\n"
             ],
             "customResetCommands": [
                 "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
