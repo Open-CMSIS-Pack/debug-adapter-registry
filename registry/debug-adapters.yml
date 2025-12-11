@@ -504,7 +504,7 @@ debug-adapters:
       telnet:
         active:                                            # add telnet: node under debugger: in cbuild-run.yml
         port: 4444
-        mode: monitor
+        mode: off
       protocol: swd
       clock: 4000000
     user-interface:
@@ -551,6 +551,9 @@ debug-adapters:
               - name: Serial Monitor
                 value: monitor
                 description:  Serial I/O via TCP/IP port to VS Code Serial Monitor
+              - name: Disabled
+                value: off
+                description:  Serial I/O disabled
 
   - name: "CMSIS-DAP@Arm-Debugger"
     alias-name: ["CMSIS-DAP@armdbg"]
