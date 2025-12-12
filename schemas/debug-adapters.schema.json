@@ -101,7 +101,7 @@
               "description": "Port number."
             },
             "mode": {
-              "type": "string",
+              "type": [ "string" , "boolean" ],
               "description": "Redirect output mode."
             }
           }

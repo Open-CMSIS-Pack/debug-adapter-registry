@@ -21,6 +21,25 @@
         "JLink": "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %>",
         "jlinkDevice": "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>",
         "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>",
+        "resetOption": {
+            "system": "0",
+            "core": "1",
+            "hardware": "2"
+        },
+        "resetTypesInput": "<%= config.reset && Array.isArray(config.reset) ? Object.fromEntries(config.reset.map(r => ( [ r.pname ?? '', r.type ]))) : undefined %>",
+        "resetTypeDefault": "<%= config.reset?.type ?? 'system' %>",
+        "telnetOptionsInput": "<%= config.telnet && Array.isArray(config.telnet) ? Object.fromEntries(config.telnet.map(t => ( [ t.pname ?? '', { mode: t.mode, port: t.port }]))) : undefined %>",
+        "telnetOptionsDefault": "<%= { mode: config.telnet?.mode ?? 'off', port: config.telnet?.port ?? '4444' } %>",
+        "telnetMode": {
+            "server": "1",
+            "monitor": "1",
+            "console": "2",
+            "off": "1"
+        },
+        "connectOptions": {
+            "attach": [ "-nohalt", "-noreset" ],
+            "halt": [ "-halt" ]
+        },
         "defaultClock": 4000,
         "scaleClock": 1000
     },
@@ -36,11 +55,18 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset",
-                "tbreak main"
+                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
+                "monitor semihosting enable",
+                "<% } %>",
+                "<% if (config.connect?.mode !== 'attach') { %>",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
+                "tbreak main",
+                "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -56,12 +82,17 @@
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
                     "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
+                    "<% const connectOptions = data.connectOptions[config.connect?.mode ?? 'halt'] ?? data.connectOptions.halt %>",
+                    "<% connectOptions.forEach(connectOption => { %>",
+                    "<%= connectOption %>\n",
+                    "<% }) %>",
                     "-noir",
                     "-vd",
                     "-nogui",
                     "-localhostonly",
                     "-silent",
-                    "-port", "<%= ports.get(pname) %>\n"
+                    "-port", "<%= ports.get(pname) %>\n",
+                    "-TelnetPort", "<%= data.telnetOptionsInput[pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -79,10 +110,15 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
+                "monitor semihosting enable",
+                "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -107,11 +143,18 @@
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset",
-                "tbreak main"
+                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
+                "monitor semihosting enable",
+                "<% } %>",
+                "<% if (config.connect?.mode !== 'attach') { %>",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
+                "tbreak main",
+                "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -127,12 +170,17 @@
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
                     "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
+                    "<% const connectOptions = data.connectOptions[config.connect?.mode ?? 'halt'] ?? data.connectOptions.halt %>",
+                    "<% connectOptions.forEach(connectOption => { %>",
+                    "<%= connectOption %>\n",
+                    "<% }) %>",
                     "-noir",
                     "-vd",
                     "-nogui",
                     "-localhostonly",
                     "-silent",
-                    "-port", "<%= ports.get(pname) %>\n"
+                    "-port", "<%= ports.get(pname) %>\n",
+                    "-TelnetPort", "<%= data.telnetOptionsInput[pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -150,10 +198,15 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
+                "monitor semihosting enable",
+                "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -176,10 +229,15 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
+                "monitor semihosting enable",
+                "<% } %>"
             ],
             "customResetCommands": [
-                "monitor reset",
+                "monitor reset <%= data.resetOption[data.resetTypesInput[pname ?? ''] ?? data.resetTypeDefault] %>\n",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -195,12 +253,17 @@
                     "-endian", "little",
                     "-if", "<%= config.protocol ?? 'swd' %>\n",
                     "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
+                    "<% const connectOptions = data.connectOptions[config.connect?.mode ?? 'halt'] ?? data.connectOptions.halt %>",
+                    "<% connectOptions.forEach(connectOption => { %>",
+                    "<%= connectOption %>\n",
+                    "<% }) %>",
                     "-noir",
                     "-vd",
                     "-nogui",
                     "-localhostonly",
                     "-silent",
-                    "-port", "<%= ports.get(pname) %>\n"
+                    "-port", "<%= ports.get(pname) %>\n",
+                    "-TelnetPort", "<%= data.telnetOptionsInput[pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
                 ],
                 "port": "<%= ports.get(pname) %>"
             },
@@ -264,7 +327,8 @@
                 "-nogui",
                 "-localhostonly",
                 "-silent",
-                "-port", "<%= ports.get(start_pname) %>\n"
+                "-port", "<%= ports.get(start_pname) %>\n",
+                "-TelnetPort", "<%= data.telnetOptionsInput[start_pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
             ],
             "problemMatcher": []
         },
