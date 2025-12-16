@@ -16,7 +16,9 @@
             }
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
-        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>"
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
+        "telnetOptionsInput": "<%= config.telnet && Array.isArray(config.telnet) ? Object.fromEntries(config.telnet.map(t => ( [ t.pname ?? '', { mode: t.mode }]))) : undefined %>",
+        "telnetOptionsDefault": "<%= { mode: config.telnet?.mode ?? 'off' } %>"
     },
     "launch": {
         "singlecore-launch": {
@@ -50,6 +52,10 @@
                     "<% } %>",
                     "--connect", "attach",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
+                    "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                    "<% if (telnetMode && telnetMode !== 'off') { %>",
+                    "-S",
+                    "<% } %>",
                     "--quiet",
                     "--log", "*.cbuild_run,*server=info"
                 ],
@@ -118,6 +124,10 @@
                     "--connect", "attach",
                     "--persist",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
+                    "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                    "<% if (telnetMode && telnetMode !== 'off') { %>",
+                    "-S",
+                    "<% } %>",
                     "--quiet",
                     "--log", "*.cbuild_run,*server=info"
                 ],
