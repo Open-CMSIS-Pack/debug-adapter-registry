@@ -246,6 +246,10 @@
                 "--connect", "attach",
                 "--persist",
                 "--reset-run",
+                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "--semihosting",
+                "<% } %>",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
                 "--quiet",
                 "--log", "*.cbuild_run,*server=info"
