@@ -246,7 +246,7 @@
                 "--connect", "attach",
                 "--persist",
                 "--reset-run",
-                "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
+                "<% const telnetMode = data.telnetOptionsInput[start_pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
                 "<% if (telnetMode && telnetMode !== 'off') { %>",
                 "--semihosting",
                 "<% } %>",
