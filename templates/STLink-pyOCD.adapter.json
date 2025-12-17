@@ -16,9 +16,7 @@
             }
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
-        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
-        "telnetOptionsInput": "<%= config.telnet && Array.isArray(config.telnet) ? Object.fromEntries(config.telnet.map(t => ( [ t.pname ?? '', { mode: t.mode }]))) : undefined %>",
-        "telnetOptionsDefault": "<%= { mode: config.telnet?.mode ?? 'off' } %>"
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>"
     },
     "launch": {
         "singlecore-launch": {
@@ -51,8 +49,7 @@
                     "--uid", "<%= config['probe-id'] %>\n",
                     "<% } %>",
                     "--connect", "attach",
-                    "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
-                    "<% if (telnetMode && telnetMode !== 'off') { %>",
+                    "<% if (config.telnet) { %>",
                     "--semihosting",
                     "<% } %>",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
@@ -123,8 +120,7 @@
                     "<% } %>",
                     "--connect", "attach",
                     "--persist",
-                    "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
-                    "<% if (telnetMode && telnetMode !== 'off') { %>",
+                    "<% if (config.telnet) { %>",
                     "--semihosting",
                     "<% } %>",
                     "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
@@ -246,8 +242,7 @@
                 "--connect", "attach",
                 "--persist",
                 "--reset-run",
-                "<% const telnetMode = data.telnetOptionsInput[start_pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
-                "<% if (telnetMode && telnetMode !== 'off') { %>",
+                "<% if (config.telnet) { %>",
                 "--semihosting",
                 "<% } %>",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}",
