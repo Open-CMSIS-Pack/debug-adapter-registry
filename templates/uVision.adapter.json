@@ -4,7 +4,7 @@
         "type": "shell",
         "command": "uVision runs on Windows only",
         "windows": {
-            "command": "<%= uv4 %>",
+            "command": "<%= config.uv4 %>",
             "options": {
                 "cwd": "${workspaceFolder}/<%= solution_folder %>",
                 "shell": {
