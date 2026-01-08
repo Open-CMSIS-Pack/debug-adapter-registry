@@ -17,7 +17,7 @@
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
         "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
-        "JLinkGDBServerCL": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : (platform === 'linux' ? 'Exe' : '') %>",
+        "JLinkGDBServerCL": "JLinkGDBServerCL<%= platform === 'win32' ? '.exe' : (platform === 'darwin' ? '' : 'Exe') %>",
         "JLink": "JLink<%= platform === 'win32' ? '.exe' : 'Exe' %>",
         "jlinkDevice": "<%= device_name %><%= start_pname ? `_${start_pname}` : '' %>",
         "jlinkDevices": "<%= Object.fromEntries(processors.map(pname => [pname ?? '', `${device_name}_${pname ?? start_pname ?? ''}`])) %>",
