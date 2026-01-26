@@ -47,7 +47,7 @@ debug-adapters:
       <property>: <value>
     user-interface:
       - section: <section label>
-        description: <section description>>
+        description: <section description>
         yaml-node: <optional section yaml node>
         options:
           - name: <property label>
@@ -147,10 +147,10 @@ The `.adapter.json` files provide snippets to be injected into the workspace `la
 ### Template processing
 
 All string elements are processed one-by-one with the [ETA JS template engine](https://eta.js.org/). The `data` section
-is processed in the first pass and the result is passed into subsequent template processing. Hence, once can collect
+is processed in the first pass and the result is passed into subsequent template processing. Hence, one can collect
 reused parts under `data` section to avoid duplication.
 
-Arrays-of-strings loaded from the template are joined into a multi-line string, processed at onces and split based on linebreaks after processing.
+Arrays-of-strings loaded from the template are joined into a multi-line string, processed at once and split based on linebreaks after processing.
 This can be used to generate arrays using a multiline template if required:
 
 ```json
