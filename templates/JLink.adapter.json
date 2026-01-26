@@ -94,7 +94,7 @@
                     "-port", "<%= ports.get(pname) %>\n",
                     "-TelnetPort", "<%= data.telnetOptionsInput[pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
                 ],
-                "port": "<%= ports.get(pname) %>"
+                "port": "\"<%= ports.get(pname) %>\""
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
@@ -125,7 +125,7 @@
                 "continue"
             ],
             "target": {
-                "port": "<%= ports.get(pname) %>"
+                "port": "\"<%= ports.get(pname) %>\""
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
@@ -182,7 +182,7 @@
                     "-port", "<%= ports.get(pname) %>\n",
                     "-TelnetPort", "<%= data.telnetOptionsInput[pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
                 ],
-                "port": "<%= ports.get(pname) %>"
+                "port": "\"<%= ports.get(pname) %>\""
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
@@ -213,7 +213,7 @@
                 "continue"
             ],
             "target": {
-                "port": "<%= ports.get(pname) %>"
+                "port": "\"<%= ports.get(pname) %>\""
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
@@ -265,7 +265,7 @@
                     "-port", "<%= ports.get(pname) %>\n",
                     "-TelnetPort", "<%= data.telnetOptionsInput[pname ?? '']?.port ?? data.telnetOptionsDefault.port %>\n"
                 ],
-                "port": "<%= ports.get(pname) %>"
+                "port": "\"<%= ports.get(pname) %>\""
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
