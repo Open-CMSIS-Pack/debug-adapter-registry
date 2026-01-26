@@ -39,8 +39,8 @@ The `registry/debug-adapters.yml` lists out all known debug adapters with additi
 
 ```yml
 debug-adapters:
-  - name: "<unique name>"
-    alias-name: ["<alias name>", ... ]
+  - name: <unique name>
+    alias-name: [<alias name>, ... ]
     template: <adapter json template>
     gdbserver:
     defaults:
