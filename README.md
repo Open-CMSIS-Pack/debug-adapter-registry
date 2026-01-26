@@ -241,8 +241,8 @@ To be transformed into
     {
       "options": {
         "plain-num": 3000,
-        "quoted-num": true,
-        "plain-bool": "3000",
+        "quoted-num": "3000",
+        "plain-bool": true,
         "quoted-bool": "true"
       }
     }
