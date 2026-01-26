@@ -211,6 +211,45 @@ To be transformed into
 }
 ```
 
+Plain numbers and boolean representation strings are converted to plain data type by default.
+If instead the value is required as a quoted string, this needs to be enforced explicitly.
+
+```json
+{
+  "data": {
+    "number": "3000",
+    "flag": "true"
+  },
+  "tasks": [
+    {
+      "options": {
+        "plain-num": "<%= data.number %>",
+        "quoted-num": "\"<%= data.number %>\"",
+        "plain-bool": "<%= data.flag %>",
+        "quoted-bool": "\"<%= data.flag %>\""
+      }
+    }
+  ]
+}
+```
+
+To be transformed into
+
+```json
+{
+  "tasks": [
+    {
+      "options": {
+        "plain-num": 3000,
+        "quoted-num": true,
+        "plain-bool": "3000",
+        "quoted-bool": "true"
+      }
+    }
+  ]
+}
+```
+
 ### Dynamic data structure
 
 The following data structure is available to the templates:
