@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/Open-CMSIS-Pack/debug-adapter-registry/v2.12.1/schemas/debug-adapters.schema.json",
+  "$id": "https://raw.githubusercontent.com/Open-CMSIS-Pack/debug-adapter-registry/v2.13.0/schemas/debug-adapters.schema.json",
   "title": "CMSIS debug-adapters registry",
   "description": "Contains the list of supported debug adapters",
-  "version": "2.12.1",
+  "version": "2.13.0",
   "type": "object",
   "properties": {
     "debug-adapters": {
