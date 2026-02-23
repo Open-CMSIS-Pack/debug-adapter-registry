@@ -320,7 +320,7 @@
                 "<% } %>",
                 "-device", "<%= data.jlinkDevice %>\n",
                 "-endian", "little",
-                "-if", "<%= config.protocol ?? 'swd' %>",
+                "-if", "<%= config.protocol ?? 'swd' %>\n",
                 "-speed", "<%= parseInt((config.clock ?? data.defaultClock) / data.scaleClock) %>\n",
                 "-nohalt",
                 "-noir",
