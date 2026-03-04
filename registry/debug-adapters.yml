@@ -709,6 +709,7 @@ debug-adapters:
             description: Path and filename of the FVP configuration file
             yml-node: config-file
             type: file
+            path-type: relative
           - name: Misc
             description: Miscellaneous command line arguments
             yml-node: args
@@ -726,4 +727,5 @@ debug-adapters:
             description: Path and filename of uVision executable
             yml-node: uv4
             type: file
+            path-type: absolute
             default: "${env:LOCALAPPDATA}/Keil_v5/UV4/UV4.exe"
