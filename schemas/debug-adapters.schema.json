@@ -134,6 +134,13 @@
           ],
           "description": "Type of the user interface element."
         },
+        "path-type": {
+          "enum": [
+            "absolute",
+            "relative"
+          ],
+          "description": "Type of the path (for file type)."
+        },
         "select": {
           "enum": [
             "on",
