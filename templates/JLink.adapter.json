@@ -54,7 +54,7 @@
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
                 "<% if (telnetMode && telnetMode !== 'off') { %>",
                 "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
@@ -110,7 +110,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
                 "<% if (telnetMode && telnetMode !== 'off') { %>",
                 "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
@@ -142,7 +142,7 @@
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
                 "<% if (telnetMode && telnetMode !== 'off') { %>",
                 "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
@@ -198,7 +198,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
                 "<% if (telnetMode && telnetMode !== 'off') { %>",
                 "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
@@ -229,7 +229,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "<% const telnetMode = data.telnetOptionsInput[pname ?? '']?.mode ?? data.telnetOptionsDefault.mode %>",
                 "<% if (telnetMode && telnetMode !== 'off') { %>",
                 "monitor semihosting ioclient <%= data.telnetMode[telnetMode] %>\n",
