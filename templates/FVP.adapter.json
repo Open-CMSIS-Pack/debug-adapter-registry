@@ -31,6 +31,8 @@
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
                 "monitor reset halt",
+                "set remote verbose-resume-supported-packet off",
+                "set remote verbose-resume-packet off",
                 "tbreak main"
             ],
             "customResetCommands": [
