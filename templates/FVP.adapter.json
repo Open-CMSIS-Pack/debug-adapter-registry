@@ -17,7 +17,22 @@
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
         "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
-        "gdbServerPlugin": "${env:AVH_FVP_PLUGINS}<%= platform === 'win32' ? 'GDBServer.dll' : 'GDBServer.so' %>"
+        "gdbServerPlugin": "${env:AVH_FVP_PLUGINS}<%= platform === 'win32' ? 'GDBServer.dll' : 'GDBServer.so' %>",
+        "modelParameters": [
+            "<% if (config['config-file']) { %>",
+            "-f", "<%= config['config-file'] %>\n",
+            "<% } %>",
+            "<% if (Array.isArray(config.args) && config.args.length > 0) { %>",
+            "<%= config.args.join('\\n') %>\n",
+            "<% } %>",
+            "<% else if (typeof config.args === 'string' && config.args.trim().length > 0) { %>",
+            "<%= config.args.trim().split(/\\s+/).join('\\n') %>\n",
+            "<% } %>",
+            "<% const files = image_files.length ? image_files.map(s => s.file) : [symbol_files[0]?.file ?? ''].filter(Boolean) %>",
+            "<% for (const [idx, file] of files.entries()) { %>",
+            "-a", "<%= file %><%= idx + 1 < files.length ? '\\n' : '' %>",
+            "<% } %>"
+        ]
     },
     "launch": {
         "singlecore-launch": {
@@ -30,13 +45,12 @@
             "auxiliaryGdb": false,
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "monitor reset halt",
                 "set remote verbose-resume-supported-packet off",
                 "set remote verbose-resume-packet off",
                 "tbreak main"
             ],
             "customResetCommands": [
-                "monitor reset halt",
+                "maintenance packet R00",
                 "maintenance flush register-cache",
                 "maintenance flush dcache",
                 "tbreak main",
@@ -47,20 +61,37 @@
                 "serverParameters": [
                     "-D",
                     "--plugin", "<%= data.gdbServerPlugin %>\n",
-                    "<% if (config['config-file']) { %>",
-                    "-f", "<%= config['config-file'] %>\n",
-                    "<% } %>",
-                    "<% if (Array.isArray(config.args) && config.args.length > 0) { %>",
-                    "<%= config.args.join('\\n') %>\n",
-                    "<% } %>",
-                    "<% else if (typeof config.args === 'string' && config.args.trim().length > 0) { %>",
-                    "<%= config.args.trim().split(/\\s+/).join('\\n') %>\n",
-                    "<% } %>",
-                    "<% const files = image_files.length ? image_files.map(s => s.file) : [data.program].filter(Boolean) %>",
-                    "<% for (const [idx, file] of files.entries()) { %>",
-                    "-a", "<%= file %><%= idx + 1 < files.length ? '\\n' : '' %>",
-                    "<% } %>"
+                    "-C", "GDBServer.port=<%= ports.get(pname) %>\n",
+                    "<%= data.modelParameters.join('\\n') %>"
                 ],
+                "port": "\"<%= ports.get(pname) %>\""
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
+        },
+        "singlecore-attach": {
+            "name": "Arm-FVP@pyOCD (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
+            "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": false,
+            "initCommands": [
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "set remote verbose-resume-supported-packet off",
+                "set remote verbose-resume-packet off"
+            ],
+            "customResetCommands": [
+                "maintenance packet R00",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
+                "tbreak main",
+                "continue"
+            ],
+            "target": {
                 "port": "\"<%= ports.get(pname) %>\""
             },
             "cmsis": {
@@ -69,29 +100,30 @@
             }
         }
     },
-    "tasks": [{
-        "label": "CMSIS Load+Run",
-        "type": "shell",
-        "command": "<%= config.model %>",
-        "options": {
-            "cwd": "<%= data.cwd %>",
-            "shell": "<%= data.shell[process.platform] %>"
+    "tasks": [
+        {
+            "label": "CMSIS Run",
+            "type": "shell",
+            "command": "<%= config.model %>",
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
+            },
+            "args": [
+                "-D",
+                "--plugin", "<%= data.gdbServerPlugin %>\n",
+                "-C", "GDBServer.port=<%= ports.get(start_pname) %>\n",
+                "<%= data.modelParameters.join('\\n') %>"
+            ],
+            "problemMatcher": []
         },
-        "args": [
-            "<% if (config['config-file']) { %>",
-            "-f", "<%= config['config-file'] %>\n",
-            "<% } %>",
-            "<% if (Array.isArray(config.args) && config.args.length > 0) { %>",
-            "<%= config.args.join('\\n') %>\n",
-            "<% } %>",
-            "<% else if (typeof config.args === 'string' && config.args.trim().length > 0) { %>",
-            "<%= config.args.trim().split(/\\s+/).join('\\n') %>\n",
-            "<% } %>",
-            "<% const files = image_files.map(s => s.file) %>",
-            "<% for (const [idx, file] of files.entries()) { %>",
-            "-a", "<%= file %><%= idx + 1 < files.length ? '\\n' : '' %>",
-            "<% } %>"
-        ],
-        "problemMatcher": []
-    }]
+        {
+            "label": "CMSIS Load+Run",
+            "dependsOn": [
+                "CMSIS Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
 }

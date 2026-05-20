@@ -661,7 +661,7 @@ debug-adapters:
       model: "FVP_MPS2_Cortex-M3"
       gdbserver:
         active:
-        port: 10000
+        port: 3333
     user-interface:
       - section: Model
         description: Arm FVP simulation model setup
