@@ -102,6 +102,16 @@
     },
     "tasks": [
         {
+            "label": "CMSIS Load",
+            "type": "shell",
+            "command": "echo Skipping CMSIS Load: images are loaded by the FVP model when CMSIS Run starts.",
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "CMSIS Run",
             "type": "shell",
             "command": "<%= config.model %>",
@@ -120,6 +130,7 @@
         {
             "label": "CMSIS Load+Run",
             "dependsOn": [
+                "CMSIS Load",
                 "CMSIS Run"
             ],
             "dependsOrder": "sequence",
