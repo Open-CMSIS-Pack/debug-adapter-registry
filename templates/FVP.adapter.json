@@ -17,7 +17,7 @@
         },
         "program": "<%= symbol_files[0]?.file ?? '' %>",
         "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
-        "gdbServerPlugin": "${env:AVH_FVP_PLUGINS}<%= platform === 'win32' ? 'GDBServer.dll' : 'GDBServer.so' %>",
+        "gdbServerPlugin": "${env:AVH_FVP_PLUGINS}/<%= platform === 'win32' ? 'GDBServer.dll' : 'GDBServer.so' %>",
         "modelParameters": [
             "<% if (config['config-file']) { %>",
             "-f", "<%= config['config-file'] %>\n",
@@ -28,7 +28,7 @@
             "<% else if (typeof config.args === 'string' && config.args.trim().length > 0) { %>",
             "<%= config.args.trim().split(/\\s+/).join('\\n') %>\n",
             "<% } %>",
-            "<% const files = image_files.length ? image_files.map(s => s.file) : [symbol_files[0]?.file ?? ''].filter(Boolean) %>",
+            "<% const files = image_files.map(s => s.file) %>",
             "<% for (const [idx, file] of files.entries()) { %>",
             "-a", "<%= file %><%= idx + 1 < files.length ? '\\n' : '' %>",
             "<% } %>"
