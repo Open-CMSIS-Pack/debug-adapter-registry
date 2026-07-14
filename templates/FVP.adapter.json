@@ -1,5 +1,6 @@
 {
     "data": {
+        "cwd": "${workspaceFolder}/<%= solution_folder %>",
         "shell": {
             "win32": {
                 "executable": "cmd.exe",
@@ -13,31 +14,103 @@
                 "executable": "/bin/bash",
                 "args": [ "-c" ]
             }
+        },
+        "program": "<%= symbol_files[0]?.file ?? '' %>",
+        "programs": "<%= symbol_files.flatMap(e => (e.pname || !processors?.length) ? e : processors.map(p => ({ ...e, pname: p }))).groupedBy(v => v.pname ?? '') %>",
+        "gdbServerPlugin": "${env:AVH_FVP_PLUGINS}/<%= platform === 'win32' ? 'GDBServer.dll' : 'GDBServer.so' %>",
+        "modelParameters": "<%= [ ...(config['config-file'] ? ['-f', config['config-file']] : []), ...(config.args?.trim().split(/\\s+/) ?? []), ...image_files.flatMap(image => ['-a', image.file]) ] %>"
+    },
+    "launch": {
+        "singlecore-launch": {
+            "name": "Arm-FVP@GDB (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
+            "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": false,
+            "initCommands": [
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "set remote verbose-resume-supported-packet off",
+                "set remote verbose-resume-packet off",
+                "tbreak main"
+            ],
+            "target": {
+                "server": "<%= config.model %>",
+                "serverParameters": [
+                    "-D",
+                    "--plugin", "<%= data.gdbServerPlugin %>\n",
+                    "-C", "GDBServer.port=<%= ports.get(pname) %>\n",
+                    "<% data.modelParameters.forEach((parameter, index) => { %>",
+                    "<%= parameter %><%= index + 1 < data.modelParameters.length ? '\\n' : '' %>",
+                    "<% }) %>"
+                ],
+                "port": "\"<%= ports.get(pname) %>\""
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
+        },
+        "singlecore-attach": {
+            "name": "Arm-FVP@GDB (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "<%= data.cwd %>",
+            "program": "<%= data.program %>",
+            "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": false,
+            "initCommands": [
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "set remote verbose-resume-supported-packet off",
+                "set remote verbose-resume-packet off"
+            ],
+            "target": {
+                "port": "\"<%= ports.get(pname) %>\""
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
         }
     },
-    "tasks": [{
-        "label": "CMSIS Load+Run",
-        "type": "shell",
-        "command": "<%= config.model %>",
-        "options": {
-            "cwd": "${workspaceFolder}/<%= solution_folder %>",
-            "shell": "<%= data.shell[process.platform] %>"
+    "tasks": [
+        {
+            "label": "CMSIS Load",
+            "type": "shell",
+            "command": "echo CMSIS Load: images are loaded by the FVP model when CMSIS Run starts.",
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
+            },
+            "problemMatcher": []
         },
-        "args": [
-            "<% if (config['config-file']) { %>",
-            "-f", "<%= config['config-file'] %>\n",
-            "<% } %>",
-            "<% if (Array.isArray(config.args) && config.args.length > 0) { %>",
-            "<%= config.args.join('\\n') %>\n",
-            "<% } %>",
-            "<% else if (typeof config.args === 'string' && config.args.trim().length > 0) { %>",
-            "<%= config.args.trim().split(/\\s+/).join('\\n') %>\n",
-            "<% } %>",
-            "<% const files = image_files.map(s => s.file) %>",
-            "<% for (const file of files) { %>",
-            "-a", "<%= file %>\n",
-            "<% } %>"
-        ],
-        "problemMatcher": []
-    }]
+        {
+            "label": "CMSIS Run",
+            "type": "shell",
+            "command": "<%= config.model %>",
+            "options": {
+                "cwd": "<%= data.cwd %>",
+                "shell": "<%= data.shell[process.platform] %>"
+            },
+            "args": [
+                "-D",
+                "--plugin", "<%= data.gdbServerPlugin %>\n",
+                "-C", "GDBServer.port=<%= ports.get(start_pname) %>\n",
+                "<% data.modelParameters.forEach((parameter, index) => { %>",
+                "<%= parameter %><%= index + 1 < data.modelParameters.length ? '\\n' : '' %>",
+                "<% }) %>"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMSIS Load+Run",
+            "dependsOn": [
+                "CMSIS Load",
+                "CMSIS Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
 }
