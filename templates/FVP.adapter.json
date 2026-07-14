@@ -22,7 +22,7 @@
     },
     "launch": {
         "singlecore-launch": {
-            "name": "Arm-FVP@pyOCD (launch)",
+            "name": "Arm-FVP@GDB (launch)",
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "<%= data.cwd %>",
@@ -53,7 +53,7 @@
             }
         },
         "singlecore-attach": {
-            "name": "Arm-FVP@pyOCD (attach)",
+            "name": "Arm-FVP@GDB (attach)",
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "<%= data.cwd %>",
