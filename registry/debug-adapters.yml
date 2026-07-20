@@ -443,6 +443,9 @@ debug-adapters:
         port: 4444
       protocol: swd
       clock: 4000000
+      trace:
+        mode: off
+        server-port: 5555
     user-interface:
       - section: Debug Interface
         description: Interface configuration for the debug port
@@ -493,6 +496,40 @@ debug-adapters:
               - name: Disabled
                 value: off
                 description:  Serial I/O disabled
+      - section: Trace Interface
+        description: Interface configuration for the trace collection
+        yml-node: trace
+        options:
+          - name: Mode
+            description: Trace collection mode
+            yml-node: mode
+            type: enum
+            default: file
+            values:
+              - name: Disabled
+                value: off
+                description: Trace collection disabled
+              - name: Server
+                value: server
+                description: Trace collection to a TCP server (default port 50000)
+              - name: File
+                value: file
+                description: Trace collection to a file (default .trace/<solution-set>.<channel>.raw)
+          - name: Input Clock
+            description: Frequency of the trace input clock (kHz)
+            yml-node: 'input-clock'
+            type: number
+            range: [10, 2000000]
+            scale: 1000
+            default: 1000
+          - name: Output Clock
+            description: Frequency of the trace output clock (kHz)
+            yml-node: 'output-clock'
+            type: number
+            range: [10, 24000]
+            scale: 1000
+            default: 1000
+
 
   - name: "J-Link Server"
     alias-name: ["J-Link", "JLink Server"]                 # alternative names that map to this debug adapter
