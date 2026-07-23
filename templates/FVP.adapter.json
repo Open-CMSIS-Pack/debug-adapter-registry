@@ -94,7 +94,6 @@
                 "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
-                "-D",
                 "<% data.modelParameters.forEach((parameter, index) => { %>",
                 "<%= parameter %><%= index + 1 < data.modelParameters.length ? '\\n' : '' %>",
                 "<% }) %>"
