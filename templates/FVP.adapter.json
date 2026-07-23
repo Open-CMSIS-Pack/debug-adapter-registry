@@ -95,8 +95,6 @@
             },
             "args": [
                 "-D",
-                "--plugin", "<%= data.gdbServerPlugin %>\n",
-                "-C", "GDBServer.port=<%= ports.get(start_pname) %>\n",
                 "<% data.modelParameters.forEach((parameter, index) => { %>",
                 "<%= parameter %><%= index + 1 < data.modelParameters.length ? '\\n' : '' %>",
                 "<% }) %>"
