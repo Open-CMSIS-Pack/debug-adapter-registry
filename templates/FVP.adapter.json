@@ -31,8 +31,6 @@
             "auxiliaryGdb": false,
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "set remote verbose-resume-supported-packet off",
-                "set remote verbose-resume-packet off",
                 "tbreak main"
             ],
             "target": {
@@ -62,8 +60,6 @@
             "auxiliaryGdb": false,
             "initCommands": [
                 "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
-                "set remote verbose-resume-supported-packet off",
-                "set remote verbose-resume-packet off"
             ],
             "target": {
                 "port": "\"<%= ports.get(pname) %>\""
