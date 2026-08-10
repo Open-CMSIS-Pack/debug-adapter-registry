@@ -59,7 +59,7 @@
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": false,
             "initCommands": [
-                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>",
+                "<%= data.programs[pname]?.slice(1)?.map(p => p.file ? `add-symbol-file \"${p.file}\"\\n` : '')?.join('') %>"
             ],
             "target": {
                 "port": "\"<%= ports.get(pname) %>\""
