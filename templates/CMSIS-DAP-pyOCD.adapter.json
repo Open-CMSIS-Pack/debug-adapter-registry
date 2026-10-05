@@ -266,7 +266,11 @@
                 "shell": "<%= data.shell[process.platform] %>"
             },
             "args": [
-                "list",
+                "info",
+                "--probe", "cmsisdap:",
+                "<% if (config['probe-id']) { %>",
+                "--uid", "<%= config['probe-id'] %>\n",
+                "<% } %>",
                 "--cbuild-run", "${command:cmsis-csolution.getCbuildRunFile}"
             ],
             "problemMatcher": []
