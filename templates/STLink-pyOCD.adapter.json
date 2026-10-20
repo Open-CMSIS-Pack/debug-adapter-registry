@@ -55,7 +55,8 @@
                     "--quiet",
                     "--log", "*.cbuild_run,*server=info"
                 ],
-                "port": "\"<%= ports.get(pname) %>\""
+                "port": "\"<%= ports.get(pname) %>\"",
+                "serverDisconnectTimeout": 3000
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
@@ -125,7 +126,8 @@
                     "--quiet",
                     "--log", "*.cbuild_run,*server=info"
                 ],
-                "port": "\"<%= ports.get(pname) %>\""
+                "port": "\"<%= ports.get(pname) %>\"",
+                "serverDisconnectTimeout": 3000
             },
             "cmsis": {
                 "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
