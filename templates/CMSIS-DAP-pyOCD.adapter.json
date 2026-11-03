@@ -209,11 +209,10 @@
         },
         {
             "label": "CMSIS Load",
-            "type": "shell",
+            "type": "cmsis-csolution.pyocd",
             "command": "pyocd",
             "options": {
-                "cwd": "<%= data.cwd %>",
-                "shell": "<%= data.shell[process.platform] %>"
+                "cwd": "<%= data.cwd %>"
             },
             "args": [
                 "load",
@@ -227,11 +226,10 @@
         },
         {
             "label": "CMSIS Run",
-            "type": "shell",
+            "type": "cmsis-csolution.pyocd",
             "command": "pyocd",
             "options": {
-                "cwd": "<%= data.cwd %>",
-                "shell": "<%= data.shell[process.platform] %>"
+                "cwd": "<%= data.cwd %>"
             },
             "args": [
                 "gdbserver",
