@@ -193,7 +193,7 @@
             "type": "cmsis-csolution.pyocd",
             "command": "pyocd",
             "options": {
-                "cwd": "<%= data.cwd %>"                
+                "cwd": "<%= data.cwd %>"
             },
             "args": [
                 "erase",
