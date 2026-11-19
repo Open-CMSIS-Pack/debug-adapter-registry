@@ -28,8 +28,8 @@
         },
         "resetTypesInput": "<%= config.reset && Array.isArray(config.reset) ? Object.fromEntries(config.reset.map(r => ( [ r.pname ?? '', r.type ]))) : undefined %>",
         "resetTypeDefault": "<%= config.reset?.type ?? 'system' %>",
-        "telnetOptionsInput": "<%= config.telnet && Array.isArray(config.telnet) ? Object.fromEntries(config.telnet.map(t => ( [ t.pname ?? '', { mode: t.mode, port: t.port }]))) : undefined %>",
-        "telnetOptionsDefault": "<%= { mode: config.telnet?.mode ?? 'off', port: config.telnet?.port ?? '4444' } %>",
+        "telnetOptionsInput": "<%= config.stdio && Array.isArray(config.stdio) ? Object.fromEntries(config.stdio.map(t => ( [ t.pname ?? '', { mode: t.mode, port: t.port }]))) : undefined %>",
+        "telnetOptionsDefault": "<%= { mode: config.stdio?.mode ?? 'off', port: config.stdio?.port ?? '4444' } %>",
         "telnetMode": {
             "server": "1",
             "monitor": "1",
