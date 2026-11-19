@@ -89,12 +89,12 @@
             }
           }
         },
-        "telnet": {
+        "stdio": {
           "type": "object",
           "properties": {
             "active": {
               "type": "null",
-              "description": "Add the telnet: node in the cbuild-run.yml file."
+              "description": "Add the stdio: node in the cbuild-run.yml file."
             },
             "port": {
               "type": "number",
