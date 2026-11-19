@@ -114,16 +114,24 @@
       "type": "object",
       "properties": {
         "section": {
-          "type": "string",
-          "description": "Section name for the user interface."
+          "type": [ "string", "null" ],
+          "description": "Section label, supporting ${{ expression }} expansion. Omitted, null, or empty labels hide the heading."
         },
         "description": {
           "type": "string",
-          "description": "Description of the section."
+          "description": "Description of the section, supporting ${{ expression }} expansion."
+        },
+        "condition": {
+          "type": [ "boolean", "string" ],
+          "default": true,
+          "description": "Boolean or complete ${{ expression }} controlling availability. Only boolean true makes the section available. Expressions can read config, device, and processors."
+        },
+        "condition-message": {
+          "type": "string",
+          "description": "Warning shown when a configured section's condition is false. Supports ${{ expression }} expansion."
         },
         "yml-node": {
-          "type": "string",
-          "description": "YAML node in the cbuild-run.yml file."
+          "$ref": "#/definitions/SectionYamlNodeType"
         },
         "type": {
           "enum": [
@@ -142,25 +150,109 @@
           "description": "Type of the path (for file type)."
         },
         "select": {
-          "enum": [
-            "on",
-            "off"
+          "oneOf": [
+            { "type": "boolean" },
+            { "enum": [ "on", "off" ] }
           ],
-          "description": "Whether to show or hide this section in the user interface."
+          "description": "If present, the section can be enabled or disabled, applying to all options. Accepts legacy on/off strings."
+        },
+        "collapsible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow content sections to collapse. Unlabeled sections stay expanded."
         },
         "options": {
           "$ref": "#/definitions/SectionOptionsType"
         },
+        "subsections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserInterfaceType"
+          },
+          "description": "Nested sections using the same declaration format, including expression expansion."
+        },
+        "subsections-layout": {
+          "enum": [ "content", "navigation" ],
+          "default": "content",
+          "description": "Display subsections as content or nested navigation entries."
+        },
+        "usage": {
+          "enum": [ "available", "used" ],
+          "description": "Marks addable subsections (available) or configured instances (used)."
+        },
         "pname-options": {
           "type": "null",
-          "description": "Allows each option to be configured independently for every CPU core."
+          "deprecated": true,
+          "description": "Deprecated: repeat options per processor using subsections with yml-node.value: '${{ processors.name }}' instead."
         }
       },
-      "additionalProperties": false,
-      "required": [
-        "section",
-        "options",
-        "description"
+      "additionalProperties": false
+    },
+    "SectionYamlNodeType": {
+      "description": "Group node under debugger in csolution.yml, as a name or a mapping. String names, mapping names, and marker values support ${{ expression }} expansion using config, device, and processors.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Group node name or marker name identifying a sequence entry."
+            },
+            "kind": {
+              "enum": [ "map", "sequence" ],
+              "default": "map",
+              "description": "Container kind for the section's options and subsections."
+            },
+            "value": {
+              "type": [ "string", "number", "boolean", "null", "array" ],
+              "items": {
+                "type": [ "string", "number", "boolean", "null" ]
+              },
+              "description": "Entry marker value. An array expands into one section per value. Null markers are retained by default. Only arrays in this field create multiple sections."
+            },
+            "optional": {
+              "type": "boolean",
+              "default": false,
+              "description": "With value, omit null or empty markers while retaining the entry and its options."
+            },
+            "select": {
+              "type": "object",
+              "description": "Bind the section's enabled state to a stored option instead of node presence.",
+              "properties": {
+                "node": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Option name holding the enabled state."
+                },
+                "selected": {
+                  "$ref": "#/definitions/SectionSwitchValuesType",
+                  "description": "Enabled value or aliases; the first value is written."
+                },
+                "unselected": {
+                  "$ref": "#/definitions/SectionSwitchValuesType",
+                  "description": "Disabled value or aliases; the first value is written."
+                }
+              },
+              "required": [ "node", "selected", "unselected" ],
+              "additionalProperties": false
+            }
+          },
+          "required": [ "name" ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SectionSwitchValuesType": {
+      "description": "A stored switch value or non-empty list of aliases, with the first value used when writing.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
       ]
     },
     "SectionOptionsType": {
