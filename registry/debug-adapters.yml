@@ -33,13 +33,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -95,13 +95,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -158,13 +158,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -221,13 +221,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -283,13 +283,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -345,13 +345,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -404,13 +404,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -466,13 +466,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
@@ -530,13 +530,13 @@ debug-adapters:
                 value: swd
                 description: Use Serial Wire Debug (SWD) interface (2 pins)
             default: swd
-      - section: Stdio
+      - section: Standard I/O
         description: Serial input/output via semihosting or RTT channel 0
         yml-node: stdio
         select: on
         pname-options:
         options:
-          - name: Stdio Mode
+          - name: Redirect Mode
             description: Configure Serial I/O redirect
             yml-node: mode
             type: enum
